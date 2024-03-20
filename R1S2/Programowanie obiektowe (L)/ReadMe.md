@@ -1,5 +1,5 @@
 # Prowadzący
-### Łukasz Hładowski
+### dr inż. Łukasz Hładowski
 
 ## Ocena końcowa
 #### TBD
