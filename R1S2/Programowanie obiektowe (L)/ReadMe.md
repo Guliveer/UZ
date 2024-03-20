@@ -1,5 +1,5 @@
 # Prowadzący
-### Łukasz Hładowski, Paweł Majdzik
+### Łukasz Hładowski
 
 ## Ocena końcowa
 #### TBD
