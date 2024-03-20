@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.27"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "silnia",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "silnia::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-silnia-Debug-e8487b8d785605b26ae8.json",
+					"name" : "silnia",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/silnia/cmake-build-debug",
+		"source" : "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/silnia"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

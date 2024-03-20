@@ -1,0 +1,3 @@
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/f_ackermanna/cmake-build-debug/CMakeFiles/f_ackermanna.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/f_ackermanna/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/f_ackermanna/cmake-build-debug/CMakeFiles/rebuild_cache.dir

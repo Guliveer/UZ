@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "zad7",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "zad7::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-zad7-Debug-0bf2dc1db67297faac03.json",
+					"name" : "zad7",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/R1S2/Programowanie obiektowe (L)/Lista_1/zad7/cmake-build-debug",
+		"source" : "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/R1S2/Programowanie obiektowe (L)/Lista_1/zad7"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

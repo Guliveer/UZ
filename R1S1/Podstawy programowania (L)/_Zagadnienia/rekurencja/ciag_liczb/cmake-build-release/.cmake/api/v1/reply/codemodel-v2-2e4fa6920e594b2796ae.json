@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.27"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "ciag_liczb",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ciag_liczb::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ciag_liczb-Release-e31e2af7c9159595ea4e.json",
+					"name" : "ciag_liczb",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/ciag_liczb/cmake-build-release",
+		"source" : "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/ciag_liczb"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

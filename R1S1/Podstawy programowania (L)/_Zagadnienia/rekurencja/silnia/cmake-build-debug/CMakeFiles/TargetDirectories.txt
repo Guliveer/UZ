@@ -1,0 +1,3 @@
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/silnia/cmake-build-debug/CMakeFiles/silnia.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/silnia/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/silnia/cmake-build-debug/CMakeFiles/rebuild_cache.dir

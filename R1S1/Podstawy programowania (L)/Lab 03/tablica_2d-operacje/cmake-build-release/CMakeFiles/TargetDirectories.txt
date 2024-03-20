@@ -1,0 +1,3 @@
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/Lab 03/tablica_2d-operacje/cmake-build-release/CMakeFiles/tablica_2d_operacje.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/Lab 03/tablica_2d-operacje/cmake-build-release/CMakeFiles/edit_cache.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/Lab 03/tablica_2d-operacje/cmake-build-release/CMakeFiles/rebuild_cache.dir

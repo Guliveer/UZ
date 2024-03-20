@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "zad9",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "zad9::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-zad9-Release-d4da0966180076fcca60.json",
+					"name" : "zad9",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/R1S2/Programowanie obiektowe (L)/Lista_1/zad9/cmake-build-release",
+		"source" : "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/R1S2/Programowanie obiektowe (L)/Lista_1/zad9"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

@@ -1,0 +1,3 @@
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/zad_dodatkowe4/cmake-build-release/CMakeFiles/zad_dodatkowe4.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/zad_dodatkowe4/cmake-build-release/CMakeFiles/edit_cache.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/zad_dodatkowe4/cmake-build-release/CMakeFiles/rebuild_cache.dir

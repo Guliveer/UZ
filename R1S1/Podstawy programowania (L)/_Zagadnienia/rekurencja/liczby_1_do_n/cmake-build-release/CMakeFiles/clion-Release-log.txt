@@ -1,0 +1,4 @@
+"/Users/oliwer/Applications/CLion Nova.app/Contents/bin/cmake/mac/aarch64/bin/cmake" -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=/Users/oliwer/Applications/CLion Nova.app/Contents/bin/ninja/mac/aarch64/ninja" -DCMAKE_C_COMPILER=gcc -G Ninja -S "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/silnia_do_n" -B "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/silnia_do_n/cmake-build-release"
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/_Zagadnienia/rekurencja/silnia_do_n/cmake-build-release

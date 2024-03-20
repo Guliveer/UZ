@@ -1,0 +1,3 @@
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/wejsciowka_03/cmake-build-debug/CMakeFiles/wejsciowka_03.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/wejsciowka_03/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/Podstawy programowania (L)/wejsciowka_03/cmake-build-debug/CMakeFiles/rebuild_cache.dir
