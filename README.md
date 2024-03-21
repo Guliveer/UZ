@@ -5,8 +5,10 @@
 📝 *Comments I've left for my friends to learn coding might be appearing.*
 
 ## Directory tree naming logic:
-`/R_S_/[subject]/somewhat_organized_assignments_in_subdirs/`
+`UZ//R_S_/[subject]/somewhat_organized_assignments_in_subdirs/`
 
+- `UZ` -> repo name
 - `R_` -> year of studying, where _ represents a number of given year
 - `S_` -> semester of the year, where _ represents a number in range {1,2}
 - `[subject]` -> name of the subject; letter in brackets defines the type of classes in a given subject: *L* - practical, *Ć* - practical (more focused on math without computers), *W* - lectures
+- `somewhat_organized_assignments_in_subdirs` -> pretty much self-explanatory
