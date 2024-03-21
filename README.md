@@ -4,7 +4,7 @@
 
 📝 *Comments I've left for my friends to learn coding might be appearing.*
 
-## Directory naming logic:
+## Directory tree naming logic:
 `/R_S_/[subject]/somewhat_organized_assignments_in_subdirs/`
 
 - `R_` -> year of studying, where _ represents a number of given year
