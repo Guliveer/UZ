@@ -5,7 +5,7 @@
 📝 *Comments I've left for my friends to learn coding might be appearing.*
 
 ## Directory tree naming logic:
-`UZ//R_S_/[subject]/somewhat_organized_assignments_in_subdirs/`
+`/UZ/R_S_/[subject]/somewhat_organized_assignments_in_subdirs/`
 
 - `UZ` -> repo name
 - `R_` -> year of studying, where _ represents a number of given year
