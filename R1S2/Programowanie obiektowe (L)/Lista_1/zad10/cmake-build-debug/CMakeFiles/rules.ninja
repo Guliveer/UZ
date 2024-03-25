@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = "/Users/oliwer/Applications/CLion Nova.app/Contents/bin/cmake/mac/aarch64/bin/cmake" --regenerate-during-build -S"/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/R1S2/Programowanie obiektowe (L)/Lista_1/zad10" -B"/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/R1S2/Programowanie obiektowe (L)/Lista_1/zad10/cmake-build-debug"
+  command = "/Users/oliwer/Applications/CLion Nova.app/Contents/bin/cmake/mac/aarch64/bin/cmake" --regenerate-during-build -S"/Users/oliwer/UZ - GitHub/R1S2/Programowanie obiektowe (L)/Lista_1/zad10" -B"/Users/oliwer/UZ - GitHub/R1S2/Programowanie obiektowe (L)/Lista_1/zad10/cmake-build-debug"
   description = Re-running CMake...
   generator = 1
 

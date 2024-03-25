@@ -1,4 +1,4 @@
-# Install script for directory: /Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/R1S2/Programowanie obiektowe (L)/Lista_1/zad10
+# Install script for directory: /Users/oliwer/UZ - GitHub/R1S2/Programowanie obiektowe (L)/Lista_1/zad10
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/oliwer/Library/CloudStorage/OneDrive-Osobisty/Dokumenty/Studia/R1S2/Programowanie obiektowe (L)/Lista_1/zad10/cmake-build-release/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/oliwer/UZ - GitHub/R1S2/Programowanie obiektowe (L)/Lista_1/zad10/cmake-build-release/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
