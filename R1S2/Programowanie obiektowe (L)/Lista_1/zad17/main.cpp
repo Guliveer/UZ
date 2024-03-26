@@ -21,8 +21,7 @@ double factorial(const int n) { // funkcja obliczająca silnię
 }
 
 double S1(const double x) { // funkcja obliczająca sumę szeregu S1
-    double S1 = 0;
-    double ai = x;
+    double S1 = 0, ai = x;
     int n = 1;
     while(abs(ai) >= epsilon) {
         S1 += ai;
@@ -33,8 +32,7 @@ double S1(const double x) { // funkcja obliczająca sumę szeregu S1
 }
 
 double S2(const double x) { // funkcja obliczająca sumę szeregu S2
-    double S2 = 0;
-    double ai = 1;
+    double S2 = 0, ai = 1;
     int n = 1;
     while(abs(ai) >= epsilon) {
         S2 += ai;
