@@ -1,3 +1,0 @@
-/Users/oliwer/UZ - GitHub/R1S2/Programowanie obiektowe (L)/Lista_2/zad01/cmake-build-release/CMakeFiles/zad01.dir
-/Users/oliwer/UZ - GitHub/R1S2/Programowanie obiektowe (L)/Lista_2/zad01/cmake-build-release/CMakeFiles/edit_cache.dir
-/Users/oliwer/UZ - GitHub/R1S2/Programowanie obiektowe (L)/Lista_2/zad01/cmake-build-release/CMakeFiles/rebuild_cache.dir
