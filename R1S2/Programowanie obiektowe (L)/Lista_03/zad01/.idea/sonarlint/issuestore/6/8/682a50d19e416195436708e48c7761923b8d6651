@@ -1,7 +1,7 @@
 
-|	cpp:S5025;":Rewrite the code so that you no longer need this "delete".(’ôžœ8ÓÌŽÅî1J$c68ea184-9c18-4833-ad4b-6f70ee63b1f7
-{	cpp:S5025<":Rewrite the code so that you no longer need this "delete".(±øÿb8ÕÌŽÅî1J$56e4ed32-2590-46c5-816b-800a2090466a
-	cpp:S5025=":Rewrite the code so that you no longer need this "delete".(ÍµÙ±ýÿÿÿÿ8ÕÌŽÅî1J$0a8b9b18-dfae-41b0-b0e6-d51a938e087a
-“	cpp:S5025""QReplace the use of "new" with an operation that automatically manages the memory.(“‘§ø8©¿ûÄî1J$eb13c143-e877-4ae4-87cb-769d573b4d07
-“	cpp:S5025$"QReplace the use of "new" with an operation that automatically manages the memory.(ÐýŽ‰8©¿ûÄî1J$6aaf7267-791f-4779-be5b-2399e756e2ed
-“	cpp:S5025&"QReplace the use of "new" with an operation that automatically manages the memory.(¸ßÒð8©¿ûÄî1J$c5626fa1-3004-425c-ad14-fcb9cb10ac68
+|	cpp:S5025;":Rewrite the code so that you no longer need this "delete".(’ôžœ8ÓÌŽÅî1J$cca0e6c6-d3e1-45ca-9c5d-d746df7abf2e
+{	cpp:S5025<":Rewrite the code so that you no longer need this "delete".(±øÿb8ÕÌŽÅî1J$29fe6ffb-dfb3-4601-8556-cc67beeb0379
+	cpp:S5025=":Rewrite the code so that you no longer need this "delete".(ÍµÙ±ýÿÿÿÿ8ÕÌŽÅî1J$ac96e884-cd3e-4c60-9929-c102b49ba77a
+“	cpp:S5025""QReplace the use of "new" with an operation that automatically manages the memory.(“‘§ø8©¿ûÄî1J$3c180772-7abb-4956-aa8b-452129cee9a1
+“	cpp:S5025$"QReplace the use of "new" with an operation that automatically manages the memory.(ÐýŽ‰8©¿ûÄî1J$b3907f4c-2031-4ced-872b-9e46eaf88c7e
+“	cpp:S5025&"QReplace the use of "new" with an operation that automatically manages the memory.(¸ßÒð8©¿ûÄî1J$7f3e20d6-c516-4966-82f9-b3f963577ef5
