@@ -43,12 +43,12 @@ main() {
 
     /* Alternatywa:
     *
-    * p->val = 1
+    * p->val = 1;
     * p->ptr = new Elem3;
     * p->ptr->val = 5;
     * p->ptr->ptr = new Elem2;
     * p->ptr->ptr->val = 7;
-    * p->ptr->ptr->val = &p;
+    * p->ptr->ptr->ptr = &p;
     */
 
 
