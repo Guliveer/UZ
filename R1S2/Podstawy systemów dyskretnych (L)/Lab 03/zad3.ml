@@ -1,7 +1,7 @@
 (* Wykorzystując język programowania OCaml napisz program, który
 wyznaczy liczby pierwsze z podanego przedziału [0, 20]. *)
 
-(* Funkcja do wygenerowania listy liczb od 2 do n *)
+(* Funkcja do wygenerowania listy liczb od a do n *)
 let rec range start limit =
   if start > limit then []
   else start :: (range (start + 1) limit);;
@@ -30,7 +30,8 @@ let primes_in_range start limit =
 
 
 (* Funkcja do wypisywania wynikow *)
-let result a b = 
+let result a b =
+  if a > b then failwith "Podany bledny przedzial";
   print_endline ("Liczby pierwsze w przedziale od " ^ string_of_int a ^ " do " ^ string_of_int b ^ ":");
   List.iter (fun x -> Printf.printf "%d " x) (primes_in_range a b);
   Printf.printf "\n";;
