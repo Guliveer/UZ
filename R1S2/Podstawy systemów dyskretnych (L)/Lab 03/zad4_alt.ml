@@ -15,7 +15,7 @@ let sieve limit =
   for i = limit downto 2 do
     if is_prime.(i) then primes := i :: !primes
   done;
-  !primes
+  !primes;;
 
 (* Funkcja do faktoryzacji liczby *)
 let rec factorize n primes acc =
@@ -24,20 +24,20 @@ let rec factorize n primes acc =
   | p :: ps ->
     if p * p > n then n :: acc
     else if n mod p = 0 then factorize (n / p) primes (p :: acc)
-    else factorize n ps acc
+    else factorize n ps acc;;
 
 (* Funkcja pomocnicza do wyświetlania faktoryzacji *)
 let print_factorization n factors =
   Printf.printf "Fact(%d) = " n;
   List.iter (fun x -> Printf.printf "%d " x) factors;
-  Printf.printf "\n"
+  Printf.printf "\n";;
 
 (* Funkcja wypisująca wynik *)
 let result a b =
   let primes = sieve b in
   for i = a to b do
     print_factorization i (List.rev (factorize i primes []))
-  done
+  done;;
 
 (* Wyznaczanie wynikow z podanego zakresu *)
 result 2 1000
