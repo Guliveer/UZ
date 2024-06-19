@@ -53,5 +53,10 @@ int main() {
     p2d = &p3d;
     p2d->out(); // result: 123
 
+    // alternatywa:
+    // Punkt2D *p2d = new Punkt3D(1, 2, 3);
+    // p2d->out(); // result: 123
+    // delete p2d;
+
     return EXIT_SUCCESS;
 }
