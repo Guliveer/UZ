@@ -24,7 +24,7 @@ public:
     void rysuj() override { std::cout << " rysuje Kwadrat"; }
 
     virtual void rysuj(unsigned int _x, unsigned int _y) override {//detale:
-        std::cout << " rysuje Kwadrat";git
+        std::cout << " rysuje Kwadrat";
     }
     //? Niepoprawne nadpisanie metody (powód: niezgodność argumentów)
     //? virtual void rysuj(int _x, int _y) {...}
