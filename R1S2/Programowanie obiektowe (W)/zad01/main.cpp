@@ -49,13 +49,13 @@ int main() {
     // Zdefiniuj wskaźnik do klasy Punkt2D, obiekt klasy Punkt3D
     // i wywołaj funkcję out() z klasy Punkt3D za pomocą wskaźnika do klasy Punkt2D
     Punkt2D *p2d = new Punkt3D(1, 2, 3);
-    p2d->out();
+    p2d->out(); // result: 123
     delete p2d;
-
     // alternatywa:
-    // Punkt2D *p2d = new Punkt3D(1, 2, 3);
+    // Punkt2D *p2d;
+    // Punkt3D p3d(1, 2, 3);
+    // p2d = &p3d;
     // p2d->out(); // result: 123
-    // delete p2d;
 
     return EXIT_SUCCESS;
 }
