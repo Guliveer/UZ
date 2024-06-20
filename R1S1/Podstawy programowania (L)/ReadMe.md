@@ -1,8 +1,8 @@
 # Język programowania
-### C
+C
 
 ## Prowadzący
-#### dr inż. Grzegorz Łabiak
+[dr inż. Grzegorz Łabiak](https://scholar.google.com/citations?user=OdZiPAMAAAAJ)
 
 ## Ocena końcowa
-#### 5.0
+5.0
