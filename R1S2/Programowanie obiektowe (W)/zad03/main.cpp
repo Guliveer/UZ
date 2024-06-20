@@ -14,14 +14,15 @@ public:
     // Zdefiniować funkcję operatorową strumienia wyjściowego "operator<<"
     // (np. cout<<u1;)
     friend std::ostream &operator<<(std::ostream &os, const Ulamek &u) {
-        os << u.l << "/" << u.m; // result: "{l}/{m}"
+        os << u.l << "/" << u.m; // result: "{l}/{m}" (string)
+        // os << u.l / u.m; // result: l/m = ? (int)
         return os;
     }
     // alternatywa:
-    // std::ostream &operator<<(std::ostream &os) const {
-    //     os << l << "/" << m; // result: l/m = ?
-    //     return os;
-    // }
+//    std::ostream &operator<<(std::ostream &os) const {
+//        os << l << "/" << m; // result: l/m = ? (int)
+//        return os;
+//    }
 };
 
 int main() {
