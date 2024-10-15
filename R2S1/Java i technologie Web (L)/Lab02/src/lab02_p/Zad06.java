@@ -13,23 +13,16 @@ package lab02_p;
 import java.util.Scanner;
 
 public class Zad06 {
-    public static double calculateInterestRate(int months) {
-        if (1 <= months && months <= 24) {
-            return 0.02;
-        } else if (months <= 48) {
-            return 0.03;
-        } else if (months <= 60) {
-            return 0.04;
-        } else if (months <= 72) {
-            return 0.05;
-        } else if (months <= 96) {
-            return 0.06;
-        } else {
-            throw new IllegalArgumentException("Liczba miesięcy poza zakresem (1 - 96).");
-        }
+    private static double calculateInterestRate(int months) {
+        if (1 < months && months <= 24) return 0.02;
+        if (24 < months && months <= 48) return 0.03;
+        if (48 < months && months <= 60) return 0.04;
+        if (60 < months && months <= 72) return 0.05;
+        if (72 < months && months <= 96) return 0.06;
+        throw new IllegalArgumentException("Liczba miesięcy poza zakresem (1 - 96).");
     }
 
-    public static double calculateMonthlyPayment(double totalPrice, double ownContribution, int months) {
+    private static double calculateMonthlyPayment(double totalPrice, double ownContribution, int months) {
         return ((totalPrice - ownContribution) * (1 + calculateInterestRate(months))) / months;
     }
 
@@ -41,7 +34,9 @@ public class Zad06 {
         System.out.print("Podaj kwotę całkowitą (PLN): ");
         double price = scanner.nextDouble();
 
-        if (price > maxPrice) {throw new IllegalArgumentException("Kwota całkowita przekracza maksymalną (" + maxPrice + ")");}
+        if (price > maxPrice) {
+            throw new IllegalArgumentException("Kwota całkowita przekracza maksymalną (" + maxPrice + ")");
+        }
 
         System.out.print("Podaj kwotę kapitału własnego (PLN): ");
         double ownContribution = scanner.nextDouble();
