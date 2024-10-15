@@ -4,7 +4,7 @@
 // mniejszych oraz większych od średniej. Do nowej tablicy skopiować w odwrotnej
 // kolejności zawartość tablicy tj. od ostatniego do pierwszego.
 
-package lab03_p;
+package lab04_p;
 
 import java.util.Scanner;
 

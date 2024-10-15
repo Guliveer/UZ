@@ -3,7 +3,7 @@
 // - sortowania szybkiego (quicksort)
 // Przedstaw 2 pierwsze przebiegi mechanizmów sortowania.
 
-package lab03_p;
+package lab04_p;
 
 import java.util.Scanner;
 

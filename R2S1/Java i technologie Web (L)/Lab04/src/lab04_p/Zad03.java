@@ -4,7 +4,7 @@
 // 21-30 przypisz wartość od 11-55 losowo,
 // 31-39 przypisz wartość od 60-75 losowo
 
-package lab03_p;
+package lab04_p;
 
 import java.util.Scanner;
 

@@ -2,7 +2,7 @@
 // Za pomocą pętli zapisz w kolejnych komórkach liczby losowo wygenerowane z
 // przedziału od 99-150. Wykonać kopię do nowej tablicy.
 
-package lab03_p;
+package lab04_p;
 
 import java.util.Scanner;
 
