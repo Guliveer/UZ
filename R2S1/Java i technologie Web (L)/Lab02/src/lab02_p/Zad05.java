@@ -37,6 +37,7 @@ public class Zad05 {
                 break;
             default:
                 System.out.println("Nieznana operacja");
+                return;
         }
         System.out.println(a + " " + operation + " " + b + " = " + result);
     }
