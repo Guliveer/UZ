@@ -1,8 +1,7 @@
-1.
-
-- a) `title Systemy operacyjne - laboratorium`
-- b) `color 16`
-- c) `Ustawienia -> Command Prompt -> Appearance -> Font Size`
+1. 
+   - a) `title Systemy operacyjne - laboratorium`
+   - b) `color 16`
+   - c) `Ustawienia -> Command Prompt -> Appearance -> Font Size`
 
 2. `help`
 
