@@ -33,19 +33,19 @@
 
 16. `if /?; for /?; call /?; goto /?`
 
-17. `[plik]`
+17. [17.bat](17.bat)
 
-18. `[plik]`
+18. [18.bat](18.bat)
 
-19. `[plik]`
+19. [19.bat](19.bat)
 
-20. `[plik]`
+20. [20.bat](20.bat)
 
-21. `[plik]`
+21. [21.bat](21.bat)
 
-22. `[plik]`
+22. [22.bat](22.bat)
 
-23. `[plik]`
+23. [23.bat](23.bat)
 
 24. `start /REALTIME notepad.exe`
 
@@ -55,12 +55,12 @@
 
 27. (SKIP)
 
-28. `[plik]`
+28. [28.bat](28.bat)
 
-29. `[plik]`
+29. [29.bat](29.bat)
 
-30. `[plik]`
+30. [30.bat](30.bat)
 
-31. `[plik]`
+31. [31.bat](31.bat)
 
-32. `[plik]`
+32. [32.bat](32.bat)
