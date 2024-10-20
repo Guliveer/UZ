@@ -1,4 +1,4 @@
-# This repo is a collection of all the programming assignments I've completed during my studies on the [University of Zielona Góra](https://uz.zgora.pl/en/) since October 2023
+# This repo is a collection of all assignments I've completed during my studies on the [University of Zielona Góra](https://uz.zgora.pl/en/) since October 2023
 
 ❓ If you don't understand something - try to translate it from polish 🇵🇱
 
