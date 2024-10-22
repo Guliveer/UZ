@@ -15,16 +15,17 @@ public class Zad01 {
         int number = scanner.nextInt();
         ArrayList<Integer> odd = new ArrayList<>();
         ArrayList<Integer> even = new ArrayList<>();
-        int temp = number;
-        while (temp > 0) {
-            int digit = temp % 10;
+
+        String numberStr = Integer.toString(number);
+        for (char digitChar : numberStr.toCharArray()) {
+            int digit = Character.getNumericValue(digitChar);
             if (digit % 2 == 0) {
                 even.add(digit);
             } else {
                 odd.add(digit);
             }
-            temp /= 10;
         }
+
         double oddAvg = odd.stream().mapToInt(Integer::intValue).average().orElse(0);
         double evenAvg = even.stream().mapToInt(Integer::intValue).average().orElse(0);
         System.out.print("Odd digits: ");
