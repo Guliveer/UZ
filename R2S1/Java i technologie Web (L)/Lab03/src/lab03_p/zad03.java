@@ -6,12 +6,13 @@
 
 package lab03_p;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class zad03 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int number = (int) (Math.random() * 200 + 1);
+        int number = (new Random()).nextInt(200) + 1;
         int guess;
         do {
             System.out.print("Enter number: ");
