@@ -1,9 +1,10 @@
 // Napisać program, który po wczytaniu wartości liczby całkowitej, oblicza stosunek
 // średniej arytmetycznej cyfr nieparzystych do średniej arytmetycznej cyfr parzystych
-// oraz sprawdza, czy podana liczba jest liczbą pierwszą.
+// oraz sprawdza, czy podana liczba jest liczbą pierwszą. Użyj list
 
 package lab03_p;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Zad01 {
@@ -12,25 +13,30 @@ public class Zad01 {
 
         System.out.print("Enter number: ");
         int number = scanner.nextInt();
-
-        int oddSum = 0;
-        int oddCount = 0;
-        int evenSum = 0;
-        int evenCount = 0;
+        ArrayList<Integer> odd = new ArrayList<>();
+        ArrayList<Integer> even = new ArrayList<>();
         int temp = number;
         while (temp > 0) {
             int digit = temp % 10;
             if (digit % 2 == 0) {
-                evenSum += digit;
-                evenCount++;
+                even.add(digit);
             } else {
-                oddSum += digit;
-                oddCount++;
+                odd.add(digit);
             }
             temp /= 10;
         }
-        double oddAvg = (double) oddSum / oddCount;
-        double evenAvg = (double) evenSum / evenCount;
+        double oddAvg = odd.stream().mapToInt(Integer::intValue).average().orElse(0);
+        double evenAvg = even.stream().mapToInt(Integer::intValue).average().orElse(0);
+        System.out.print("Odd digits: ");
+        for (int i = odd.size() - 1; i >= 0; i--) {
+            System.out.print(odd.get(i) + " ");
+        }
+
+        System.out.print("\nEven digits: ");
+        for (int i = even.size() - 1; i >= 0; i--) {
+            System.out.print(even.get(i) + " ");
+        }
+
         System.out.print("\n");
         System.out.println("Odd average: " + oddAvg);
         System.out.println("Even average: " + evenAvg);
