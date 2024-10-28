@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Stwórz klasę o nazwie Samochod reprezentującą dane pojazdu zawierającą
 // następujące pola:
 // - marka,

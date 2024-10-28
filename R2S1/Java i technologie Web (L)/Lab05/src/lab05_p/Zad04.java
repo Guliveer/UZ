@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Należy poprawić program, tak aby działał poprawnie
 
 package lab05_p;

@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Wyznacz równanie kwadratowe z podanych przez użytkownika wartości parametrów a, b i c.
 
 package lab02_p;

@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Napisz metodę, która sprawdzi, czy samochód posiada jeszcze gwarancję (wiek
 // pojazdu do 2 lat licząc od daty rejestracji) i zwróci informację w formie komunikatu
 // tekstowego.

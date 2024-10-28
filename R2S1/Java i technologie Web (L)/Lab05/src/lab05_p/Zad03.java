@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Dodaj klasę AutoKomis, w której stworzone będą nowe obiekty klasy Samochod,
 // przechowujące dane o pojazdach (10 sztuk).
 

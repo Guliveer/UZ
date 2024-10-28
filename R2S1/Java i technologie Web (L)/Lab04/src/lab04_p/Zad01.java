@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Napisz program, w którym zostanie utworzona 30-elementowa tablica liczb typu int.
 // Za pomocą pętli zapisz w kolejnych komórkach liczby losowo wygenerowane z
 // przedziału od 99-150. Wykonać kopię do nowej tablicy.

@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 package lab05_p;
 
 public class Car {

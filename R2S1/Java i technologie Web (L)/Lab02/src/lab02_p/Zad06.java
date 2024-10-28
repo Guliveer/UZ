@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // W salonie samochodowym zaoferowano sprzedaż leasingową pojazdów. Napisz kod,
 // który policzy miesięczne zobowiązanie z uwzględnieniem odsetek i wpłaconego kapitału własnego.
 // Dane wejściowe to maksymalna kwota: 300 tyś PLN, liczba rat do 96.

@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Napisz program realizujący funkcje kalkulatora, z uwzględnieniem, ograniczenia dzielenia przez 0.
 
 package lab02_p;

@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Losujemy liczbę z zakresu od 1 do 200. Zadaniem użytkownika jest podanie właściwej
 // wylosowanej liczby. Jeżeli wczytana liczba jest mniejsza od wylosowanej użytkownik
 // zostanie o tym poinformowany, tak samo jak w przypadku podania wartości wyższej.

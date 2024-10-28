@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Po wczytaniu nieujemnej liczby całkowitej wyświetlone zostaną wszystkie wartości
 // potęgi liczby 3 mniejsze niż wartość wczytana.
 

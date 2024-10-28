@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Stworzyć tablicę 7 x 7 liczb całkowitych, wypełnić ją losowymi wartościami, następnie
 // wyznaczyć dla każdej kolumny minimum i maksimum, najmniejszy oraz największy
 // element w tablicy, średnią arytmetyczną elementów tablicy, ilość elementów

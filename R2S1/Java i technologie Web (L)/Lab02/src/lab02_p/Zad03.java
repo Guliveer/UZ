@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Opracuj kod służący do konwersji prędkości samochodu z mil na km/h
 
 package lab02_p;

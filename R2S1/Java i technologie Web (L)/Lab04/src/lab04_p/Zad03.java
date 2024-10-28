@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Dla tablicy 40 elementowej komórkom o indeksach:
 // 0-10 przypisz wartość od 1-5 losowo,
 // 11-20 przypisz wartość od 6-10 losowo,

@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Zrealizuj kod, który dla zadanej liczby całkowitej wyświetla jej wszystkie dzielniki.
 
 package lab03_p;

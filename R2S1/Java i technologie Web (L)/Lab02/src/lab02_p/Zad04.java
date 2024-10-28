@@ -1,9 +1,11 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Wczytaj kilka (x) liczb i wyznacz wartości min, max, średnią, oraz ilość podanych liczb.
 
 package lab02_p;
 
 public class Zad04 {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         // ask for x until pressed Return key
 
         int x;

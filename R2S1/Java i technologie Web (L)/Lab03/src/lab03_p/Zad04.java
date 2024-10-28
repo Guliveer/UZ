@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Opracuj kod realizujący wczytywanie kolejnych liczb do momentu gdy podana
 // zostanie wartość 5. Wyświetlić iloczyn podanych liczb.
 

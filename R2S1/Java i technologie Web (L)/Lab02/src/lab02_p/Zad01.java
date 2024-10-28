@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Napisz program, który narysuje choinkę o wysokości podanej przez użytkownika
 
 package lab02_p;

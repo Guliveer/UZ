@@ -1,3 +1,5 @@
+// Oliwer Pawelski, 24INF-SP/A
+
 // Dla macierzy wynikowej z zadania numer 1 zaimplementuj i wykonaj mechanizmy:
 // - sortowania bąbelkowego
 // - sortowania szybkiego (quicksort)
