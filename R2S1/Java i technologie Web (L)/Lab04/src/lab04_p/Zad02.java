@@ -15,8 +15,8 @@ public class Zad02 {
         Scanner scanner = new Scanner(System.in);
         int[][] tab = new int[7][7];
         int[][] tabCopy = new int[7][7];
-        int min, max, sum = 0, count = 0;
         double avg;
+        int sum = 0, count = 0;
 
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab[i].length; j++) {
@@ -26,7 +26,8 @@ public class Zad02 {
             }
         }
 
-        min = max = tab[0][0];
+        int min = tab[0][0], max = tab[0][0];
+
         for (int[] ints : tab) {
             for (int anInt : ints) {
                 if (anInt < min) {
@@ -58,8 +59,8 @@ public class Zad02 {
                 }
             }
         }
-
         System.out.println("X < Avg:\t" + count);
+
         count = 0;
         for (int[] ints : tab) {
             for (int j = 0; j < ints.length; j++) {
@@ -68,7 +69,6 @@ public class Zad02 {
                 }
             }
         }
-
         System.out.println("X > Avg:\t" + count);
 
         for (int i = tab.length - 1; i >= 0; i--) {

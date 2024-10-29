@@ -7,66 +7,66 @@
 
 package lab04_p;
 
-import java.util.Scanner;
-
 public class Zad04 {
     // Bubble Sort implementation with optional 'cycles' argument
-    public static int[] bubbleSort(int[] array, int... cycles) {
-        int n = array.length;
-        int[] sortedArray = array.clone(); // Clone the original array to avoid modifying it
-        int maxCycles = cycles.length > 0 ? cycles[0] : n - 1;
-
-        for (int i = 0; i < maxCycles; i++) {
-            boolean swapped = false;
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        boolean swapped;
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
             for (int j = 0; j < n - i - 1; j++) {
-                if (sortedArray[j] > sortedArray[j + 1]) {
-                    int temp = sortedArray[j];
-                    sortedArray[j] = sortedArray[j + 1];
-                    sortedArray[j + 1] = temp;
+                if (arr[j] > arr[j + 1]) {
+                    // Zamiana
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                     swapped = true;
                 }
             }
+            // Jeśli nie było zamian, tablica jest już posortowana
             if (!swapped) {
-                break; // If no elements were swapped, the array is already sorted
+                System.out.println("Tablica posortowana: " + java.util.Arrays.toString(arr));
+                return;
+            }
+
+            // Wyświetlenie postępu (tylko 2 pierwsze przebiegi)
+            if (i < 2) {
+                System.out.println("Po przebiegu " + (i + 1) + ": " + java.util.Arrays.toString(arr));
             }
         }
-        return sortedArray;
     }
 
-    // Quick Sort implementation with optional 'cycles' argument
-    public static int[] quickSort(int[] array, int... cycles) {
-        int[] sortedArray = array.clone(); // Clone the original array to avoid modifying it
-        int maxCycles = cycles.length > 0 ? cycles[0] : Integer.MAX_VALUE; // Unlimited cycles if not provided
-        quickSortHelper(sortedArray, 0, sortedArray.length - 1, new int[]{0}, maxCycles);
-        return sortedArray;
-    }
-
-    // Helper function for Quick Sort
-    private static void quickSortHelper(int[] array, int low, int high, int[] currentCycle, int maxCycles) {
-        if (low < high && currentCycle[0] < maxCycles) {
-            int pi = partition(array, low, high);
-            currentCycle[0]++;
-
-            quickSortHelper(array, low, pi - 1, currentCycle, maxCycles);
-            quickSortHelper(array, pi + 1, high, currentCycle, maxCycles);
+    public static void quickSort(int[] arr, int low, int high, int[] stepCount) {
+        if (low < high) {
+            int pi = partition(arr, low, high, stepCount);
+            quickSort(arr, low, pi - 1, stepCount);  // Lewa część
+            quickSort(arr, pi + 1, high, stepCount); // Prawa część
         }
     }
 
-    // Partition function for Quick Sort
-    private static int partition(int[] array, int low, int high) {
-        int pivot = array[high];
-        int i = (low - 1);
+    private static int partition(int[] arr, int low, int high, int[] stepCount) {
+        int pivot = arr[high]; // Wybieramy ostatni element jako pivot
+        int i = (low - 1); // Indeks elementu mniejszego od pivota
+
         for (int j = low; j < high; j++) {
-            if (array[j] < pivot) {
+            if (arr[j] <= pivot) {
                 i++;
-                int temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
+                // Zamiana
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
         }
-        int temp = array[i + 1];
-        array[i + 1] = array[high];
-        array[high] = temp;
+        // Zamiana pivota na właściwe miejsce
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        // Wyświetlamy tablicę po przebiegu (tylko 2 pierwsze)
+        stepCount[0]++;
+        if (stepCount[0] <= 2) {
+            System.out.println("Przebieg " + stepCount[0] + ": " + java.util.Arrays.toString(arr));
+        }
 
         return i + 1;
     }
@@ -79,32 +79,20 @@ public class Zad04 {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] tab = new int[30];
-        for (int i = 0; i < tab.length; i++) {
-            tab[i] = (int) (Math.random() * 51) + 99; // Tablica bazowa
-        }
+        int[] arrBubble = {5, 3, 8, 4, 2};
+        int[] arrQuick = arrBubble.clone(); // Klonowanie tablicy dla quicksort
 
         System.out.println("Tablica oryginalna:");
-        printArray(tab);
+        printArray(arrBubble);
+        System.out.println();
 
-        // Tworzenie osobnych kopii do sortowania
-        System.out.println("\n\nSortowanie bąbelkowe (2 cykle):");
-        int[] tabBubbleShort = bubbleSort(tab, 2);
-        printArray(tabBubbleShort);
+        System.out.println("Sortowanie bąbelkowe:");
+        bubbleSort(arrBubble);
+        System.out.println("Posortowana tablica: " + java.util.Arrays.toString(arrBubble));
 
-        System.out.println("\nSortowanie bąbelkowe (pełne):");
-        int[] tabBubble = bubbleSort(tab);
-        printArray(tabBubble);
-
-        System.out.println("\n\nSortowanie szybkie (2 cykle):");
-        int[] tabQuickShort = quickSort(tab, 2);
-        printArray(tabQuickShort);
-
-        System.out.println("\nSortowanie szybkie (pełne):");
-        int[] tabQuick = quickSort(tab);
-        printArray(tabQuick);
-
-        scanner.close();
+        System.out.println("\nSortowanie szybkie:");
+        int[] stepCount = {0}; // Licznik przebiegów
+        quickSort(arrQuick, 0, arrQuick.length - 1, stepCount);
+        System.out.println("Posortowana tablica: " + java.util.Arrays.toString(arrQuick));
     }
 }
