@@ -1,0 +1,1 @@
+To jest przykładowy tekst do pliku tekstowego.
