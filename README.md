@@ -5,7 +5,7 @@
 📝 *Comments I've left for my friends to learn coding might be appearing.*
 
 ### 📥 Download selected directory
-> #### [download-directory.github.io](https://download-directory.github.io)  
+> #### 🔗 [download-directory.github.io](https://download-directory.github.io)  
 > *(Also in repo's "About" section)*
 
 ## Directory tree naming logic:
