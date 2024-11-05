@@ -2,7 +2,7 @@
 
 // Napisać program, który po wczytaniu wartości liczby całkowitej, oblicza stosunek
 // średniej arytmetycznej cyfr nieparzystych do średniej arytmetycznej cyfr parzystych
-// oraz sprawdza, czy podana liczba jest liczbą pierwszą. Użyj list
+// oraz sprawdza, czy podana liczba jest liczbą pierwszą.
 
 package lab03_p;
 
