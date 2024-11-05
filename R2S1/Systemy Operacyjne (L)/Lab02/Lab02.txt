@@ -1,0 +1,116 @@
+1. Sprawdź w linii poleceń istniejące konta i grupy użytkowników? Użyj polecenia z grupy net.
+- net accounts; net localgroup
+
+2. Utwórz następujące konta użytkowników przynależące do różnych grup
+- osobny plik
+
+3. Usuń założone grupy i użytkowników z linii poleceń. Sprawdź czy operacje usunięcia się powiodły.
+- osobny plik
+
+4. Jakim poleceniem z linii komend można otworzyć program Zarządzanie komputerem?
+- start compmgmt.msc
+
+5. Z linii poleceń otwórz program Zasady zabezpieczeń lokalnych. Włączyć opcje dotyczące komplikacji hasła, długość min 8 znaków oraz ważność hasła ustawić na 14 dni.
+- osobny plik
+
+6. Z linii poleceń otwórz program Zasady zabezpieczeń lokalnych. Włączyć opcje blokady konta tak, aby było blokowane na jedną minutę po wprowadzeniu trzech błędnych haseł.
+- ten sam plik co w zadaniu 5
+
+7. Jako administrator utwórz konto o nazwie Jan i przypisz mu folder macierzysty w następującej lokalizacji: C:\Foldery_macierzyste\Jan.
+- osobny plik
+
+8. Przejdź do właściwości konta Jan i przetestuj wszystkie możliwe scenariusze ustalania przez administratora zasad dotyczących hasła
+- compmgmt.msc > Narzędzia systemowe > Użytkownicy i grupy lokalne > Użytkownicy
+
+9. Sprawdź kiedy ostatnio logował się użytkownik Jan na swoje konto? Podaj dokładną datę i godzinę logowania.
+- net user Jan
+
+10. Wyświetlić wszystkie informacje na temat użytkownika, którego nazwę należy podać jako parametr wejściowy do skryptu.
+- osobny plik
+
+11. Napisać polecenie, które spowoduje dodanie do systemu użytkownika o podanej nazwie, który będzie mógł się zalogować jedynie w dni robocze, w godzinach od 8 do 15.
+- osobny plik
+
+12. Napisać polecenie które ustawi minimalną długość hasła na 10 znaków.
+- osobny plik
+
+13. Napisać polecenie, które ustawi ważność hasła na 5 dni. Po upływie 5 dni wymuszona zostanie zmiana hasła.
+- osobny plik
+
+14. Napisać skrypt, który pobierze listę użytkowników z pliku tekstowego, a następnie utworzy dla nich konta.
+- .\14.ps1 "C:\ścieżka\do\pliku.txt"
+
+15. Prawa dostępu do zasobów. Wykonaj działania:
+(a) Utworzyć trzech użytkowników o nazwach Student1, Student2, Student3.
+(b) Utworzyć dwie grupy o nazwach Grupa1 i Grupa2.
+(c) Do grupy Grupa1 przypisać użytkowników Student1 i Student2.
+(d) Do grupy Grupa2 przypisać użytkowników Student2 i Student3.
+(e) Utworzyć na dysku folder o nazwie C:\dane_grup.
+(f) Zapoznaj się z poleceniem icacls.
+(g) Z poziomu linii poleceń odczytaj właściwości folderu C:\dane_grup.
+(h) Przypisać uprawnienia domyślne wraz z prawem Zapis do folderu Dane_grup grupie
+Grupa1.
+(i) Przypisać grupie Grupa2 prawa Wyświetlanie zawartości folderu oraz Odczyt i odmó-
+wić prawa Zapis1
+(j) Sprawdzić jakie są czynne uprawnienia poszczególnych użytkowników? Zwróć szczególną
+uwagę na użytkownika Student2 jakie będzie miał uprawnienia. Wypisz je.
+- osobny plik
+
+16. Napisać skrypt, który nada określone prawa dostępu danemu użytkownikowi do danego zasobu. Wszystkie potrzebne dane powinny być podane jako parametry skryptu.
+- osobny plik
+
+17. Zalogować się jako administrator. Utworzyć folder C:\dane_admina. Nadaj użytkownikowi admin prawo Pełna kontrola do tego folderu i utworzyć wewnątrz niego plik plik_admina.txt o dowolnej treści.
+- osobny plik
+ 
+18. Zalogować się odpowiednio jako Student1, Student2 oraz Student3 i wykonać na pliku plik_admina.txt operacje: otwarcia, zmiany zawartości, zapisu, usunięcia. Wykonanie których operacji jest możliwe?
+- Student1: Może otworzyć, zmieniać i zapisać plik, ponieważ ma uprawnienia do pełnej kontrola lub zapisu.
+- Student2: Może otworzyć i zapisać plik, ale nie ma uprawnień do usunięcia go (jeśli ustawienia nie zezwalają).
+- Student3: Może tylko otworzyć plik, ale nie może go zmieniać ani zapisać, ani usunąć.
+
+19. Za poznaj się z poleceniem takeown.
+- takeown /?
+
+20. Zapoznać się z programem diskpart. Za jego pomocą wyświetlić
+(a) szczegółowe informacje o dostępnych dyskach, wolumenach i partycjach
+(b) nazwy partycji oraz ich rozmiary
+- diskpart
+- DISKPART> list disk
+- DISKPART> list volume
+- DISKPART> select disk 0
+- DISKPART> list partition
+- DISKPART> exit
+
+21. Zapoznać się z poleceniem fsutil
+- fsutil
+
+22. Wpisać w linii poleceń następujące polecenie: fsutil fsinfo volumeinfo C: i sprawdzić czy dysk obsługuje przydziały dyskowe.
+- Supports Disk Quotas (tak)
+
+23. Sprawdzić jakie są obecnie ustawione limity przydziałów: fsutil quota query C:. Następnie ustawić użytkownikowi Student1 limity na 60 MB (poziom ostrzeżeń, w bajtach: 62914560 = 60*2^20) i 100 MB (limit końcowy, w bajtach: 104857600 = 100*2^20). Ponownie sprawdzić ustawienia limitu przydziałów. Następnie zmienić limity na 80 MB (83886080 B, poziom ostrzeżeń) i 120 MB (125829120 B, limit końcowy)
+- osobny plik
+
+24. Zaloguj się na konto Student1. Uruchom notatnik i napisz w nim dowolny tekst bez zapisywania go. Notatnik pozostaw uruchomiony.
+(a) Podaj jaki masz SID
+(b) Przeloguj się na konto administratora (bez wylogowywania).
+- whoami /user (SID: S-1-5-21-2030720402-1669296796-3871203637-1024)
+
+25. Zapoznaj się z poleceniem query, a w szczególności z user i session.
+(a) Sprawdź ilu obecnie użytkowników jest zalogowanych w systemie?
+(b) Sprawdź jaki numer identyfikacyjny (ID) ma sesja administratora i użytkownika Student1,
+godzinę logowania, nazwę sesji oraz stan.
+(c) Porównaj wyniki z tym co prezentuje Menedżer zadań w trybie graficznym. Podaj także jakim poleceniem można uruchomić Menedżera zadań?
+- query user
+- query session
+- taskmgr / Ctrl + Shift + Esc
+
+26. Zapoznaj sie z poleceniem query process oraz uruchom notatnik.
+(a) Wyświetl osobno procesy dla administratora i użytkownika Student1.
+(b) Wyświetl procesy, które są obecnie używane w sesji o nazwie console.
+(c) Wyświetl procesy, które są skojarzone z notatnikiem. Zwróć uwagę na PID procesu i z jakim
+użytkownikiem i sesją są skojarzone.
+(d) Zadanie domowe: wyjaśnij pojęcie PID.
+(e) Porównaj wyniki z tym co prezentuje Menedżer zadań w trybie graficznym.
+- query process admin;; query process Student1
+- query process console
+- query process notepad.exe
+- PID: Process ID -> indywidualny numer każdego procesu
