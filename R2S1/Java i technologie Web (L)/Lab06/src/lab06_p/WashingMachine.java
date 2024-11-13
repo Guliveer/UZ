@@ -5,6 +5,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import java.io.File;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class WashingMachine {
@@ -35,6 +36,15 @@ public class WashingMachine {
     }
 
     public void start() {
+        System.out.print("Press [Enter] to power on the washing machine...");
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.printf("%s", TextColor.BLACK);
+            scanner.nextLine();
+            System.out.printf("%s", TextColor.DEFAULT);
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
         controlPanel.turnOn();
         ControlPanel.show("Select a program or customize settings.");
 

@@ -17,15 +17,14 @@ public class Zad02 {
 
         System.out.println("\ny = " + a + "x^2 + " + b + "x + " + c);
 
-        // calculate delta
-        double delta = b * b - 4 * a * c;
+
+        double delta = Math.pow(b, 2) - 4 * a * c; // calculate delta
         System.out.println("Delta: " + delta);
         if (delta < 0) {
             System.out.println("Brak rozwiązań");
         }
         if (delta == 0) {
-            double x = -b / (2 * a);
-            System.out.println("x = " + x);
+            System.out.println("x = " + (-b / (2 * a)));
         }
         if (delta > 0) {
             double x1 = (-b - Math.sqrt(delta)) / (2 * a);

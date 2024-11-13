@@ -12,12 +12,25 @@ public class Zad05 {
         char operation;
 
         // ask for a, b, operation
-        System.out.print("Podaj a: ");
-        a = new Scanner(System.in).nextDouble();
-        System.out.print("Podaj operację (+, -, *, /): ");
+        System.out.print("Podaj a:\n");
+        try {
+            a = new Scanner(System.in).nextDouble();
+        } catch (Exception z) {
+            throw new ArithmeticException("Podana wartość nie jest liczbą");
+        }
+
+        System.out.print("Podaj operację (+, -, *, /):\n" + a + " ");
         operation = new Scanner(System.in).next().charAt(0);
-        System.out.print("Podaj b: ");
-        b = new Scanner(System.in).nextDouble();
+        if (operation != '+' && operation != '-' && operation != '*' && operation != '/') {
+            throw new ArithmeticException("Nieznana operacja");
+        }
+
+        System.out.print("Podaj b:\n" + a + " " + operation + " ");
+        try {
+            b = new Scanner(System.in).nextDouble();
+        } catch (Exception e) {
+            throw new ArithmeticException("Podana wartość nie jest liczbą");
+        }
 
         // calculate
         switch (operation) {
@@ -32,8 +45,7 @@ public class Zad05 {
                 break;
             case '/':
                 if (b == 0) {
-                    System.out.println("Nie można dzielić przez 0");
-                    return;
+                    throw new ArithmeticException("Dzielenie przez 0");
                 }
                 result = a / b;
                 break;
@@ -41,6 +53,6 @@ public class Zad05 {
                 System.out.println("Nieznana operacja");
                 return;
         }
-        System.out.println(a + " " + operation + " " + b + " = " + result);
+        System.out.println("\n" + a + " " + operation + " " + b + " = " + result);
     }
 }

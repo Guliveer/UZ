@@ -15,6 +15,11 @@ public class Zad04 {
         do {
             System.out.print("Enter number: ");
             number = scanner.nextInt();
+			// Uncomment below to include 5 in the product
+			
+            // if (number == 5) {
+            //     break;
+            // }
             product *= number;
         } while (number != 5);
         System.out.println("Product: " + product);

@@ -15,8 +15,8 @@ public class Zad01 {
         int[] tabCopy = new int[30];
         for (int i = 0; i < tab.length; i++) {
             tab[i] = (int) (Math.random() * 51) + 99;
-            tabCopy[i] = tab[i];
         }
+        System.arraycopy(tab, 0, tabCopy, 0, tab.length);
         System.out.println("Tablica oryginalna:");
         for (int j : tab) {
             System.out.print(j + " ");
