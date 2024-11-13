@@ -12,13 +12,14 @@ _(Also in repo's "About" section)_
 
 # Programming languages list
 
-| Language                                                                                                 | Directory                                                                            |
-| :------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
-| ![C](https://img.shields.io/badge/C-FF318C?style=for-the-badge&logo=clion&logoColor=white)               | [`~/R1S1/Podstawy programowania (L)/`](<./R1S1/Podstawy%20programowania%20(L)/>)     |
-| ![C++](https://img.shields.io/badge/C%2B%2B-21D789?style=for-the-badge&logo=clion&logoColor=white)       | [`~/R1S2/Programowanie obiektowe (L)/`](<./R1S2/Programowanie%20obiektowe%20(L)/>)   |
-| ![C++](https://img.shields.io/badge/C%2B%2B-21D789?style=for-the-badge&logo=clion&logoColor=white)       | [`~/R1S2/Programowanie obiektowe (W)/`](<./R1S2/Programowanie%20obiektowe%20(W)/>)   |
-| ![Java](https://img.shields.io/badge/Java-FC801D?style=for-the-badge&logo=intellij-idea&logoColor=white) | [`~/R2S1/Java i technologie Web (L)/`](<./R2S1/Java%20i%20technologie%20Web%20(L)/>) |
-| ![Python](https://img.shields.io/badge/Python-FCF84A?style=for-the-badge&logo=pycharm&logoColor=black)   | `[TBD]`                                                                              |
+| Language                                                                                                 | Directory                                                                                        |
+| :------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- |
+| ![C](https://img.shields.io/badge/C-FF318C?style=for-the-badge&logo=clion&logoColor=white)               | [`~/R1S1/Podstawy programowania (L)/`](<./R1S1/Podstawy%20programowania%20(L)/>)                 |
+| ![OCaml](https://img.shields.io/badge/OCaml-FC801D?style=for-the-badge&logo=ocaml&logoColor=white)       | [`~/R1S2/Podstawy systemów dyskretnych (L)/`](<./R1S2/Podstawy%20systemów%20dyskretnych%20(L)/>) |
+| ![C++](https://img.shields.io/badge/C%2B%2B-21D789?style=for-the-badge&logo=clion&logoColor=white)       | [`~/R1S2/Programowanie obiektowe (L)/`](<./R1S2/Programowanie%20obiektowe%20(L)/>)               |
+| ![C++](https://img.shields.io/badge/C%2B%2B-21D789?style=for-the-badge&logo=clion&logoColor=white)       | [`~/R1S2/Programowanie obiektowe (W)/`](<./R1S2/Programowanie%20obiektowe%20(W)/>)               |
+| ![Java](https://img.shields.io/badge/Java-087CFA?style=for-the-badge&logo=intellij-idea&logoColor=white) | [`~/R2S1/Java i technologie Web (L)/`](<./R2S1/Java%20i%20technologie%20Web%20(L)/>)             |
+| ![Python](https://img.shields.io/badge/Python-FCF84A?style=for-the-badge&logo=pycharm&logoColor=black)   | `[TBD]`                                                                                          |
 
 ## Directory tree naming logic:
 
