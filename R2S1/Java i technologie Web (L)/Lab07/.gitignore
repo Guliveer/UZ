@@ -1,3 +1,7 @@
+### Custom ###
+*.txt
+*.csv
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/

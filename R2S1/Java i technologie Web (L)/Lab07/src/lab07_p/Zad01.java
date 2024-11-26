@@ -15,7 +15,7 @@ public class Zad01 {
         Random random = new Random(2137);
         double[] liczby = new double[7];
         for (int i = 0; i < liczby.length; i++) {
-            liczby[i] = random.nextInt(10) + 1;
+            liczby[i] = random.nextDouble(10) + 1;
         }
 
         // Przykład użycia klasy Kalkulator
