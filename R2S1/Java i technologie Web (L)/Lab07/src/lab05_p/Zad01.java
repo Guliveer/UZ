@@ -7,16 +7,25 @@
 
 package lab05_p;
 
+import java.util.Random;
+
 public class Zad01 {
     public static void main(String[] args) {
+        // 7 losowych liczb
+        Random random = new Random(2137);
+        double[] liczby = new double[7];
+        for (int i = 0; i < liczby.length; i++) {
+            liczby[i] = random.nextInt(10) + 1;
+        }
+
         // Przykład użycia klasy Kalkulator
-        Kalkulator kalk1 = new Kalkulator(5);
+        Kalkulator kalk1 = new Kalkulator(liczby[0]);
         System.out.println("Wynik dodawania: " + kalk1.oblicz("dodaj"));
 
-        Kalkulator kalk2 = new Kalkulator(5, 3, 2, 1);
+        Kalkulator kalk2 = new Kalkulator(liczby[0], liczby[1], liczby[2], liczby[3]);
         System.out.println("Wynik odejmowania: " + kalk2.oblicz("odejmij"));
 
-        Kalkulator kalk3 = new Kalkulator(2, 3, 4, 5, 6, 7, 8);
+        Kalkulator kalk3 = new Kalkulator(liczby[0], liczby[1], liczby[2], liczby[3], liczby[4], liczby[5], liczby[6]);
         System.out.println("Wynik mnożenia: " + kalk3.oblicz("pomnóż"));
 
         Kalkulator kalk4 = new Kalkulator(kalk3);
