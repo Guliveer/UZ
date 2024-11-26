@@ -3,7 +3,7 @@
 // Korzystając ze strumieni Javy napisz program realizujący odczyt, oraz zapis dowolnych
 // danych dla pliku tekstowego *.txt i *.csv.
 
-package lab05_p;
+package lab07_p;
 
 import java.io.*;
 

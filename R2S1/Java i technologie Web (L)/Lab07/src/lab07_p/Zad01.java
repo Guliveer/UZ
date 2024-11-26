@@ -5,7 +5,7 @@
 // wynik operacji matematycznej. Dodatkowo konstruktor kopiujący klasy zawierający
 // informacje o liczbach wykorzystanych do wykonywania operacji.
 
-package lab05_p;
+package lab07_p;
 
 import java.util.Random;
 
