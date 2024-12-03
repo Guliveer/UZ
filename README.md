@@ -1,14 +1,22 @@
 # This repo is a collection of assignments I've completed during my studies on the [University of Zielona Góra](https://uz.zgora.pl/en/) since October 2023
 
+![GitHub repo size](https://img.shields.io/github/repo-size/Guliveer/UZ?style=flat-square&label=Repo%20size&color=red)
+![GitHub last commit](https://img.shields.io/github/last-commit/Guliveer/UZ?style=flat-square&label=Last%20commit&color=008F39)
+![GitHub language count](https://img.shields.io/github/languages/count/Guliveer/UZ?style=flat-square&label=Languages%20used&color=mediumslateblue)
+
 ❓ If you don't understand something - try to translate it from polish 🇵🇱
 
 📝 _Comments I've left for my friends to learn coding might be appearing._
 
 ### 📥 Download selected directory
 
-> 🔗 [**download-directory.github.io**](https://download-directory.github.io)
+> 🔗 [**download-directory.github.io**](https://download-directory.github.io)  
+> (Open it in new tab)
 
-_(Also in repo's "About" section)_
+### 📄 Open in IDE view
+
+> 🔗 [**GitHub1s.com**](https://github1s.com/Guliveer/UZ)  
+> (Also in repo's "About" section)
 
 # Programming languages list
 
