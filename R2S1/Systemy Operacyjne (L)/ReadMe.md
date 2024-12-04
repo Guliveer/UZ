@@ -8,7 +8,7 @@
 
 TBD
 
-# Tree
+# Drzewo / Tree
 
 [`./`](./)  
 |- [`Lab01/`](./Lab01) \# Wiersz polecenia i skrypty ![CMD](https://img.shields.io/badge/CMD-black)  

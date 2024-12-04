@@ -1,23 +1,24 @@
-1. 
-   - a) `title Systemy operacyjne - laboratorium`
-   - b) `color 16`
-   - c) `Ustawienia -> Command Prompt -> Appearance -> Font Size`
+# Lab01 [Wiersz polecenia i skrypty]
 
-2. `help`
+1.  - a) `title Systemy operacyjne - laboratorium`
+    - b) `color 16`
+    - c) `Ustawienia -> Command Prompt -> Appearance -> Font Size`
 
-3. `date /T`
+2.  `help`
 
-4. `chkdsk > %homedir%%homepath%\Desktop\raport_dysk.txt`
+3.  `date /T`
 
-5. `type %homedir%%homepath%\Desktop\raport_dysk.txt`
+4.  `chkdsk > %homedir%%homepath%\Desktop\raport_dysk.txt`
 
-6. `dir /A:-D C:\`
+5.  `type %homedir%%homepath%\Desktop\raport_dysk.txt`
 
-7. `dir /A:D C:\`
+6.  `dir /A:-D C:\`
 
-8. `dir %windir%\system32 /O:E`
+7.  `dir /A:D C:\`
 
-9. `xcopy ".\.." "." /V`
+8.  `dir %windir%\system32 /O:E`
+
+9.  `xcopy ".\.." "." /V`
 
 10. `mkdir Kat1; mkdir Kat2; xcopy "%windir%\system32\?d*" ".\Kat2"`
 

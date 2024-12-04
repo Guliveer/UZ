@@ -8,7 +8,7 @@ dr inż. Marek Wróblewski
 
 TBD
 
-# Tree
+# Drzewo / Tree
 
 [`./`](./)  
 |- [`Lab02/`](./Lab02) \# Typy danych, instrukcje warunkowe, realizacja wejścia-wyjścia  

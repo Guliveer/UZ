@@ -1,4 +1,4 @@
-# Lab03
+# Lab03 [Powłoka PowerShell]
 
 1.  Użyć polecenia `Get-Help`, aby otrzymać pomoc polecenia `Set-Location`.
 

@@ -1,4 +1,4 @@
-# Lab04
+# Lab04 [Linux - praca w konsoli]
 
 ## 1. Manipulowanie plikami i katalogami
 
@@ -638,12 +638,12 @@ Zwiększ datę systemową o 5 dni.
 
 ### 4.16. Utwórz plik `prog1.c` i skopiuj do niego następującą zawartość:
 
-> ```c
-> int main() {
-> 	printf("Test\n");
-> 	while (1);
-> }
-> ```
+```c
+int main() {
+	printf("Test\n");
+ 	while (1);
+}
+```
 
 Skompiluj pliku poleceniem `gcc -o prog1 prog1.c`  
 Otrzymujemy program o nazwie _prog1_, który po uruchomieniu wypisuje na ekran komunikat 'Test', a następnie się zawiesza. Kończymy jego działanie poprzez wciśnięcie kombinacji klawiszy **Ctrl-C**. Dane są:

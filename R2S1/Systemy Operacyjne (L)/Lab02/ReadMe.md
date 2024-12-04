@@ -1,4 +1,4 @@
-# Lab02
+# Lab02 [Zarządzanie systemem Windows 10 z poziomu wiersza polecenia]
 
 1. **Sprawdź w linii poleceń istniejące konta i grupy użytkowników?**  
    Użyj polecenia z grupy `net`:
