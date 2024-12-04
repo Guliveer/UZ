@@ -696,3 +696,108 @@ Ustaw **właściciela**, **grupę** oraz **prawa dostępu** do programu _prog1_ 
 > Czy _stud1_ może w tej sytuacji uruchamiać program?
 >
 > > Tak, użytkownik _stud1_ może uruchomić program. Dzięki ustawionym prawom dostępu (`r-x` dla grupy i innych użytkowników) oraz bitowi SUID, proces uruchamiany przez _stud1_ będzie działał z uprawnieniami użytkownika _pracUZ_ oraz w grupie _users_.
+
+### 4.17. Utwórz użytkowników _stud1_–_stud6_ oraz trzy grupy _parlament_, _koloinf_, _koloair_. Grupą podstawową dla użytkowników _stud1_ i _stud2_ jest grupa _parlament_, dla użytkowników _stud3_ i _stud4_ grupa koloinf, a dla użytkowników _stud5_ i _stud6_ grupa _koloair_. Wiadomo także, że użytkownicy _stud1_ oraz _stud5_ należą także do grupy _koloinf_. W katalogu `/test` umieszczono plik o nazwie `projekt`. Do tego pliku pełne prawa posiada powinna posiadać grupa _koloinf_ a pozostałe grupy tylko prawo czytania. Ustawić odpowiednie uprawnienia wg podanego schematu. Sprawdzić jakie uprawnienia efektywne posiadają użytkownicy _stud1_–_stud6_.
+
+> ```bash
+> # tworzenie grup
+> sudo groupadd parlament
+> sudo groupadd koloinf
+> sudo groupadd koloair
+>
+> # tworzenie użytkowników
+> sudo useradd -m -G parlament stud1
+> sudo useradd -m -G parlament stud2
+> sudo useradd -m -G koloinf stud3
+> sudo useradd -m -G koloinf stud4
+> sudo useradd -m -G koloair stud5
+> sudo useradd -m -G koloair stud6
+>
+> # przypisywanie użytkowników do grup podstawowych
+> sudo usermod -g parlament stud1
+> sudo usermod -g parlament stud2
+> sudo usermod -g koloinf stud3
+> sudo usermod -g koloinf stud4
+> sudo usermod -g koloair stud5
+> sudo usermod -g koloair stud6
+>
+> # dodanie stud1 i stud5 do grupy koloinf
+> sudo usermod -aG koloinf stud1
+> sudo usermod -aG koloinf stud5
+>
+> # tworzenie pliku
+> sudo mkdir /test
+> sudo touch /test/projekt
+>
+> # nadanie praw dostępu
+> sudo chown :koloinf /test/projekt
+> sudo chmod 760 /test/projekt
+>
+> # sprawdzenie uprawnień
+> getfacl /test/projekt
+> ```
+
+### 4.18. Dla użytkownika _stud4_ ustawić “sticky bit” do katalogu `/tmp`. Zalogować się do systemu jako _stud4_ i umieścić w katalogu `tmp` plik `dane.txt`. Wylogować się i zalogować na konto innego użytkownika. Usunąć plik `dane.txt`. Czy jest to możliwe?
+
+> ```bash
+> # ustawienie sticky bit i sprawdzenie uprawnień
+> sudo chmod +t /tmp
+> ls -ld /tmp
+>
+> # zalogowanie jako stud4 i umieszczenie pliku w katalogu tmp
+> sudo su stud4
+> echo "Dane testowe" > /tmp/dane.txt
+> exit
+>
+> # zalogowanie jako inny użytkownik i usunięcie pliku
+> sudo su stud1
+> rm /tmp/dane.txt
+>
+> # wynik:
+> # Ponieważ "sticky bit" został ustawiony dla katalogu /tmp, inny użytkownik nie jest w stanie usunąć pliku dane.txt, bo nie jest jego właścicielem
+> # W systemie pojawi się komunikat podobny do:
+> # rm: cannot remove '/tmp/dane.txt': Operation not permitted
+> ```
+
+## 5. Wyrażenie regularne
+
+### 5.1. Napisać wyrażenie regularne do wyszukiwania z tekście frazy `\abc[?]`.
+
+> `\\abc\[\?\]`
+
+### 5.2. Za pomocą polecenia `grep` usunąć z pliku `dane1.dat` linie nie pasujące do wzorca.
+
+> `grep -v -E "\\abc\[\?\]" dane1.dat > dane1_filtered.dat`
+
+### 5.3. Zapoznać się z poleceniem `expr` do wykonywania operacji na łańcuchach znaków.
+
+> `man expr`
+
+### 5.4. Za pomocą polecenia `expr` wyświetlić rozszerzenie pliku, którego nazwa znajduje się w zmiennej plik.
+
+> ```bash
+> plik="plik.txt"
+> expr "$plik" : '.*\.\(.*\)'
+> ```
+
+### 5.5. Zmodyfikować rozwiązanie zadania poprzedniego tak, aby była wyświetlana nazwa bez rozszerzenia.
+
+> ```bash
+> plik="plik.txt"
+> expr "$plik" : '\(.*\)\..*'
+> ```
+
+### 5.6. Napisać wyrażenie regularne do wyszukiwania w tekście adresów witryn www. Adresy mogą zaczynać się od słów http, https lub bez nich.
+
+> `(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9\-]+(\.[a-zA-Z]{2,})(\/[^\s]*)?`
+
+### 5.7. Napisać wyrażenie regularne do wyszukiwaniu w pliku adresów e-mail.
+
+> RegEx: `[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}`
+>
+> ```bash
+> # przykładowe użycie
+> plik="dane.txt"
+> regex='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+> grep -o -E $regex $plik
+> ```
