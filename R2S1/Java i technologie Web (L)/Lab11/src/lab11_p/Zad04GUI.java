@@ -19,7 +19,7 @@ public class Zad04GUI {
     }
 
     private static void showLoginWindow() {
-        JFrame loginFrame = new JFrame("Logowanie");
+        JFrame loginFrame = new JFrame("Logowanie do poczty UZ");
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(500, 300);
         loginFrame.setLayout(new BorderLayout());
@@ -31,11 +31,6 @@ public class Zad04GUI {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        JLabel titleLabel = new JLabel("Logowanie do poczty UZ", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
-        loginFrame.add(titleLabel, BorderLayout.NORTH);
 
         JLabel loginLabel = new JLabel("Login (nr indeksu):");
         JTextField loginField = new JTextField(20);
@@ -93,7 +88,7 @@ public class Zad04GUI {
                 return;
             }
 
-            // authenticate session - if user is not authenticated, it will throw an exception
+            // authenticate session - if a user is not authenticated, it will throw an exception
             try {
                 Session session = createMailSession(login, password);
                 session.getTransport("smtp").connect();
@@ -123,11 +118,6 @@ public class Zad04GUI {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        JLabel titleLabel = new JLabel("Wyślij e-mail", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
-        emailFrame.add(titleLabel, BorderLayout.NORTH);
 
         JLabel recipientLabel = new JLabel("Adres odbiorcy:");
         JTextField recipientField = new JTextField(30);
