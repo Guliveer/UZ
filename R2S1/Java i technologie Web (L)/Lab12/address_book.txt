@@ -1,0 +1,40 @@
+[General]
+    Name: test
+    Surname: test
+    Company: test
+    Position: test
+[Address]
+    Street: test
+    City: test
+    Zip code: test
+    Region: test
+    Country: test
+[Contact]
+    Phone: test
+    Email: test
+    Website: test
+[Notes]
+    test
+
+---
+
+[General]
+    Name: test2
+    Surname: test2
+    Company: test2
+    Position: test2
+[Address]
+    Street: test2
+    City: test2
+    Zip code: test2
+    Region: test2
+    Country: test2
+[Contact]
+    Phone: test2
+    Email: test2
+    Website: test2
+[Notes]
+    test2
+
+---
+

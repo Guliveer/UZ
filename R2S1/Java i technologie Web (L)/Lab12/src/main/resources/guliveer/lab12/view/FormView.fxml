@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="guliveer.lab12.controller.FormController" spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+    <children>
+        <Label text="Name"/>
+        <TextField fx:id="firstNameField"/>
+        <Label text="Surname"/>
+        <TextField fx:id="lastNameField"/>
+        <Label text="Company"/>
+        <TextField fx:id="companyField"/>
+        <Label text="Position"/>
+        <TextField fx:id="positionField"/>
+        <Label text="Street"/>
+        <TextField fx:id="streetField"/>
+        <Label text="City"/>
+        <TextField fx:id="cityField"/>
+        <Label text="Zip code"/>
+        <TextField fx:id="postalCodeField"/>
+        <Label text="Region"/>
+        <TextField fx:id="provinceField"/>
+        <Label text="Country"/>
+        <TextField fx:id="countryField"/>
+        <Label text="Phone number"/>
+        <TextField fx:id="phoneField"/>
+        <Label text="Email"/>
+        <TextField fx:id="emailField"/>
+        <Label text="Website"/>
+        <TextField fx:id="websiteField"/>
+        <Label text="Notes"/>
+        <TextField fx:id="notesField"/>
+        <Button text="Save" onAction="#handleSave"/>
+    </children>
+</VBox>
