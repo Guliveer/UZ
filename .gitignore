@@ -56,9 +56,7 @@ Temporary Items
 *.lib
 
 # Executables
-*.exe
 *.out
-*.app
 
 # Prerequisites
 *.d
@@ -91,9 +89,7 @@ Temporary Items
 *.dylib
 
 # Executables
-*.exe
 *.out
-*.app
 *.i*86
 *.x86_64
 *.hex
@@ -176,9 +172,6 @@ cmake-build-*/
 
 # File-based project format
 *.iws
-
-# IntelliJ
-out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
