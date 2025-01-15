@@ -7,103 +7,25 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 		<title>Guliveer/UZ - Repo Viewer</title>
-		<style>
-			* {
-				font-family: 'Fira Code', monospace;
-			}
-
-			body {
-				line-height: 1.6;
-				margin: 0;
-				padding: 0;
-				color: #333;
-				background: #f4f4f9;
-			}
-
-			header {
-				background: #007bff;
-				color: #fff;
-				padding: 10px 20px;
-				text-align: center;
-			}
-
-			header h1 {
-				margin: 0;
-			}
-
-			main {
-				padding: 20px;
-			}
-
-			section {
-				margin-bottom: 20px;
-				padding: 15px;
-				background: #fff;
-				border: 1px solid #ddd;
-				border-radius: 5px;
-			}
-
-			footer {
-				text-align: center;
-				padding: 10px;
-				background: #333;
-				color: #fff;
-			}
-
-			ul {
-				list-style-type: none;
-				padding: 0;
-			}
-
-			li {
-				padding: 5px;
-				border-bottom: 1px solid #ddd;
-			}
-
-			a {
-				text-decoration: none;
-				color: #007bff;
-				cursor: pointer;
-			}
-
-			a:visited {
-				color: #007bff;
-			}
-
-			.main-btn {
-				margin-bottom: 10px;
-			}
-
-			.download-btn,
-			.back-btn {
-				background: #28a745;
-				color: #fff;
-				padding: 5px 10px;
-				border: none;
-				border-radius: 3px;
-				cursor: pointer;
-				font-size: 0.9em;
-			}
-
-			.back-btn {
-				background: #007bff;
-			}
-
-			.download-btn:hover {
-				background: #218838;
-			}
-
-			.back-btn:hover {
-				background: #0056b3;
-			}
-		</style>
 	</head>
 
 	<body>
 		<header>
 			<h1>GitHub - Guliveer/UZ</h1>
 			<p>Explore files and learn more about this repo</p>
+			<div popover id="insert-token">
+				<!-- Place to insert token -->
+				<label for="token">Insert your GitHub <a target="_blank"
+						href="https://github.com/settings/tokens/new?description=Guliveer%2FUZ%20-%20Repo%20Viewer&scopes=public_repo">Personal
+						Access Token</a> to increase the API rate limit:</label>
+				<input type="password" name="token" id="token" placeholder="Paste your token here" />
+				<button class='reload-btn' onclick="window.location.reload()">
+					Save & refresh
+					<icon>check</icon>
+				</button>
+			</div>
 		</header>
 		<main>
 			<section id="project-info">
@@ -111,168 +33,462 @@
 				<div id="readme-content">Loading...</div>
 			</section>
 			<section id="file-list">
-				<h2>Repository Files</h2>
-				<label>~/</label>
-				<ul>
-					<!-- Dynamic list of files will go here -->
-				</ul>
+				<h2>Repository Explorer</h2>
+				<button class="download-btn main-btn" style="display: none;">
+					Download current dir
+					<icon>download</icon>
+				</button>
+				<label></label>
+				<div>
+					<ul>
+						<!-- Dynamic list of files will go here -->
+						Loading...
+					</ul>
 			</section>
 		</main>
 		<footer>
 			<p>Powered by <a href="https://github.com">GitHub Pages</a></p>
+			<p><button popovertarget="insert-token">Token</button></p>
 		</footer>
 	</body>
 
-	<script>
-		const username = "Guliveer"; // Twój login na GitHubie
-		const repo = "UZ"; // Nazwa repozytorium
-		const cacheKey = `repoCache_${username}_${repo}`;
-		let repoCache = JSON.parse(localStorage.getItem(cacheKey)) || {}; // Cache w LocalStorage
-		let currentPath = ""; // Aktualna ścieżka
-		let token = null; // Token API
-
-		// Wczytaj token z pliku `token.js`
-		fetch('./token.js')
-			.then(response => {
-				if (response.ok) return response.text();
-				throw new Error('Token file not found');
-			})
-			.then(script => {
-				eval(script); // Wykonaj kod, aby ustawić `window.GITHUB_API_TOKEN`
-				token = window.GITHUB_API_TOKEN;
-				if (!token) throw new Error('Token not loaded');
-				console.log("Token loaded successfully");
-			})
-			.catch(error => console.error("Error loading token:", error));
-
-		// Funkcja do fetch z autoryzacją
-		function fetchWithAuth(url) {
-			if (!token) {
-				console.error("Token not loaded");
-				return Promise.reject("Token not loaded");
-			}
-			return fetch(url, {
-				headers: {
-					Authorization: `token ${token}`,
-					Accept: "application/vnd.github.v3+json"
-				}
-			});
+	<style>
+		:root {
+			--test: hsl(200, 90%, 58%);
+			--hsl-h: 15;
+			--hsl-s: 90%;
+			--hsl-l: 55%;
+			--primary-color: hsl(var(--hsl-h), var(--hsl-s), var(--hsl-l));
 		}
 
-		// Inicjalizacja po załadowaniu DOM
-		document.addEventListener("DOMContentLoaded", () => {
-			loadReadme(); // Wczytaj README.md
-			loadFiles(currentPath); // Wczytaj pliki repozytorium
-		});
+		* {
+			font-family: 'Fira Code', monospace;
+			transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+			font-size: 0.95rem;
+		}
 
-		// Wczytaj README.md
-		function loadReadme() {
-			fetchWithAuth(`https://api.github.com/repos/${username}/${repo}/readme`)
+		/* change text select */
+		::selection {
+			background: var(--primary-color);
+			color: #fff;
+		}
+
+		icon {
+			font-family: 'Material Symbols Rounded' !important;
+			font-weight: normal;
+			font-style: normal;
+			font-size: 1rem;
+			line-height: 1;
+			letter-spacing: normal;
+			text-transform: none;
+			position: relative;
+			top: 0.15rem;
+			/* margin-left: 0.25rem;
+			margin-right: 0.25rem; */
+			display: inline-block;
+			white-space: nowrap;
+			word-wrap: normal;
+			direction: ltr;
+			text-rendering: optimizeLegibility;
+			-webkit-font-smoothing: antialiased;
+			font-variation-settings:
+				'FILL' 0,
+				'wght' 400,
+				'GRAD' 0,
+				'opsz' 24
+		}
+
+		body {
+			line-height: 1.6;
+			margin: 0;
+			padding: 0;
+			color: #333;
+			background: #f4f4f9;
+		}
+
+		header {
+			background: var(--primary-color);
+			color: #fff;
+			padding: 1.5rem 0;
+			text-align: center;
+		}
+
+		header h1 {
+			margin: 0;
+		}
+
+		main {
+			padding: 20px;
+		}
+
+		section {
+			margin-bottom: 20px;
+			padding: 15px;
+			background: #fff;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+		}
+
+		footer {
+			/* text-align: center; */
+			padding: 1.5rem 0.8rem;
+			background: #333;
+			color: #fff;
+			position: static;
+			bottom: 0;
+			width: 100%;
+			display: flex;
+			gap: 0.5rem;
+			flex-direction: column;
+			flex-wrap: nowrap;
+			justify-content: center;
+			align-items: center;
+		}
+
+		footer * {
+			font-size: 0.85rem;
+			text-decoration: none;
+			height: fit-content;
+			margin: 0;
+		}
+
+		footer button {
+			color: var(--primary-color);
+			cursor: pointer;
+			border: none;
+			background: none;
+			padding: 0;
+		}
+
+		#insert-token[popover]:popover-open {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.4rem;
+		}
+
+		#insert-token label {
+			font-size: 0.9rem;
+		}
+
+		[popover],
+		[popover] input {
+			width: fit-content;
+			height: fit-content;
+		}
+
+		[popover] {
+			padding: 1rem;
+			border: none;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		[popover]::backdrop {
+			background: rgba(0, 0, 0, 0.5);
+			backdrop-filter: blur(5px);
+		}
+
+		[popover] input {
+			font-size: 1rem;
+			padding: 0.4rem 0.8rem;
+			border-radius: 5px;
+			border: 1px solid #ddd;
+			min-width: 25rem;
+			min-height: 2rem;
+			text-align: center;
+		}
+
+		[popover] input:focus {
+			outline: none;
+			border-color: var(--primary-color);
+		}
+
+		ul {
+			list-style-type: none;
+			padding: 0;
+		}
+
+		li {
+			padding: 5px;
+			border-bottom: 1px solid #ddd;
+		}
+
+		a,
+		a:visited {
+			text-decoration: none;
+			color: var(--primary-color);
+			cursor: pointer;
+		}
+
+		.markdown-heading>a {
+			display: none;
+			visibility: hidden;
+		}
+
+		.reload-btn {
+			background: #007bff;
+			color: #fff;
+			padding: 0.5rem 1rem;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+			font-size: 0.9em;
+		}
+
+		.download-btn,
+		.back-btn {
+			background: #28a745;
+			color: #fff;
+			padding: 5px 10px;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+			font-size: 0.9em;
+		}
+
+		.download-btn:hover {
+			background: #218838;
+		}
+
+		/* DARK MODE */
+		@media (prefers-color-scheme: dark) {
+			:root {
+				/* for dark bg */
+				--hsl-h: 200;
+			}
+
+			body {
+				background: #333;
+				color: #fff;
+			}
+
+			header {
+				background: #222;
+			}
+
+			section {
+				background: #444;
+				border-color: #333;
+			}
+
+			footer {
+				background: #222;
+				color: #fff;
+			}
+
+			[popover] {
+				background: #444;
+				color: #fff;
+			}
+
+			[popover] input {
+				background: #333;
+				color: #fff;
+				border-color: #555;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			* {
+				transition: none !important;
+				animation-duration: 0s !important;
+			}
+		}
+	</style>
+
+</html>
+
+<script>
+	const username = "Guliveer";
+	const repo = "UZ";
+	const repoCache = {}; // Cache for storing repo data
+	let currentPath = "";
+	let token = null;
+
+	if (localStorage.getItem("token")) {
+		token = localStorage.getItem("token");
+		document.getElementById("token").value = token;
+	}
+
+	const tokenArea = document.getElementById("token");
+	// listen to updates in input field (any: paste, keyup, etc.)
+	document.addEventListener("input", (e) => {
+		if (e.target === tokenArea) {
+			token = tokenArea.value;
+			localStorage.setItem("token", token)
+
+			if (localStorage.getItem("token") == tokenArea.value) {
+				// Log token change and time (dd/mm/yyyy hh:mm:ss)
+				console.info(`[${new Date().toLocaleString()}] Token has been changed`);
+			}
+		}
+	});
+
+	document.addEventListener("DOMContentLoaded", () => {
+		loadReadme();
+		loadFiles(currentPath);
+	});
+
+	function loadReadme() {
+		const lastUpdated = localStorage.getItem("readme-updated-at");
+		if (Date.now() - lastUpdated > 24 * 60 * 60 * 1000) { // 24 (h) * 60 (min) * 60 (s) * 1000 (ms)
+			localStorage.removeItem("readme");
+			localStorage.removeItem("readme-updated-at");
+		}
+
+		if (localStorage.getItem("readme")) {
+			if (localStorage.getItem("readme").includes("API rate limit exceeded")) {
+				localStorage.removeItem("readme");
+				localStorage.removeItem("readme-updated-at");
+				return;
+			}
+			document.getElementById("readme-content").innerHTML = localStorage.getItem("readme");
+			return;
+		}
+
+		if (token != null) {
+			fetch(`https://api.github.com/repos/${username}/${repo}/readme`, {
+				headers: {
+					Accept: "application/vnd.github.v3.html",
+					Authorization: `token ${token}`
+				}
+			})
 				.then(response => response.text())
 				.then(html => {
 					document.getElementById("readme-content").innerHTML = html;
+					// save content to local storage
+					localStorage.setItem("readme", html);
+					localStorage.setItem("readme-updated-at", Date.now());
 				})
 				.catch(() => {
 					document.getElementById("readme-content").innerText =
 						"README.md file not found in the repository.";
 				});
-		}
-
-		// Wczytaj pliki i foldery
-		function loadFiles(path) {
-			const cachedData = repoCache[path];
-
-			if (cachedData) {
-				validateCacheAndRender(cachedData, path);
-			} else {
-				fetchAndCacheFiles(path);
-			}
-		}
-
-		// Sprawdź cache i zaktualizuj w razie potrzeby
-		function validateCacheAndRender(cachedData, path) {
-			fetchWithAuth(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
-				.then(response => response.json())
-				.then(files => {
-					if (files.sha !== cachedData.sha) {
-						// Jeśli SHA różne, zaktualizuj cache
-						repoCache[path] = { sha: files.sha, data: files };
-						localStorage.setItem(cacheKey, JSON.stringify(repoCache));
-						renderFiles(files, path);
-					} else {
-						// Jeśli cache aktualne, użyj go
-						renderFiles(cachedData.data, path);
-					}
+		} else {
+			fetch(`https://api.github.com/repos/${username}/${repo}/readme`, {
+				headers: {
+					Accept: "application/vnd.github.v3.html"
+				}
+			})
+				.then(response => response.text())
+				.then(html => {
+					document.getElementById("readme-content").innerHTML = html;
+					// save content to local storage
+					localStorage.setItem("readme", html);
+					localStorage.setItem("readme-updated-at", Date.now());
 				})
-				.catch(() => {
-					// Jeśli API niedostępne, użyj cache
-					renderFiles(cachedData.data, path);
+				.catch(response.status == (403 || 429), () => {
+					document.querySelector("#file-list ul").innerHTML = "API rate limit exceeded. Please use Personal Access Token.";
+					document.querySelector("button[popovertarget='insert-token']").click(); // press #insert-token button to show token input
+				})
+				.catch(response.status != 200, () => {
+					document.querySelector("#file-list ul").innerHTML = "Error loading README.md file.";
 				});
 		}
+	}
 
-		// Pobierz pliki z API i zapisz do cache
-		function fetchAndCacheFiles(path) {
-			fetchWithAuth(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
+	function loadFiles(path) {
+		if (repoCache[path]) {
+			renderFiles(repoCache[path], path);
+			return;
+		}
+
+		if (token != null) {
+			fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`, {
+				headers: {
+					Authorization: `token ${token}`
+				}
+			})
 				.then(response => response.json())
 				.then(files => {
-					// Zapisz w cache
-					repoCache[path] = { sha: files.sha, data: files };
-					localStorage.setItem(cacheKey, JSON.stringify(repoCache));
+					repoCache[path] = files; // Cache the files for this path
 					renderFiles(files, path);
 				})
 				.catch(() => {
-					const fileList = document.querySelector("#file-list ul");
-					fileList.innerHTML = "<li>Error loading files</li>";
+					document.querySelector("#file-list ul").innerHTML = "Error loading files.";
+				});
+		} else {
+			fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
+				.then(response => response.json())
+				.then(files => {
+					repoCache[path] = files; // Cache the files for this path
+					renderFiles(files, path);
+				})
+				.catch(response.status == (403 || 429), () => {
+					document.querySelector("#file-list ul").innerHTML = "API rate limit exceeded. Please use Personal Access Token.";
+					document.querySelector("button[popovertarget='insert-token']").click(); // press #insert-token button to show token input
+				})
+				.catch(response.status != 200, () => {
+					document.querySelector("#file-list ul").innerHTML = "Error loading files.";
 				});
 		}
+	}
 
-		// Renderuj pliki w interfejsie
-		function renderFiles(files, path) {
-			const fileList = document.querySelector("#file-list ul");
-			fileList.innerHTML = "";
-			document.querySelector("#file-list label").textContent = `~/${path}`;
+	function renderFiles(files, path) {
+		const fileExplorer = document.querySelector("#file-list");
+		// const backBtn = document.querySelector(".back-btn");
+		const downloadBtn = document.querySelector(".download-btn");
+		const fileList = document.querySelector("#file-list ul");
 
-			// Dodaj przycisk "Go Back" jeśli nie w root
-			if (path) {
-				const backBtn = document.createElement("button");
-				backBtn.textContent = "Go Back";
-				backBtn.className = "back-btn main-btn";
-				backBtn.onclick = () => {
-					const parentPath = path.split("/").slice(0, -1).join("/");
-					loadFiles(parentPath);
-				};
-				fileList.appendChild(backBtn);
-			}
+		fileList.innerHTML = "";
+		document.querySelector("#file-list label").textContent = `~/${path}`;
 
-			// Dodaj przycisk "Download current dir"
-			const downloadBtn = document.createElement("button");
-			downloadBtn.textContent = "Download current dir";
-			downloadBtn.className = "download-btn main-btn";
+		if (path) { // Show 'go back' button
+			const li = document.createElement("li");
+			const backBtn = document.createElement("a");
+			backBtn.textContent = "../";
+			backBtn.onclick = () => {
+				const parentPath = path.split("/").slice(0, -1).join("/");
+				loadFiles(parentPath);
+			};
+			li.appendChild(backBtn);
+			fileList.appendChild(li);
+		}
+
+		if (files.length) { // Show 'download' button
+			downloadBtn.style.display = "inline-block";
 			downloadBtn.onclick = () => {
 				const folderUrl = `https://github.com/${username}/${repo}/tree/main/${path}`;
 				window.open(`https://download-directory.github.io/?url=${folderUrl}`);
 			};
-			fileList.appendChild(downloadBtn);
+		} else {
+			downloadBtn.style.display = "none";
+		}
 
-			// Renderuj pliki i foldery
-			files.forEach(file => {
-				const li = document.createElement("li");
-				const link = document.createElement("a");
-				link.textContent = file.name;
 
-				if (file.type === "dir") {
-					// Folder: kliknięcie wczytuje zawartość
-					link.onclick = () => loadFiles(file.path);
-				} else {
-					// Plik: kliknięcie otwiera w nowej karcie
-					link.href = file.html_url;
-					link.target = "_blank";
+		files.sort((a, b) => { // Sort all alphabetically, but with directories first
+			if (a.type === "dir" && b.type !== "dir") return -1; // a = dir, b = file
+			if (a.type !== "dir" && b.type === "dir") return 1; // a = file, b = dir
+			return a.name.localeCompare(b.name); // If both are of the same type - sort by name
+		});
+
+		files.forEach(file => {
+			const li = document.createElement("li");
+			const link = document.createElement("a");
+			link.textContent = file.name;
+
+			if (file.type === "dir") { // Folder
+				link.onclick = () => loadFiles(file.path);
+				link.textContent += "/"; // Add a slash at the end to indicate it's a folder
+			} else { // File
+				link.href = file.html_url;
+				link.target = "_blank";
+
+				// if found file 'index.html' in root, mark it
+				if (file.name === "index.html" && path === "") {
+					link.textContent += " 🌐";
 				}
 
-				li.appendChild(link);
-				fileList.appendChild(li);
-			});
-		}
-	</script>
+				// add <icon>download</icon> to the link end
+				const icon = document.createElement("icon");
+				icon.textContent = "open_in_new"; // icon to show
+				link.appendChild(icon);
+			}
 
-</html>
+			li.appendChild(link);
+			fileList.appendChild(li);
+		});
+
+	}
+</script>
