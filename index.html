@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Repository Viewer</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				line-height: 1.6;
+				margin: 0;
+				padding: 0;
+				color: #333;
+				background: #f4f4f9;
+			}
+
+			header {
+				background: #007bff;
+				color: #fff;
+				padding: 10px 20px;
+				text-align: center;
+			}
+
+			header h1 {
+				margin: 0;
+			}
+
+			main {
+				padding: 20px;
+			}
+
+			section {
+				margin-bottom: 20px;
+				padding: 15px;
+				background: #fff;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+			}
+
+			footer {
+				text-align: center;
+				padding: 10px;
+				background: #333;
+				color: #fff;
+			}
+
+			ul {
+				list-style-type: none;
+				padding: 0;
+			}
+
+			li {
+				padding: 5px;
+				border-bottom: 1px solid #ddd;
+			}
+
+			li a {
+				text-decoration: none;
+				color: #007bff;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<h1>Guliveer - UZ</h1>
+			<p>Explore files and learn more about this project.</p>
+		</header>
+		<main>
+			<section id="project-info">
+				<h2>About This Project</h2>
+				<div id="readme-content">Loading...</div>
+			</section>
+			<section id="file-list">
+				<h2>Repository Files</h2>
+				<ul>
+					<!-- Dynamic list of files will go here -->
+				</ul>
+			</section>
+		</main>
+		<footer>
+			<p>Powered by <a href="https://github.com">GitHub Pages</a></p>
+		</footer>
+		<script type="module">
+			import { Octokit, App } from "https://esm.sh/octokit";
+		</script>
+		<script>
+			const username = "Guliveer";
+			const repo = "UZ";
+			let currentPath = ""; // Tracks the current folder path
+
+			document.addEventListener("DOMContentLoaded", () => {
+				loadReadme();
+				loadFiles(currentPath);
+			});
+
+			// Load README.md content
+			function loadReadme() {
+				fetch(`https://api.github.com/repos/${username}/${repo}/readme`, {
+					headers: { Accept: "application/vnd.github.v3.html" }
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error("README.md not found.");
+						}
+						return response.text();
+					})
+					.then(html => {
+						document.getElementById("readme-content").innerHTML = html;
+					})
+					.catch(() => {
+						document.getElementById("readme-content").innerText =
+							"README.md file not found in the repository.";
+					});
+			}
+
+			// Load files and folders
+			function loadFiles(path) {
+				fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
+					.then(response => {
+						if (!response.ok) {
+							throw new Error("Failed to load files.");
+						}
+						return response.json();
+					})
+					.then(files => {
+						const fileList = document.querySelector("#file-list ul");
+						fileList.innerHTML = ""; // Clear the current list
+
+						if (path) {
+							// Add "Go Back" option if not in root
+							const li = document.createElement("li");
+							const backLink = document.createElement("a");
+							backLink.textContent = "⬅️ Go Back";
+							backLink.onclick = () => {
+								const parentPath = path.split("/").slice(0, -1).join("/");
+								loadFiles(parentPath);
+							};
+							li.appendChild(backLink);
+							fileList.appendChild(li);
+						}
+
+						files.forEach(file => {
+							const li = document.createElement("li");
+							const link = document.createElement("a");
+							link.textContent = file.name;
+
+							if (file.type === "dir") {
+								// Handle folder click
+								link.onclick = () => {
+									loadFiles(file.path);
+								};
+							} else {
+								// Handle file click (open in new tab)
+								link.href = file.html_url;
+								link.target = "_blank";
+							}
+
+							li.appendChild(link);
+							fileList.appendChild(li);
+						});
+					})
+					.catch(() => {
+						const fileList = document.querySelector("#file-list ul");
+						fileList.innerHTML = "<li>Error loading files.</li>";
+					});
+			}
+		</script>
+	</body>
+
+</html>
