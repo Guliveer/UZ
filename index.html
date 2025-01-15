@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+		<title>Guliveer/UZ - Repo Viewer</title>
+	</head>
+
+	<body>
+		<header>
+			<h1>GitHub - Guliveer/UZ</h1>
+			<p>Explore files and learn more about this repo</p>
+			<div popover id="insert-token">
+				<!-- Place to insert token -->
+				<label for="token">Insert your GitHub <a target="_blank"
+						href="https://github.com/settings/tokens/new?description=Guliveer%2FUZ%20-%20Repo%20Viewer&scopes=public_repo">Personal
+						Access Token</a> to increase the API rate limit:</label>
+				<input type="password" name="token" id="token" placeholder="Paste your token here" />
+				<button class='reload-btn' onclick="window.location.reload()">
+					Save & refresh
+					<icon>check</icon>
+				</button>
+			</div>
+		</header>
+		<main>
+			<section id="project-info">
+				<h2>About This Project</h2>
+				<div id="readme-content">Loading...</div>
+			</section>
+			<section id="file-list">
+				<h2>Repository Explorer</h2>
+				<button class="download-btn main-btn" style="display: none;">
+					Download current dir
+					<icon>download</icon>
+				</button>
+				<label></label>
+				<ul>
+					<!-- Dynamic list of files will go here -->
+					Loading...
+				</ul>
+			</section>
+		</main>
+		<footer>
+			<p>Powered by <a href="https://github.com">GitHub Pages</a></p>
+			<p><button popovertarget="insert-token">Token</button></p>
+		</footer>
+	</body>
+
+	<style>
+		:root {
+			--test: hsl(200, 90%, 58%);
+			--hsl-h: 15;
+			--hsl-s: 90%;
+			--hsl-l: 55%;
+			--primary-color: hsl(var(--hsl-h), var(--hsl-s), var(--hsl-l));
+		}
+
+		* {
+			font-family: 'Fira Code', monospace;
+			transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+
+		}
+
+		/* change text select */
+		::selection {
+			background: var(--primary-color);
+			color: #fff;
+		}
+
+		icon {
+			font-family: 'Material Symbols Rounded' !important;
+			font-weight: normal;
+			font-style: normal;
+			font-size: 1rem;
+			line-height: 1;
+			letter-spacing: normal;
+			text-transform: none;
+			position: relative;
+			top: 0.15rem;
+			/* margin-left: 0.25rem;
+			margin-right: 0.25rem; */
+			display: inline-block;
+			white-space: nowrap;
+			word-wrap: normal;
+			direction: ltr;
+			text-rendering: optimizeLegibility;
+			-webkit-font-smoothing: antialiased;
+			font-variation-settings:
+				'FILL' 0,
+				'wght' 400,
+				'GRAD' 0,
+				'opsz' 24
+		}
+
+		body {
+			line-height: 1.6;
+			margin: 0;
+			padding: 0;
+			color: #333;
+			background: #f4f4f9;
+		}
+
+		header {
+			background: var(--primary-color);
+			color: #fff;
+			padding: 1.5rem 0;
+			text-align: center;
+		}
+
+		header h1 {
+			margin: 0;
+		}
+
+		main {
+			padding: 20px;
+		}
+
+		section {
+			margin-bottom: 20px;
+			padding: 15px;
+			background: #fff;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+		}
+
+		footer {
+			/* text-align: center; */
+			padding: 1.5rem 0.8rem;
+			background: #333;
+			color: #fff;
+			position: static;
+			bottom: 0;
+			width: 100%;
+			display: flex;
+			gap: 0.5rem;
+			flex-direction: column;
+			flex-wrap: nowrap;
+			justify-content: center;
+			align-items: center;
+		}
+
+		footer * {
+			font-size: 0.85rem;
+			text-decoration: none;
+			height: fit-content;
+			margin: 0;
+		}
+
+		footer button {
+			color: var(--primary-color);
+			cursor: pointer;
+			border: none;
+			background: none;
+			padding: 0;
+		}
+
+		#insert-token[popover]:popover-open {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.4rem;
+		}
+
+		#insert-token label {
+			font-size: 0.9rem;
+		}
+
+		[popover],
+		[popover] input {
+			width: fit-content;
+			height: fit-content;
+		}
+
+		[popover] {
+			padding: 1rem;
+			border: none;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		[popover]::backdrop {
+			background: rgba(0, 0, 0, 0.5);
+			backdrop-filter: blur(5px);
+		}
+
+		[popover] input {
+			font-size: 1rem;
+			padding: 0.4rem 0.8rem;
+			border-radius: 5px;
+			border: 1px solid #ddd;
+			min-width: 25rem;
+			min-height: 2rem;
+			text-align: center;
+		}
+
+		[popover] input:focus {
+			outline: none;
+			border-color: var(--primary-color);
+		}
+
+		section#file-list {
+			font-size: 0.95rem;
+		}
+
+		ul {
+			list-style-type: none;
+			padding: 0;
+		}
+
+		li {
+			padding: 5px;
+			border-bottom: 1px solid #ddd;
+		}
+
+		a,
+		a:visited {
+			text-decoration: none;
+			color: var(--primary-color);
+			cursor: pointer;
+		}
+
+		.markdown-heading>a {
+			display: none;
+			visibility: hidden;
+		}
+
+		.reload-btn {
+			background: #007bff;
+			color: #fff;
+			padding: 0.5rem 1rem;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+			font-size: 0.9em;
+		}
+
+		.download-btn,
+		.back-btn {
+			background: #28a745;
+			color: #fff;
+			padding: 5px 10px;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+			font-size: 0.9em;
+		}
+
+		.download-btn:hover {
+			background: #218838;
+		}
+
+		/* DARK MODE */
+		@media (prefers-color-scheme: dark) {
+			:root {
+				/* for dark bg */
+				--hsl-h: 200;
+			}
+
+			body {
+				background: #333;
+				color: #fff;
+			}
+
+			header {
+				background: #222;
+			}
+
+			section {
+				background: #444;
+				border-color: #333;
+			}
+
+			footer {
+				background: #222;
+				color: #fff;
+			}
+
+			[popover] {
+				background: #444;
+				color: #fff;
+			}
+
+			[popover] input {
+				background: #333;
+				color: #fff;
+				border-color: #555;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			* {
+				transition: none !important;
+				animation-duration: 0s !important;
+			}
+		}
+	</style>
+
+</html>
+
+<script>
+	const username = "Guliveer";
+	const repo = "UZ";
+	const repoCache = {}; // Cache for storing repo data
+	let currentPath = "";
+	let token = null;
+
+	if (localStorage.getItem("token")) {
+		token = localStorage.getItem("token");
+		document.getElementById("token").value = token;
+	}
+
+	const tokenArea = document.getElementById("token");
+	// listen to updates in input field (any: paste, keyup, etc.)
+	document.addEventListener("input", (e) => {
+		if (e.target === tokenArea) {
+			token = tokenArea.value;
+			localStorage.setItem("token", token)
+
+			if (localStorage.getItem("token") == tokenArea.value) {
+				// Log token change and time (dd/mm/yyyy hh:mm:ss)
+				console.info(`[${new Date().toLocaleString()}] Token has been changed`);
+			}
+		}
+	});
+
+	document.addEventListener("DOMContentLoaded", () => {
+		loadReadme();
+		loadFiles(currentPath);
+	});
+
+	function loadReadme() {
+		const lastUpdated = localStorage.getItem("readme-updated-at");
+		if (Date.now() - lastUpdated > 24 * 60 * 60 * 1000) { // 24 (h) * 60 (min) * 60 (s) * 1000 (ms)
+			localStorage.removeItem("readme");
+			localStorage.removeItem("readme-updated-at");
+		}
+
+		if (localStorage.getItem("readme")) {
+			if (localStorage.getItem("readme").includes("API rate limit exceeded")) {
+				localStorage.removeItem("readme");
+				localStorage.removeItem("readme-updated-at");
+				return;
+			}
+			document.getElementById("readme-content").innerHTML = localStorage.getItem("readme");
+			return;
+		}
+
+		if (token != null) {
+			fetch(`https://api.github.com/repos/${username}/${repo}/readme`, {
+				headers: {
+					Accept: "application/vnd.github.v3.html",
+					Authorization: `token ${token}`
+				}
+			})
+				.then(response => response.text())
+				.then(html => {
+					document.getElementById("readme-content").innerHTML = html;
+					// save content to local storage
+					localStorage.setItem("readme", html);
+					localStorage.setItem("readme-updated-at", Date.now());
+				})
+				.catch(() => {
+					document.getElementById("readme-content").innerText =
+						"README.md file not found in the repository.";
+				});
+		} else {
+			fetch(`https://api.github.com/repos/${username}/${repo}/readme`, {
+				headers: {
+					Accept: "application/vnd.github.v3.html"
+				}
+			})
+				.then(response => response.text())
+				.then(html => {
+					document.getElementById("readme-content").innerHTML = html;
+					// save content to local storage
+					localStorage.setItem("readme", html);
+					localStorage.setItem("readme-updated-at", Date.now());
+				})
+				.then(() => {
+					const s = response.status;
+
+					if (s == (403 || 429)) {
+						document.querySelector("#file-list ul").innerHTML = "API rate limit exceeded. Please use Personal Access Token.";
+						document.querySelector("button[popovertarget='insert-token']").click(); // press #insert-token button to show token input
+					}
+					if (s != 200) {
+						document.querySelector("#file-list ul").innerHTML = "Error loading files.";
+					}
+				});
+		}
+	}
+
+	function loadFiles(path) {
+		if (repoCache[path]) {
+			renderFiles(repoCache[path], path);
+			return;
+		}
+
+		if (token != null) {
+			fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`, {
+				headers: {
+					Authorization: `token ${token}`
+				}
+			})
+				.then(response => response.json())
+				.then(files => {
+					repoCache[path] = files; // Cache the files for this path
+					renderFiles(files, path);
+				})
+				.catch(() => {
+					document.querySelector("#file-list ul").innerHTML = "Error loading files.";
+				});
+		} else {
+			fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
+				.then(response => response.json())
+				.then(files => {
+					repoCache[path] = files; // Cache the files for this path
+					renderFiles(files, path);
+				})
+				.then(() => {
+					const s = response.status;
+
+					if (s == (403 || 429)) {
+						document.querySelector("#file-list ul").innerHTML = "API rate limit exceeded. Please use Personal Access Token.";
+						document.querySelector("button[popovertarget='insert-token']").click(); // press #insert-token button to show token input
+					}
+					if (s != 200) {
+						document.querySelector("#file-list ul").innerHTML = "Error loading files.";
+					}
+				});
+		}
+	}
+
+	function renderFiles(files, path) {
+		const fileExplorer = document.querySelector("#file-list");
+		const downloadBtn = document.querySelector(".download-btn");
+		const fileList = document.querySelector("#file-list ul");
+
+		fileList.innerHTML = "";
+		document.querySelector("#file-list label").textContent = `~/${path}`;
+
+		if (path) { // Show 'go back' button
+			const li = document.createElement("li");
+			const backBtn = document.createElement("a");
+			backBtn.textContent = "../";
+			backBtn.onclick = () => {
+				const parentPath = path.split("/").slice(0, -1).join("/");
+				loadFiles(parentPath);
+			};
+			li.appendChild(backBtn);
+			fileList.appendChild(li);
+		}
+
+		if (files.length) { // Show 'download' button
+			downloadBtn.style.display = "inline-block";
+			downloadBtn.onclick = () => {
+				const folderUrl = `https://github.com/${username}/${repo}/tree/main/${path}`;
+				window.open(`https://download-directory.github.io/?url=${folderUrl}`);
+			};
+		} else {
+			downloadBtn.style.display = "none";
+		}
+
+
+		files.sort((a, b) => { // Sort all alphabetically, but with directories first
+			if (a.type === "dir" && b.type !== "dir") return -1; // a = dir, b = file
+			if (a.type !== "dir" && b.type === "dir") return 1; // a = file, b = dir
+			return a.name.localeCompare(b.name); // If both are of the same type - sort by name
+		});
+
+		files.forEach(file => {
+			const li = document.createElement("li");
+			const link = document.createElement("a");
+			link.textContent = file.name;
+
+			if (file.type === "dir") { // Folder
+				link.onclick = () => loadFiles(file.path);
+				link.textContent += "/"; // Add a slash at the end to indicate it's a folder
+			} else { // File
+				link.href = file.html_url;
+				link.target = "_blank";
+
+				// if found file 'index.html' in root, mark it
+				if (file.name === "index.html" && path === "") {
+					link.textContent = "🌐 " + link.textContent;
+				}
+
+				// add <icon>download</icon> to the link end
+				const icon = document.createElement("icon");
+				icon.textContent = "open_in_new"; // icon to show
+				link.appendChild(icon);
+			}
+
+			li.appendChild(link);
+			fileList.appendChild(li);
+		});
+
+	}
+</script>
