@@ -10,7 +10,7 @@
 		<title>Guliveer/UZ - Repo Viewer</title>
 		<style>
 			* {
-				font-family: 'Fira Code', serif !important;
+				font-family: 'Fira Code', monospace;
 			}
 
 			body {
@@ -75,39 +75,27 @@
 				margin-bottom: 10px;
 			}
 
-			.download-btn {
+			.download-btn,
+			.back-btn {
 				background: #28a745;
 				color: #fff;
 				padding: 5px 10px;
-				margin-left: 10px;
 				border: none;
 				border-radius: 3px;
 				cursor: pointer;
 				font-size: 0.9em;
+			}
+
+			.back-btn {
+				background: #007bff;
 			}
 
 			.download-btn:hover {
 				background: #218838;
 			}
 
-			.back-btn {
-				background: #007bff;
-				color: #fff;
-				padding: 5px 10px;
-				margin-left: 10px;
-				border: none;
-				border-radius: 3px;
-				cursor: pointer;
-				font-size: 0.9em;
-			}
-
 			.back-btn:hover {
 				background: #0056b3;
-			}
-
-			.markdown-heading>a {
-				visibility: hidden;
-				display: none;
 			}
 		</style>
 	</head>
@@ -128,7 +116,6 @@
 				<ul>
 					<!-- Dynamic list of files will go here -->
 				</ul>
-				<div id="sub-readme-content"></div>
 			</section>
 		</main>
 		<footer>
@@ -137,26 +124,51 @@
 	</body>
 
 	<script>
-		const username = "Guliveer"; // Replace with your GitHub username
-		const repo = "UZ"; // Replace with your repository name
-		let currentPath = ""; // Tracks the current folder path
+		const username = "Guliveer"; // Twój login na GitHubie
+		const repo = "UZ"; // Nazwa repozytorium
+		const cacheKey = `repoCache_${username}_${repo}`;
+		let repoCache = JSON.parse(localStorage.getItem(cacheKey)) || {}; // Cache w LocalStorage
+		let currentPath = ""; // Aktualna ścieżka
+		let token = null; // Token API
 
+		// Wczytaj token z pliku `token.js`
+		fetch('./token.js')
+			.then(response => {
+				if (response.ok) return response.text();
+				throw new Error('Token file not found');
+			})
+			.then(script => {
+				eval(script); // Wykonaj kod, aby ustawić `window.GITHUB_API_TOKEN`
+				token = window.GITHUB_API_TOKEN;
+				if (!token) throw new Error('Token not loaded');
+				console.log("Token loaded successfully");
+			})
+			.catch(error => console.error("Error loading token:", error));
+
+		// Funkcja do fetch z autoryzacją
+		function fetchWithAuth(url) {
+			if (!token) {
+				console.error("Token not loaded");
+				return Promise.reject("Token not loaded");
+			}
+			return fetch(url, {
+				headers: {
+					Authorization: `token ${token}`,
+					Accept: "application/vnd.github.v3+json"
+				}
+			});
+		}
+
+		// Inicjalizacja po załadowaniu DOM
 		document.addEventListener("DOMContentLoaded", () => {
-			loadReadme(); // then replace every "./" at the beginning of href in #readme-content to repo url
-			loadFiles(currentPath);
+			loadReadme(); // Wczytaj README.md
+			loadFiles(currentPath); // Wczytaj pliki repozytorium
 		});
 
-		// Load README.md content
+		// Wczytaj README.md
 		function loadReadme() {
-			fetch(`https://api.github.com/repos/${username}/${repo}/readme`, {
-				headers: { Accept: "application/vnd.github.v3.html" }
-			})
-				.then(response => {
-					if (!response.ok) {
-						throw new Error("README.md not found.");
-					}
-					return response.text();
-				})
+			fetchWithAuth(`https://api.github.com/repos/${username}/${repo}/readme`)
+				.then(response => response.text())
 				.then(html => {
 					document.getElementById("readme-content").innerHTML = html;
 				})
@@ -166,77 +178,47 @@
 				});
 		}
 
-		// Load files and folders
+		// Wczytaj pliki i foldery
 		function loadFiles(path) {
-			fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
-				.then(response => {
-					if (!response.ok) {
-						throw new Error("Failed to load files.");
-					}
-					return response.json();
-				})
+			const cachedData = repoCache[path];
+
+			if (cachedData) {
+				validateCacheAndRender(cachedData, path);
+			} else {
+				fetchAndCacheFiles(path);
+			}
+		}
+
+		// Sprawdź cache i zaktualizuj w razie potrzeby
+		function validateCacheAndRender(cachedData, path) {
+			fetchWithAuth(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
+				.then(response => response.json())
 				.then(files => {
-					const fileList = document.querySelector("#file-list ul");
-					fileList.innerHTML = ""; // Clear the current list
-					document.querySelector("#file-list label").textContent = `~/${path}`; // Update current path display
-
-					if (path) {
-						// Add "Go Back" option if not in root
-						const backBtn = document.createElement("button");
-						backBtn.textContent = "Go Back";
-						backBtn.className = "back-btn";
-						backBtn.classList.add("main-btn");
-						backBtn.onclick = () => {
-							const split = path.split("/");
-							split.pop();
-							loadFiles(split.join("/"));
-						};
-						fileList.appendChild(backBtn);
-						fileList.appendChild(document.createElement("br"));
+					if (files.sha !== cachedData.sha) {
+						// Jeśli SHA różne, zaktualizuj cache
+						repoCache[path] = { sha: files.sha, data: files };
+						localStorage.setItem(cacheKey, JSON.stringify(repoCache));
+						renderFiles(files, path);
+					} else {
+						// Jeśli cache aktualne, użyj go
+						renderFiles(cachedData.data, path);
 					}
+				})
+				.catch(() => {
+					// Jeśli API niedostępne, użyj cache
+					renderFiles(cachedData.data, path);
+				});
+		}
 
-					// Add Download current dir button
-					const downloadBtn = document.createElement("button");
-					downloadBtn.textContent = "Download current dir";
-					downloadBtn.className = "download-btn";
-					downloadBtn.classList.add("main-btn");
-					downloadBtn.onclick = () => {
-						const folderUrl = `https://github.com/${username}/${repo}/tree/main/${path}`;
-						window.open(`https://download-directory.github.io/?url=${folderUrl}`);
-					};
-					fileList.appendChild(downloadBtn);
-
-					files.forEach(file => {
-						const li = document.createElement("li");
-						const link = document.createElement("a");
-						link.textContent = file.name;
-
-						li.appendChild(link);
-
-						if (file.type === "dir") {
-							// Handle folder click
-							link.onclick = () => {
-								loadFiles(file.path);
-							};
-
-							// Add download button for folders
-							const downloadBtn = document.createElement("button");
-							downloadBtn.textContent = "Download dir";
-							downloadBtn.className = "download-btn";
-							downloadBtn.onclick = () => {
-								const folderUrl = `https://github.com/${username}/${repo}/tree/main/${file.path}`;
-								window.open(`https://download-directory.github.io/?url=${folderUrl}`);
-							};
-
-							li.appendChild(downloadBtn);
-						} else {
-							// Handle file click (open in new tab)
-							link.href = file.html_url;
-							link.target = "_blank";
-						}
-
-						fileList.appendChild(li);
-					});
+		// Pobierz pliki z API i zapisz do cache
+		function fetchAndCacheFiles(path) {
+			fetchWithAuth(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
+				.then(response => response.json())
+				.then(files => {
+					// Zapisz w cache
+					repoCache[path] = { sha: files.sha, data: files };
+					localStorage.setItem(cacheKey, JSON.stringify(repoCache));
+					renderFiles(files, path);
 				})
 				.catch(() => {
 					const fileList = document.querySelector("#file-list ul");
@@ -244,14 +226,53 @@
 				});
 		}
 
-		document.getElementById("readme-content").addEventListener("onload", (e) => {
-			const links = document.getElementById("readme-content").querySelectorAll("a");
-			links.forEach(link => {
-				if (link.href.startsWith("./")) {
-					link = link.href.replace("./", `https://github.com/${username}/${repo}/`);
+		// Renderuj pliki w interfejsie
+		function renderFiles(files, path) {
+			const fileList = document.querySelector("#file-list ul");
+			fileList.innerHTML = "";
+			document.querySelector("#file-list label").textContent = `~/${path}`;
+
+			// Dodaj przycisk "Go Back" jeśli nie w root
+			if (path) {
+				const backBtn = document.createElement("button");
+				backBtn.textContent = "Go Back";
+				backBtn.className = "back-btn main-btn";
+				backBtn.onclick = () => {
+					const parentPath = path.split("/").slice(0, -1).join("/");
+					loadFiles(parentPath);
+				};
+				fileList.appendChild(backBtn);
+			}
+
+			// Dodaj przycisk "Download current dir"
+			const downloadBtn = document.createElement("button");
+			downloadBtn.textContent = "Download current dir";
+			downloadBtn.className = "download-btn main-btn";
+			downloadBtn.onclick = () => {
+				const folderUrl = `https://github.com/${username}/${repo}/tree/main/${path}`;
+				window.open(`https://download-directory.github.io/?url=${folderUrl}`);
+			};
+			fileList.appendChild(downloadBtn);
+
+			// Renderuj pliki i foldery
+			files.forEach(file => {
+				const li = document.createElement("li");
+				const link = document.createElement("a");
+				link.textContent = file.name;
+
+				if (file.type === "dir") {
+					// Folder: kliknięcie wczytuje zawartość
+					link.onclick = () => loadFiles(file.path);
+				} else {
+					// Plik: kliknięcie otwiera w nowej karcie
+					link.href = file.html_url;
+					link.target = "_blank";
 				}
+
+				li.appendChild(link);
+				fileList.appendChild(li);
 			});
-		});
+		}
 	</script>
 
 </html>
