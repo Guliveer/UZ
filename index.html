@@ -4,10 +4,16 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Repository Viewer</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+		<title>Guliveer/UZ - Repo Viewer</title>
 		<style>
+			* {
+				font-family: 'Fira Code', serif !important;
+			}
+
 			body {
-				font-family: Arial, sans-serif;
 				line-height: 1.6;
 				margin: 0;
 				padding: 0;
@@ -55,18 +61,61 @@
 				border-bottom: 1px solid #ddd;
 			}
 
-			li a {
+			a {
 				text-decoration: none;
 				color: #007bff;
 				cursor: pointer;
+			}
+
+			a:visited {
+				color: #007bff;
+			}
+
+			.main-btn {
+				margin-bottom: 10px;
+			}
+
+			.download-btn {
+				background: #28a745;
+				color: #fff;
+				padding: 5px 10px;
+				margin-left: 10px;
+				border: none;
+				border-radius: 3px;
+				cursor: pointer;
+				font-size: 0.9em;
+			}
+
+			.download-btn:hover {
+				background: #218838;
+			}
+
+			.back-btn {
+				background: #007bff;
+				color: #fff;
+				padding: 5px 10px;
+				margin-left: 10px;
+				border: none;
+				border-radius: 3px;
+				cursor: pointer;
+				font-size: 0.9em;
+			}
+
+			.back-btn:hover {
+				background: #0056b3;
+			}
+
+			.markdown-heading>a {
+				visibility: hidden;
+				display: none;
 			}
 		</style>
 	</head>
 
 	<body>
 		<header>
-			<h1>Guliveer - UZ</h1>
-			<p>Explore files and learn more about this project.</p>
+			<h1>GitHub - Guliveer/UZ</h1>
+			<p>Explore files and learn more about this repo</p>
 		</header>
 		<main>
 			<section id="project-info">
@@ -75,99 +124,134 @@
 			</section>
 			<section id="file-list">
 				<h2>Repository Files</h2>
+				<label>~/</label>
 				<ul>
 					<!-- Dynamic list of files will go here -->
 				</ul>
+				<div id="sub-readme-content"></div>
 			</section>
 		</main>
 		<footer>
 			<p>Powered by <a href="https://github.com">GitHub Pages</a></p>
 		</footer>
-		<script type="module">
-			import { Octokit, App } from "https://esm.sh/octokit";
-		</script>
-		<script>
-			const username = "Guliveer";
-			const repo = "UZ";
-			let currentPath = ""; // Tracks the current folder path
-
-			document.addEventListener("DOMContentLoaded", () => {
-				loadReadme();
-				loadFiles(currentPath);
-			});
-
-			// Load README.md content
-			function loadReadme() {
-				fetch(`https://api.github.com/repos/${username}/${repo}/readme`, {
-					headers: { Accept: "application/vnd.github.v3.html" }
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw new Error("README.md not found.");
-						}
-						return response.text();
-					})
-					.then(html => {
-						document.getElementById("readme-content").innerHTML = html;
-					})
-					.catch(() => {
-						document.getElementById("readme-content").innerText =
-							"README.md file not found in the repository.";
-					});
-			}
-
-			// Load files and folders
-			function loadFiles(path) {
-				fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
-					.then(response => {
-						if (!response.ok) {
-							throw new Error("Failed to load files.");
-						}
-						return response.json();
-					})
-					.then(files => {
-						const fileList = document.querySelector("#file-list ul");
-						fileList.innerHTML = ""; // Clear the current list
-
-						if (path) {
-							// Add "Go Back" option if not in root
-							const li = document.createElement("li");
-							const backLink = document.createElement("a");
-							backLink.textContent = "⬅️ Go Back";
-							backLink.onclick = () => {
-								const parentPath = path.split("/").slice(0, -1).join("/");
-								loadFiles(parentPath);
-							};
-							li.appendChild(backLink);
-							fileList.appendChild(li);
-						}
-
-						files.forEach(file => {
-							const li = document.createElement("li");
-							const link = document.createElement("a");
-							link.textContent = file.name;
-
-							if (file.type === "dir") {
-								// Handle folder click
-								link.onclick = () => {
-									loadFiles(file.path);
-								};
-							} else {
-								// Handle file click (open in new tab)
-								link.href = file.html_url;
-								link.target = "_blank";
-							}
-
-							li.appendChild(link);
-							fileList.appendChild(li);
-						});
-					})
-					.catch(() => {
-						const fileList = document.querySelector("#file-list ul");
-						fileList.innerHTML = "<li>Error loading files.</li>";
-					});
-			}
-		</script>
 	</body>
+
+	<script>
+		const username = "Guliveer"; // Replace with your GitHub username
+		const repo = "UZ"; // Replace with your repository name
+		let currentPath = ""; // Tracks the current folder path
+
+		document.addEventListener("DOMContentLoaded", () => {
+			loadReadme(); // then replace every "./" at the beginning of href in #readme-content to repo url
+			loadFiles(currentPath);
+		});
+
+		// Load README.md content
+		function loadReadme() {
+			fetch(`https://api.github.com/repos/${username}/${repo}/readme`, {
+				headers: { Accept: "application/vnd.github.v3.html" }
+			})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error("README.md not found.");
+					}
+					return response.text();
+				})
+				.then(html => {
+					document.getElementById("readme-content").innerHTML = html;
+				})
+				.catch(() => {
+					document.getElementById("readme-content").innerText =
+						"README.md file not found in the repository.";
+				});
+		}
+
+		// Load files and folders
+		function loadFiles(path) {
+			fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error("Failed to load files.");
+					}
+					return response.json();
+				})
+				.then(files => {
+					const fileList = document.querySelector("#file-list ul");
+					fileList.innerHTML = ""; // Clear the current list
+					document.querySelector("#file-list label").textContent = `~/${path}`; // Update current path display
+
+					if (path) {
+						// Add "Go Back" option if not in root
+						const backBtn = document.createElement("button");
+						backBtn.textContent = "Go Back";
+						backBtn.className = "back-btn";
+						backBtn.classList.add("main-btn");
+						backBtn.onclick = () => {
+							const split = path.split("/");
+							split.pop();
+							loadFiles(split.join("/"));
+						};
+						fileList.appendChild(backBtn);
+						fileList.appendChild(document.createElement("br"));
+					}
+
+					// Add Download current dir button
+					const downloadBtn = document.createElement("button");
+					downloadBtn.textContent = "Download current dir";
+					downloadBtn.className = "download-btn";
+					downloadBtn.classList.add("main-btn");
+					downloadBtn.onclick = () => {
+						const folderUrl = `https://github.com/${username}/${repo}/tree/main/${path}`;
+						window.open(`https://download-directory.github.io/?url=${folderUrl}`);
+					};
+					fileList.appendChild(downloadBtn);
+
+					files.forEach(file => {
+						const li = document.createElement("li");
+						const link = document.createElement("a");
+						link.textContent = file.name;
+
+						li.appendChild(link);
+
+						if (file.type === "dir") {
+							// Handle folder click
+							link.onclick = () => {
+								loadFiles(file.path);
+							};
+
+							// Add download button for folders
+							const downloadBtn = document.createElement("button");
+							downloadBtn.textContent = "Download dir";
+							downloadBtn.className = "download-btn";
+							downloadBtn.onclick = () => {
+								const folderUrl = `https://github.com/${username}/${repo}/tree/main/${file.path}`;
+								window.open(`https://download-directory.github.io/?url=${folderUrl}`);
+							};
+
+							li.appendChild(downloadBtn);
+						} else {
+							// Handle file click (open in new tab)
+							link.href = file.html_url;
+							link.target = "_blank";
+						}
+
+						fileList.appendChild(li);
+					});
+				})
+				.catch(() => {
+					const fileList = document.querySelector("#file-list ul");
+					fileList.innerHTML = "<li>Error loading files</li>";
+				});
+		}
+
+		document.getElementById("readme-content").addEventListener("onload", (e) => {
+			const links = document.getElementById("readme-content").querySelectorAll("a");
+			links.forEach(link => {
+				if (link.href.startsWith("./")) {
+					link = link.href.replace("./", `https://github.com/${username}/${repo}/`);
+				}
+			});
+		});
+	</script>
 
 </html>
