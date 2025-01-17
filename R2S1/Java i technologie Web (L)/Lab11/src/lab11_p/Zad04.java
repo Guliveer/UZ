@@ -52,6 +52,8 @@ public class Zad04 {
             String subject = console.readLine("Podaj temat wiadomości: ");
             String body = console.readLine("Podaj treść wiadomości: ");
 
+            body += "\n---\nSent using a program created by Oliwer Pawelski\ngithub.com/Guliveer"; // additional footer
+
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(login + "@stud.uz.zgora.pl"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));

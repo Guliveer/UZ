@@ -173,7 +173,7 @@ public class Zad04GUI {
                 return;
             }
 
-            body += "\n[Sent using a program created by <Oliwer Pawelski>]"; // additional footer
+            body += "\n---\nSent using a program created by Oliwer Pawelski\ngithub.com/Guliveer"; // additional footer
             try {
                 sendEmail(recipient, subject, body);
                 statusLabel.setForeground(Color.getHSBColor(0.3f, 0.75f, 0.5f)); // green (not so vibrant)
