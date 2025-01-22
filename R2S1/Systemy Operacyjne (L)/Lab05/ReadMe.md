@@ -170,3 +170,57 @@ $ _
 ### 16. Zmienić skrypty konfiguracyjne tak, aby w każdy wtorek system przypominał użytkownikowi o zajęciach z systemów operacyjnych. Jeżeli użytkownik zaloguje się w trakcie zajęć komunikat powinien informować, że zajęcia już trwają.
 
 > [16.sh](./16.sh)
+
+### 17. Napisać skrypt wyświetlający wszystkie pliki o rozszerzeniu conf, które zaczynają się od _a_, _b_, _c_ lub _d_ i znajdują się w katalogu `/etc`. Wydruk ma być w postaci:
+
+```bash
+Plik1 : /etc/asound.conf
+Plik2 : /etc/cas.conf
+Plik3 : /etc/cups.conf
+```
+
+> [17.sh](./17.sh)
+
+### 18. Napisać skrypt wykonujący kopię zapasową danego katalogu. Kopie powinny znajdować się w katalogu `kopie_projektow`. Każda nowo utworzona kopia ma znajdować się w odrębnym katalogu o nazwie zawierającej datę wykonania kopii. Skrypt ma sprawdzać czy katalog z kopiami istnieje. Jeżeli nie, to skrypt ma utworzyć taki katalog. Katalog do archiwizacji ma być podany jako parametr wejściowy. Skrypt ma również sprawdzać poprawność składni wywołania.
+
+> [18.sh](./18.sh)
+
+### 19. Napisać skrypt dokonujący operacji arytmetycznej na dwóch argumentach. Możliwe do wykonania operacje powinny obejmować: dodawanie, odejmowanie, mnożenie i dzielenie. Argumenty powinny zostać podane do skryptu jako parametry wejściowe. Wywołanie skryptu powinno wyglądać w podany sposób. Skrypt powinien kontrolować liczbę podanych parametrów i wypisywać odpowiednie komunikaty na ich brak:
+
+- (a) w przypadku braku pierwszego parametru: „Brak parametrów wejściowych”,
+- (b) w przypadku braku drugiego parametru: „Brak operatora”,
+- (c) w przypadku braku trzeciego parametru: „Brak drugiego argumentu”. Skrypt powinien działać tak długo, aż użytkownik nie wyrazi chęci zakończenia obliczeń.
+
+```bash
+skrypt 2 + 3
+```
+
+> [19.sh](./19.sh)
+
+### 20. Za pomocą polecenia `awk` wyznaczyć średnie ocen punktowych studentów z kolokwiów. Dane zapisane są w pliku tekstowym i mają strukturę:
+
+```
+student kolokwium1 kolokwium2 ... kolokwium
+1 85 67 ... 76
+2 67 56 ... 89
+.
+.
+.
+m 45 78 ... 99
+```
+
+> [20.sh](./20.sh)
+
+### 21. Napisać skrypt sprawdzający czy system wykorzystuje pamięć wirtualną. Jeżeli tak to podaje informację o rozmiarze pamięci wirtualnej.
+
+> [21.sh](./21.sh)
+
+### 22. Napisać skrypt czyszczący pamięć podręczną. Wskazówka: wykorzystać plik drop caches. Rozszerzyć funkcjonalność skryptu na czyszczenie innych elementów systemu, np. buforów, czy pamięci wirtualnej.
+
+> [22.sh](./22.sh)
+
+### 23. Napisać skrypt sprawdzający temperaturę pracy procesora. Jeśli jest ona większa niż podany przez użytkownika próg to skrypt powinien informować o tym fakcie użytkownika.
+
+Wskazówka: wykorzystać polecenie sensors. Rozszerzyć funkcjonalność skryptu na sprawdzanie temperatury pracy innych urządzeń.
+
+> [23.sh](./23.sh)
