@@ -28,9 +28,9 @@ package guliveer.lab12;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class App extends Application {
@@ -42,7 +42,13 @@ public class App extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/guliveer/lab12/view/FormView.fxml"));
         Pane root = loader.load();
-        Scene scene = new Scene(root, 400, 900);
+
+        ScrollPane scrollPane = new ScrollPane(root);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setPannable(true);
+
+        Scene scene = new Scene(scrollPane, 400, 600);
 
         primaryStage.setTitle("Address Book");
         primaryStage.setScene(scene);
