@@ -16,7 +16,6 @@
 ### 📄 Open in IDE view
 
 > 🔗 [**GitHub1s.com**](https://github1s.com/Guliveer/UZ)  
-> (Also in repo's "About" section)
 
 # Programming languages list
 
