@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Zad02" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="lab03_p.zad02.TestWatkow" />
+    <module name="Lab03" />
+    <option name="PROGRAM_PARAMETERS" value="500 20000" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
