@@ -1,0 +1,3 @@
+SET SQL_SAFE_UPDATES=1;
+
+DELETE FROM studenci;
