@@ -1,0 +1,10 @@
+Procesor: Apple M2
+Liczba rdzeni: 8
+RAM: 8192 MB
+OS: Mac OS X 15.4
+
+Jaka jest zależność czasu działania programu i liczby rdzeni procesora w komputerze?
+    - Czas działania programu zmniejsza się wraz ze wzrostem liczby wątków.
+    Oznacza to, że program działa szybciej dzięki równoległemu przetwarzaniu — do momentu,
+    gdy liczba wątków odpowiada liczbie rdzeni procesora. Po przekroczeniu tej liczby,
+    dodawanie kolejnych wątków raczej nie przynosi dużej poprawy wydajności.
