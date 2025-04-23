@@ -1,0 +1,120 @@
+# Zadanie 1
+SELECT first_name, last_name, start_date, salary FROM emp;
+
+# Zadanie 2
+SELECT
+    last_name,
+    last_name,
+    CONCAT(first_name, '<->', last_name) AS 'first_name & last_name'
+FROM emp;
+
+# Zadanie 3
+SELECT
+    first_name,
+    last_name,
+    start_date,
+    salary
+FROM emp
+WHERE salary > 1500
+ORDER BY last_name;
+
+# Zadanie 4
+SELECT
+    first_name,
+    last_name,
+    start_date,
+    salary
+FROM emp
+WHERE salary BETWEEN 1500 AND 2500
+ORDER BY salary;
+
+# Zadanie 5
+SELECT
+    first_name AS IMIE,
+    last_name AS nazwisko,
+    start_date AS "data zatrudnienia",
+    salary AS "ZaRoBkI"
+FROM emp
+WHERE salary BETWEEN 1500 AND 2500
+ORDER BY salary;
+
+# Zadanie 6
+SELECT
+    first_name,
+    last_name,
+    salary,
+    salary * 12 AS "salary*12"
+FROM emp
+WHERE dept_id = 41;
+
+# Zadanie 7
+SELECT
+    first_name,
+    last_name,
+    start_date
+FROM emp
+WHERE start_date > '1991-12-31'
+ORDER BY start_date;
+
+# Zadanie 8
+SELECT
+    CURRENT_DATE AS 'current_date',
+    CURRENT_TIME AS 'current_time',
+    CURRENT_TIMESTAMP AS 'current_timestamp';
+
+# Zadanie 9
+SELECT
+    CURRENT_TIMESTAMP AS 'current_timestamp',
+    DATE_FORMAT(CURRENT_TIMESTAMP, '%W :: %M :: %d :: %Y :: %H:%i:%s') AS "biezaca data i godzina";
+
+# Zadanie 10
+SELECT
+    last_name,
+    start_date,
+    DATEDIFF(CURDATE(), start_date) AS "ilosc dni"
+FROM emp
+ORDER BY `ilosc dni` DESC;
+
+# Zadanie 11
+SELECT
+    first_name,
+    last_name
+FROM emp
+ORDER BY last_name
+LIMIT 3, 5;
+
+# Zadanie 12
+SELECT
+    name
+FROM product
+WHERE name LIKE 'A%'
+    OR name LIKE 'B%'
+    OR name LIKE 'C%'
+ORDER BY name DESC;
+
+# Zadanie 13
+SELECT
+    first_name,
+    last_name,
+    commission_pct AS COMMISSION_PCT
+FROM emp
+WHERE commission_pct IS NOT NULL;
+
+# Zadanie 14
+SELECT
+    id,
+    name,
+    region_id
+FROM dept
+ORDER BY name, region_id;
+
+# Zadanie 15
+SELECT
+    name,
+    credit_rating
+FROM customer
+WHERE credit_rating = 'GOOD';
+
+# Zadanie 16
+SELECT DISTINCT name
+FROM dept;
