@@ -3,11 +3,11 @@
 
 class A:
     def method(self):
-        print("Method from class A")
+        print("Method from classes A")
 
 class B:
     def method(self):
-        print("Method from class B")
+        print("Method from classes B")
 
 class C(A, B):  # Dziedziczenie wielokrotne
     pass

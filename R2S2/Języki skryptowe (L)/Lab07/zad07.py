@@ -1,32 +1,9 @@
 # Zaimplementować klasę Group zawierającą listę studentów.
 # Zainicjalizować obiekt z dowolnymi studentami.
 
-# Defining the Person class
-class Person:
-    def __init__(self, name, last_name, age):
-        self.name = name
-        self.last_name = last_name
-        self.age = age
+import classes
 
-    def get_name(self):
-        return self.name
-
-    def get_last_name(self):
-        return self.last_name
-
-    def get_age(self):
-        return self.age
-
-# Defining the Student class inheriting from Person
-class Student(Person):
-    def __init__(self, name, last_name, age, index_nr):
-        super().__init__(name, last_name, age)
-        self.index_nr = index_nr
-
-    def get_index_nr(self):
-        return self.index_nr
-
-# Defining the Group class
+# Defining the Group classes
 class Group:
     def __init__(self):
         self.students = []
@@ -44,8 +21,8 @@ class Group:
 
 
 # Example usage
-student1 = Student("Alice", "Brown", 20, "S12345")
-student2 = Student("Bob", "Green", 21, "S67890")
+student1 = classes.student.Student("Alice", "Brown", 20, "S12345")
+student2 = classes.student.Student("Bob", "Green", 21, "S67890")
 
 group = Group()
 group.add_student(student1)

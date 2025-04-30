@@ -1,6 +1,8 @@
 # Zaimplementować własne wyjątki do obsługi błędów odczytu i zapisu wyświetlające komunikaty
 # o błędach w sposób spersonalizowany.
 
+import classes
+
 # Defining custom exceptions for read and write errors
 class ReadError(Exception):
     def __init__(self, message):
@@ -11,26 +13,7 @@ class WriteError(Exception):
     def __init__(self, message):
         super().__init__(f"Write Error: {message}")
 
-class Student:
-    def __init__(self, name, last_name, age, index_nr):
-        self.name = name
-        self.last_name = last_name
-        self.age = age
-        self.index_nr = index_nr
-
-    def get_name(self):
-        return self.name
-
-    def get_last_name(self):
-        return self.last_name
-
-    def get_age(self):
-        return self.age
-
-    def get_index_nr(self):
-        return self.index_nr
-
-# Extending the Group class to use custom exceptions
+# Extending the Group classes to use custom exceptions
 class Group:
     def __init__(self):
         self.students = []
@@ -61,7 +44,7 @@ class Group:
                 for line in file:
                     try:
                         name, last_name, age, index_nr = line.strip().split(", ")
-                        self.add_student(Student(name, last_name, int(age), index_nr))
+                        self.add_student(classes.student.Student(name, last_name, int(age), index_nr))
                     except ValueError as e:
                         raise ReadError(f"Error parsing line: {line.strip()} - {e}")
             print(f"Group successfully loaded from {file_path}")
@@ -79,8 +62,8 @@ except ReadError as e:
 
 print()  # Empty line for better readability
 
-student1 = Student("Alice", "Brown", 20, "S12345")
-student2 = Student("Bob", "Green", 21, "S67890")
+student1 = classes.student.Student("Alice", "Brown", 20, "S12345")
+student2 = classes.student.Student("Bob", "Green", 21, "S67890")
 
 group.add_student(student1)
 group.add_student(student2)

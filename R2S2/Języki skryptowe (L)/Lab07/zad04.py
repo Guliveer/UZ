@@ -2,23 +2,9 @@
 # atrybut notes to klasy Student. Zainicjalizować dwóch studentów z dowolnymi ocenami z więcej
 # niż trzech przedmiotów.
 
-# Defining the Osoba class
-class Osoba:
-    def __init__(self, name, last_name, age):
-        self.name = name
-        self.last_name = last_name
-        self.age = age
+import classes
 
-    def get_name(self):
-        return self.name
-
-    def get_last_name(self):
-        return self.last_name
-
-    def get_age(self):
-        return self.age
-
-# Defining the Notes class
+# Defining the Notes classes
 class Notes:
     def __init__(self, grades):
         self.grades = grades
@@ -32,8 +18,8 @@ class Notes:
     def get_average(self):
         return sum(self.grades.values()) / len(self.grades)
 
-# Updating the Student class to include the notes attribute
-class Student(Osoba):
+# Updating the Student classes to include the notes attribute
+class Student(classes.person.Person):
     def __init__(self, name, last_name, age, index_nr, grades):
         super().__init__(name, last_name, age)
         self.indexNr = index_nr

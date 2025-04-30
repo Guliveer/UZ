@@ -2,20 +2,20 @@
 
 class A:
     def method(self):
-        print("Method from class A")
+        print("Method from classes A")
 
 class B(A):
     def method(self):
-        print("Method from class B")
+        print("Method from classes B")
 
 class C(A):
     def method(self):
-        print("Method from class C")
+        print("Method from classes C")
 
 class D(B, C):  # Diamond inheritance
     pass
 
-# Creating an object of class D
+# Creating an object of classes D
 obj = D()
 obj.method()  # Resolves using MRO
 

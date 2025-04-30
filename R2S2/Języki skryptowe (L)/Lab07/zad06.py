@@ -1,24 +1,10 @@
 # Zaimplementować klasę WorkingStudent dziedziczącą po Student i Employee. Zainicjaliować
 # dowolnymi danymi.
 
-# Defining the Person class
-class Person:
-    def __init__(self, name, last_name, age):
-        self.name = name
-        self.last_name = last_name
-        self.age = age
+import classes
 
-    def get_name(self):
-        return self.name
-
-    def get_last_name(self):
-        return self.last_name
-
-    def get_age(self):
-        return self.age
-
-# Defining the Employee class inheriting from Person
-class Employee(Person):
+# Defining the Employee classes inheriting from Person
+class Employee(classes.person.Person):
     def __init__(self, name, last_name, age, salary, position):
         super().__init__(name, last_name, age)
         self.salary = salary
@@ -30,20 +16,11 @@ class Employee(Person):
     def get_position(self):
         return self.position
 
-# Defining the Student class inheriting from Person
-class Student(Person):
-    def __init__(self, name, last_name, age, index_nr):
-        super().__init__(name, last_name, age)
-        self.index_nr = index_nr
-
-    def get_index_nr(self):
-        return self.index_nr
-
-# Defining the WorkingStudent class inheriting from Student and Employee
-class WorkingStudent(Student, Employee):
+# Defining the WorkingStudent classes inheriting from Student and Employee
+class WorkingStudent(classes.student.Student, Employee):
     def __init__(self, name, last_name, age, index_nr, salary, position):
         # Initialize Person attributes using super()
-        Person.__init__(self, name, last_name, age)
+        classes.person.Person.__init__(self, name, last_name, age)
         # Initialize Student-specific attributes
         self.index_nr = index_nr
         # Initialize Employee-specific attributes

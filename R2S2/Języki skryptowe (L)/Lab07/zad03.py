@@ -2,7 +2,7 @@
 # wartościach parametrów. Zaimplementować metody getName, getLastName, getAge. Utworzyć
 # klasę potomną Student dziedziczącą po Person o atrybucie indexNr i metodzie getIndexNr
 
-# Defining the Osoba class
+# Defining the Osoba classes
 class Osoba:
     def __init__(self, name, last_name, age):
         self.name = name
@@ -19,7 +19,7 @@ class Osoba:
         return self.age
 
 
-# Defining the Student class inheriting from Osoba
+# Defining the Student classes inheriting from Osoba
 class Student(Osoba):
     def __init__(self, name, last_name, age, index_nr):
         super().__init__(name, last_name, age)

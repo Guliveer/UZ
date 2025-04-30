@@ -2,32 +2,9 @@
 # z odczytem danych. Zasymulować błąd odczytu (np. poprzez zablokowanie do zapisu)
 # i sprawdzić działanie mechanizmu wyjątków.
 
-# Defining the Person class
-class Person:
-    def __init__(self, name, last_name, age):
-        self.name = name
-        self.last_name = last_name
-        self.age = age
+import classes
 
-    def get_name(self):
-        return self.name
-
-    def get_last_name(self):
-        return self.last_name
-
-    def get_age(self):
-        return self.age
-
-# Defining the Student class inheriting from Person
-class Student(Person):
-    def __init__(self, name, last_name, age, index_nr):
-        super().__init__(name, last_name, age)
-        self.index_nr = index_nr
-
-    def get_index_nr(self):
-        return self.index_nr
-
-# Extending the Group class to include file reading functionality
+# Extending the Group classes to include file reading functionality
 class Group:
     def __init__(self):
         self.students = []
@@ -49,7 +26,7 @@ class Group:
                 for line in file:
                     try:
                         name, last_name, age, index_nr = line.strip().split(", ")
-                        self.add_student(Student(name, last_name, int(age), index_nr))
+                        self.add_student(classes.student.Student(name, last_name, int(age), index_nr))
                     except ValueError as e:
                         print(f"Error parsing line: {line.strip()} - {e}")
             print(f"Group successfully loaded from {file_path}")
