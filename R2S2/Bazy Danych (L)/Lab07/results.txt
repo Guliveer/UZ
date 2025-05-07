@@ -1,0 +1,87 @@
+# Zadanie 1: Wyświetlić maksymalne, minimalne oraz średnie zarobki wszystkich pracowników. Użyć funkcji SUM, AVG, MIN, MAX oraz COUNT.
+
+SELECT
+    MIN(salary) AS Min,
+    MAX(salary) AS Max,
+    AVG(salary) AS Srednie,
+    SUM(salary) AS Suma,
+    COUNT(*) AS `Ilosc pracownikow`
+FROM emp;
+
+# Zadanie 2: Wyświetlić informację ilu pracowników zarabia w przedziale od 1000 do 2000 (zbiór domknięty)
+
+SELECT
+    COUNT(*) AS `Od 1000 do 2000`
+FROM emp
+WHERE salary BETWEEN 1000 AND 2000;
+
+# Zadanie 3: Wyświetlić informację o kosztach płacowych w poszczególnych wydziałach (użyć klauzuli GROUP BY).
+
+SELECT
+    dept_id AS `Numer dzialu`,
+    SUM(salary) AS `Suma zarobkow`,
+    COUNT(*) AS `Liczba prac.`
+FROM emp
+GROUP BY dept_id;
+
+# Zadanie 4: Wyświetlić informację o kosztach płacowych w poszczególnych wydziałach, tym razem ograniczając się tylko do działów o numerach 41, 42 oraz 43 (użyć klauzuli HAVING).
+
+SELECT
+    dept_id AS `Numer dzialu`,
+    SUM(salary) AS `Suma zarobkow`,
+    COUNT(*) AS `Liczba prac.`
+FROM emp
+GROUP BY dept_id
+HAVING dept_id IN (41, 42, 43);
+
+# Zadanie 5: Wyświetlić informację o kosztach płacowych w poszczególnych działach.
+
+SELECT
+    d.region_id AS `Numer regionu`,
+    d.id AS `Numer działu`,
+    d.name AS `Nazwa działu`,
+    SUM(e.salary) AS `Suma zarobków`,
+    COUNT(*) AS `Liczba pracowników`
+FROM emp e
+JOIN dept d ON e.dept_id = d.id
+GROUP BY d.region_id, d.id, d.name
+ORDER BY d.region_id, `Liczba pracowników` DESC;
+
+# Zadanie 6: Wyświetlić informację o kosztach płacowych w poszczególnych regionach. Zwrócić uwagę na to,
+# że w tabeli dept nazwy działów dublują się (różne są natomiast region_id). Zgodność
+# otrzymanego wyniku łatwo jest sprawdzić poprzez zsumowanie odpowiednich (jakich?) liczb
+# uzyskanych w poprzednim ćwiczeniu (zakładając oczywiście, że tam otrzymano poprawny wynik).
+
+SELECT
+    r.id AS `id`,
+    r.name AS `name`,
+    SUM(e.salary) AS `Suma zarobków`,
+    COUNT(*) AS `Liczba pracowników`
+FROM emp e
+JOIN dept d ON e.dept_id = d.id
+JOIN region r ON d.region_id = r.id
+GROUP BY r.id, r.name
+ORDER BY r.id;
+
+# Zadanie 7: Sprawdzić spójność danych w tabelach ord oraz item. Dane będziemy uważali za spójne, gdy
+# suma, na którą opiewa zamówienie (wartośd w kolumnie total) dla każdego zamówienia będzie
+# dokładnie taka sama jak wartość zamówienia wyliczona jako suma iloczynów price * quantity w
+# tabeli item (uzasadnij dlaczego).
+
+SELECT
+    o.total AS `TOTAL, ord`,
+    ROUND(SUM(i.price * i.quantity), 2) AS `PRICE * QUANTITY, item`,
+    ROUND(o.total - SUM(i.price * i.quantity), 2) AS `Różnica`
+FROM ord o
+JOIN item i ON o.id = i.ord_id
+GROUP BY o.id, o.total
+ORDER BY o.total;
+
+# Zadanie 8: Wyświetlić prosty raport o klientach. Zwrócić uwagę, że wynik posortowany jest wg. ilości
+# klientów w danym regionie (użyć funkcji konkatenacji CONCAT).
+
+SELECT CONCAT('Z regionu ', UPPER(r.name), ' pochodzi ', COUNT(c.id), ' klientów.') AS INFO
+FROM customer c
+JOIN region r ON c.region_id = r.id
+GROUP BY r.id, r.name
+ORDER BY COUNT(c.id) DESC;
