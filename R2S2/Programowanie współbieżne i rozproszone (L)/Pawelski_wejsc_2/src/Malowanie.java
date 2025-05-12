@@ -21,7 +21,7 @@ class Malowanie implements Runnable {
                 Blotnik blotnik = stolKontroli.take();
                 System.out.println(color + "Malowanie:\t" + blotnik + colorReset);
                 Thread.sleep(2000); // Symulacja czasu malowania
-                System.out.println(color + "Malowanie\t" + blotnik + " [Gotowe]" + colorReset);
+                System.out.println(color + "Malowanie:\t" + blotnik + " [Gotowe]" + colorReset);
                 magazyn.put(blotnik);
                 System.out.println("Magazyn:\t" + blotnik + " [Przeniesiono]");
             }
