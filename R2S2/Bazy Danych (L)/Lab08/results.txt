@@ -1,0 +1,198 @@
+# Zadanie 1: Wyznaczyć iloczyn kartezjaoski tabel dept oraz emp. Ile rekordów wynikowych otrzymamy?
+# Czy wynik ma jakąś wartość praktyczną? Jeżeli tak, to jaką?
+
+SELECT *
+FROM dept CROSS JOIN emp;
+
+# Zadanie 2: Powtórzyć powyższe dwiczenie dla tabel ord, item oraz product. Uwaga na możliwość zawieszenia
+# się aplikacji klienckiej a być może i całego serwera MySQL (dlaczego?).
+
+SELECT *
+FROM ord
+CROSS JOIN item
+CROSS JOIN product;
+
+# Zadanie 3: Wyświetlić dane o pracownikach pracujących w dziale o nazwie Sales. Dla tabel zdefiniować
+# aliasy i posługiwać się nimi przy odwoływaniu do kolumn.
+
+SELECT e.first_name, e.last_name, d.name
+FROM emp e
+JOIN dept d ON e.dept_id = d.id
+WHERE d.name = 'Sales';
+
+# Zadanie 4: Zapytanie z poprzedniego punktu przerobić w taki sposób, aby było błędne i generowało błąd
+# świadczący o niepoprawnym odwołaniu się do nazwy kolumny (ERROR 1052 (23000): Column '%s'
+# In %s is ambiguous). Czy potrafisz powiedzieć jak taki błąd świadomie wywołać, zanim jeszcze
+# zaczniesz modyfikować zapytanie?
+
+SELECT e.first_name, e.last_name, d.name
+FROM emp e
+JOIN dept d ON dept_id = id
+WHERE d.name = 'Sales';
+
+# Zadanie 5: Wyświetlić dane o pracownikach pracujących w regionie o nazwie Europe. Dla tabel zdefiniować
+# aliasy i posługiwać się nimi przy odwoływaniu się do kolumn.
+
+SELECT
+  e.first_name,
+  e.last_name,
+  d.name AS Dzial,
+  r.name AS Region
+FROM emp e
+JOIN dept d ON e.dept_id = d.id
+JOIN region r ON d.region_id = r.id
+WHERE r.name = 'Europe';
+
+# Zadanie 6: Wyświetlić stany magazynowe wszystkich produktów z rozbiciem na poszczególne hurtownie
+# (wymagane dane są w tabelach warehouse, product, inventory, emp). Ograniczamy się tylko do
+# tych produktów, których sprzedaż, czyli różnica wartości pól inventory.max_in_stock oraz
+# inventory.amount_in_stock jest mniejsza niż 10. Dane posortować wg. nazwy hurtowni
+# a następnie wg. nazwy produktu.
+
+SELECT
+  w.address AS 'Adres hurt.',
+  CONCAT(e.first_name, ' ', e.last_name) AS 'Szef',
+  p.name AS 'Nazwa produktu',
+  i.amount_in_stock AS 'Stan biez.',
+  i.max_in_stock AS 'Stan max',
+  (i.max_in_stock - i.amount_in_stock) AS 'Roznica'
+FROM inventory i
+JOIN product p ON i.product_id = p.id
+JOIN warehouse w ON i.warehouse_id = w.id
+JOIN emp e ON w.manager_id = e.id
+WHERE (i.max_in_stock - i.amount_in_stock) < 10
+ORDER BY w.address, p.name;
+
+# Zadanie 7: Utworzyć tabelę o nazwie price_category.
+# Ich sens jest następujący: ustalamy odpowiednie przedziały cenowe i przypisujemy im nazwy.
+# Ustaliliśmy więc 6 takich przedziałów - 3 dla sezonu letniego i 3 dla zimowego. Dane z tej tabeli
+# wykorzystamy do oceny w jakich przedziałach cenowych mieszczą się poszczególne produkty
+# (tabela product).
+# Następnie należy wykonad zapytanie, które nazywa się połączenie nierównościowe (ang. theta-
+# join). Złączamy ze sobą relacje, które nie są powiązane ze sobą więzami integralnościowymi.
+# W poniższym przykładzie wyświetlono listę produktów oraz na bazie tabeli price_category
+# sprawdzono, w jakich przedziałach cenowych mieszczą się ceny poszczególnych produktów.
+
+CREATE TABLE price_category (
+    id INT NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    price_min DECIMAL(10,2) NOT NULL,
+    price_max DECIMAL(10,2) NOT NULL
+);
+
+INSERT INTO price_category (id, name, price_min, price_max) VALUES
+(1, 'Low Summer', 0.00, 100.00),
+(2, 'Medium Summer', 101.00, 500.00),
+(3, 'High Summer', 501.00, 2000.00),
+(4, 'Low Winter', 0.00, 50.00),
+(5, 'Medium Winter', 51.00, 300.00),
+(6, 'High Winter', 301.00, 2000.00);
+
+SELECT
+    p.name AS product_name,
+    pc.name AS price_category_name,
+    CONCAT(pc.price_min, ' -- ', pc.price_max) AS price_range,
+    p.suggested_price AS price
+FROM
+    product p
+        JOIN
+    price_category pc
+    ON
+        p.suggested_price BETWEEN pc.price_min AND pc.price_max
+ORDER BY product_name;
+
+# Zadanie 8: Z tabeli emp wyświetlić dane o pracownikach (nazwisko pracownika, nazwisko bezpośredniego
+# przełożonego). Należy zauważyć, że w tabeli emp na kolumnie manager_id założony jest klucz
+# obcy z referencją do klucza głównego id w tej samej tabeli.
+# W kolumnie manager_id wpisany jest identyfikator szefa danego pracownika. Zwróćmy uwagę,
+# że pole manager_id dla pracownika na stanowisku President ma wartośd NULL, co oznacza, że nie
+# ma on swojego zwierzchnika.
+
+SELECT
+    e.last_name AS employee_last_name,
+    e.title AS employee_title,
+    m.last_name AS manager_last_name,
+    m.title AS manager_title
+FROM
+    emp e
+        JOIN
+    emp m
+    ON
+        e.manager_id = m.id
+ORDER BY
+    e.id;
+
+# Zadanie 9: Z tabeli ord w rekordach, gdzie id < 100 usunąć dane o „opiekunach” tych zamówień (użyć
+# polecenia UPDATE. O jaką kolumnę chodzi?). Następnie należy wyświetlić numery zamówieo,
+# daty ich złożenia oraz imię i nazwisko opiekuna danego zamówienia. Użyć operator LEFT OUTER
+# JOIN. Do uzyskania napisów --brak danych-- użyd funkcji IFNULL.
+
+UPDATE ord
+SET sales_rep_id = NULL
+WHERE id < 100;
+
+SELECT
+    o.id,
+    DATE_FORMAT(o.date_ordered, '%d-%m-%Y') AS Data,
+    IFNULL(e.first_name, '--brak danych--') AS Imie,
+    IFNULL(e.last_name, '--brak danych--') AS Nazwisko
+FROM
+    ord o
+LEFT OUTER JOIN
+    emp e ON o.sales_rep_id = e.id
+ORDER BY
+    o.id;
+
+# Zadanie 10: Wyświetlić dane o pracownikach (tabela emp) oraz zamówieniach (numer id oraz data złożenia
+# zamówienia), którymi się opiekują. Pamiętajmy o tym, że jeden pracownik może opiekować się
+# więcej niż jednym zamówieniem.
+
+SELECT
+    e.first_name,
+    e.last_name,
+    o.id,
+    DATE_FORMAT(o.date_ordered, '%d-%m-%Y') AS date_ordered
+FROM
+    emp e
+LEFT OUTER JOIN
+    ord o ON e.id = o.sales_rep_id
+ORDER BY
+    e.last_name, e.first_name, o.date_ordered;
+
+# Zadanie 11: Połączyć w jeden zbiorczy wynik dane z tabel dept oraz region.
+# Użyć operatora UNION. Następnie zamienić UNION na UNION ALL i opisać jakie zaszły zmiany.
+
+SELECT name FROM region
+UNION
+SELECT name FROM dept;
+
+SELECT name FROM region
+UNION ALL
+SELECT name FROM dept;
+
+# Zadanie 12: Połączyć w jeden zbiorczy wynik nazwiska pracowników z tabeli emp oraz nazwy klientów z
+# tabeli customer. Użyć operatora UNION oraz funkcji CONCAT do odpowiedniego sformatowania
+# wyjścia. Posortować wynik od A do Z.
+
+SELECT CONCAT(last_name, ' <-- emp') AS 'Pracownicy i klienci'
+FROM emp
+UNION
+SELECT CONCAT(name, ' <-- customer') AS 'Pracownicy i klienci'
+FROM customer
+ORDER BY 1;
+
+# Zadanie 13: Zmodyfikować zapytanie z poprzedniego ćwiczenia, tak aby najpierw pojawiły się nazwiska
+# pracowników a potem nazwy klientów. Dane powinny być posortowane od A do Z (oddzielnie
+# pracownicy i oddzielnie klienci). Należy użyć pewnego triku, polegającego na umiejętnym użyciu
+# tzw. pseudokolumny i następnie posortowaniu wyniku podług niej.
+
+SELECT
+   1 AS sort_order,
+   CONCAT(last_name, ' <-- emp') AS 'Pracownicy i klienci'
+FROM emp
+UNION
+SELECT
+   2 AS sort_order,
+   CONCAT(name, ' <-- customer') AS 'Pracownicy i klienci'
+FROM customer
+ORDER BY sort_order, `Pracownicy i klienci`;
