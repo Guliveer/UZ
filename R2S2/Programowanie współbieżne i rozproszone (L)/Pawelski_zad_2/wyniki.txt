@@ -1,0 +1,108 @@
+Number of processors: 8
+
+Matrix size: 500x500
+Single-threaded time: 0.09 s
+Multi-threaded time: 0.06 s
+Speedup: 1.56x
+MD5 checksum (C): f9c3b34b2825ae11d417081ef88d62c8
+MD5 checksum (D): f9c3b34b2825ae11d417081ef88d62c8
+Results match: true
+
+Matrix size: 1000x1000
+Single-threaded time: 1.16 s
+Multi-threaded time: 0.24 s
+Speedup: 4.93x
+MD5 checksum (C): 00f974470b947a3a48c486faf4f9e5cb
+MD5 checksum (D): 00f974470b947a3a48c486faf4f9e5cb
+Results match: true
+
+Matrix size: 1500x1500
+Single-threaded time: 4.55 s
+Multi-threaded time: 1.03 s
+Speedup: 4.39x
+MD5 checksum (C): 01dee2bd7b38f2ded2441ba0fc68f7fe
+MD5 checksum (D): 01dee2bd7b38f2ded2441ba0fc68f7fe
+Results match: true
+
+---
+Number of processors: 8
+
+Matrix size: 500x500
+Single-threaded time: 0.08 s
+Multi-threaded time: 0.04 s
+Speedup: 1.88x
+MD5 checksum (C): f9c3b34b2825ae11d417081ef88d62c8
+MD5 checksum (D): f9c3b34b2825ae11d417081ef88d62c8
+Results match: true
+
+Matrix size: 1000x1000
+Single-threaded time: 1.19 s
+Multi-threaded time: 0.23 s
+Speedup: 5.07x
+MD5 checksum (C): 00f974470b947a3a48c486faf4f9e5cb
+MD5 checksum (D): 00f974470b947a3a48c486faf4f9e5cb
+Results match: true
+
+Matrix size: 1500x1500
+Single-threaded time: 4.71 s
+Multi-threaded time: 1.07 s
+Speedup: 4.39x
+MD5 checksum (C): 01dee2bd7b38f2ded2441ba0fc68f7fe
+MD5 checksum (D): 01dee2bd7b38f2ded2441ba0fc68f7fe
+Results match: true
+
+---
+Number of processors: 8
+
+Matrix size: 500x500
+Single-threaded time: 0.08 s
+Multi-threaded time: 0.03 s
+Speedup: 2.35x
+MD5 checksum (C): f9c3b34b2825ae11d417081ef88d62c8
+MD5 checksum (D): f9c3b34b2825ae11d417081ef88d62c8
+Results match: true
+
+Matrix size: 1000x1000
+Single-threaded time: 1.00 s
+Multi-threaded time: 0.23 s
+Speedup: 4.44x
+MD5 checksum (C): 00f974470b947a3a48c486faf4f9e5cb
+MD5 checksum (D): 00f974470b947a3a48c486faf4f9e5cb
+Results match: true
+
+Matrix size: 1500x1500
+Single-threaded time: 4.15 s
+Multi-threaded time: 0.92 s
+Speedup: 4.50x
+MD5 checksum (C): 01dee2bd7b38f2ded2441ba0fc68f7fe
+MD5 checksum (D): 01dee2bd7b38f2ded2441ba0fc68f7fe
+Results match: true
+
+---
+Number of processors: 8
+
+Matrix size: 500x500
+Single-threaded time: 0.08 s
+Multi-threaded time: 0.06 s
+Speedup: 1.40x
+MD5 checksum (C): f9c3b34b2825ae11d417081ef88d62c8
+MD5 checksum (D): f9c3b34b2825ae11d417081ef88d62c8
+Results match: true
+
+Matrix size: 1000x1000
+Single-threaded time: 1.01 s
+Multi-threaded time: 0.24 s
+Speedup: 4.20x
+MD5 checksum (C): 00f974470b947a3a48c486faf4f9e5cb
+MD5 checksum (D): 00f974470b947a3a48c486faf4f9e5cb
+Results match: true
+
+Matrix size: 1500x1500
+Single-threaded time: 4.48 s
+Multi-threaded time: 0.94 s
+Speedup: 4.76x
+MD5 checksum (C): 01dee2bd7b38f2ded2441ba0fc68f7fe
+MD5 checksum (D): 01dee2bd7b38f2ded2441ba0fc68f7fe
+Results match: true
+
+---
