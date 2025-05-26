@@ -1,75 +1,27 @@
 Number of processors: 8
+
 Matrix size: 500x500
-Single-threaded time: 0.15 s
-Multi-threaded time: 0.06 s
-Speedup: 2.47x
+Single-threaded time: 0.14 s
+Multi-threaded time: 0.07 s
+Speedup: 1.98x
 Results match: true
 MD5 checksum (C): f9c3b34b2825ae11d417081ef88d62c8
 MD5 checksum (D): f9c3b34b2825ae11d417081ef88d62c8
 
 Matrix size: 1000x1000
-Single-threaded time: 1.79 s
-Multi-threaded time: 0.32 s
+Single-threaded time: 1.71 s
+Multi-threaded time: 0.30 s
 Speedup: 5.66x
 Results match: true
 MD5 checksum (C): 00f974470b947a3a48c486faf4f9e5cb
 MD5 checksum (D): 00f974470b947a3a48c486faf4f9e5cb
 
 Matrix size: 1500x1500
-Single-threaded time: 7.52 s
-Multi-threaded time: 1.33 s
-Speedup: 5.65x
+Single-threaded time: 7.53 s
+Multi-threaded time: 3.54 s
+Speedup: 2.13x
 Results match: true
 MD5 checksum (C): 01dee2bd7b38f2ded2441ba0fc68f7fe
 MD5 checksum (D): 01dee2bd7b38f2ded2441ba0fc68f7fe
 
-Number of processors: 8
-Matrix size: 500x500
-Single-threaded time: 0.21 s
-Multi-threaded time: 0.06 s
-Speedup: 3.64x
-Results match: true
-MD5 checksum (C): f9c3b34b2825ae11d417081ef88d62c8
-MD5 checksum (D): f9c3b34b2825ae11d417081ef88d62c8
-
-Matrix size: 1000x1000
-Single-threaded time: 1.79 s
-Multi-threaded time: 0.36 s
-Speedup: 4.97x
-Results match: true
-MD5 checksum (C): 00f974470b947a3a48c486faf4f9e5cb
-MD5 checksum (D): 00f974470b947a3a48c486faf4f9e5cb
-
-Matrix size: 1500x1500
-Single-threaded time: 7.08 s
-Multi-threaded time: 1.28 s
-Speedup: 5.51x
-Results match: true
-MD5 checksum (C): 01dee2bd7b38f2ded2441ba0fc68f7fe
-MD5 checksum (D): 01dee2bd7b38f2ded2441ba0fc68f7fe
-
-Number of processors: 8
-Matrix size: 500x500
-Single-threaded time: 0.22 s
-Multi-threaded time: 0.21 s
-Speedup: 1.05x
-Results match: true
-MD5 checksum (C): f9c3b34b2825ae11d417081ef88d62c8
-MD5 checksum (D): f9c3b34b2825ae11d417081ef88d62c8
-
-Matrix size: 1000x1000
-Single-threaded time: 1.86 s
-Multi-threaded time: 0.53 s
-Speedup: 3.53x
-Results match: true
-MD5 checksum (C): 00f974470b947a3a48c486faf4f9e5cb
-MD5 checksum (D): 00f974470b947a3a48c486faf4f9e5cb
-
-Matrix size: 1500x1500
-Single-threaded time: 7.55 s
-Multi-threaded time: 1.36 s
-Speedup: 5.55x
-Results match: true
-MD5 checksum (C): 01dee2bd7b38f2ded2441ba0fc68f7fe
-MD5 checksum (D): 01dee2bd7b38f2ded2441ba0fc68f7fe
-
+---

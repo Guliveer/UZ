@@ -37,10 +37,10 @@ public class MatrixMultiplication {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
         int[] sizes = {500, 1000, 1500};
         int processors = Runtime.getRuntime().availableProcessors();
-        System.out.println("Number of processors: " + processors);
+        System.out.println("Number of processors: " + processors + "\n");
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("wyniki.txt", true))) {
-            writer.write("Number of processors: " + processors + "\n");
+            writer.write("Number of processors: " + processors + "\n\n");
 
             for (int size : sizes) {
                 int[][] A = new int[size][size];
@@ -85,6 +85,8 @@ public class MatrixMultiplication {
                 System.out.print(result);
                 writer.write(result);
             }
+
+            writer.write("---\n");
         }
     }
 
