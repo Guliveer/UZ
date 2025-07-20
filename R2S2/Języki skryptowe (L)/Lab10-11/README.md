@@ -15,4 +15,4 @@ Users can register, log in, and manage their notes. Admin users can delete any n
 
 Made by [@Guliveer](https://github.com/Guliveer) & [@Deerion](https://github.com/Deerion) in about 3 hours.
 
-🔗 [github.com/Guliveer/UZ-django-notekeeper](https://github.com/Guliveer/UZ-django-notekeeper)
+🔗 [Guliveer/UZ-django-notekeeper](https://github.com/Guliveer/UZ-django-notekeeper)

@@ -57,5 +57,9 @@
 - `~` -> repo's root directory
 - `R_` -> year of studying, where `_` represents a number of given year
 - `S_` -> semester of the year, where `_` represents a number of given semester
-- `[subject]` -> name of the subject; letter in brackets defines the type of classes in a given subject: _L_ - practical, _Ć_ - practical (more focused on math without computers), _W_ - lectures
+- `[subject]` -> name of the subject; letter in brackets defines the type of classes in a given subject:
+  - _L_ - practical,
+  - _Ć_ - practical (more focused on math without computers),
+  - _P_ - project,
+  - _W_ - lectures
 - `somewhat_organized_assignments_in_subdirs` -> pretty much self-explanatory
