@@ -1,0 +1,25 @@
+# Przykładowy plik skryptu z poleceniami
+# Linie zaczynające się od # są komentarzami i będą ignorowane
+
+# Test polecenia pomoc
+pomoc
+
+# Test polecenia grupa
+grupa
+
+# Test poleceń czesc z różnymi nazwiskami
+czesc Kowalski
+czesc NOWAK
+czesc wiśniewski
+
+# Test błędnych poleceń
+czesc
+czesc Jan Kowalski
+czesc 123
+
+# Test nieznanych poleceń
+nieznane_polecenie
+test
+
+# Polecenie zakończenia (opcjonalne - można usunąć aby program nie kończył się automatycznie)
+exit

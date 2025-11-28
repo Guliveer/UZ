@@ -1,0 +1,8 @@
+pomoc
+grupa
+czesc Kowalski
+czesc
+czesc kowalski nowak
+czesc 123
+nieznane_polecenie
+exit
