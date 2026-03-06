@@ -1,0 +1,15 @@
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/bin/Debug/net10.0/Zadanie03
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/bin/Debug/net10.0/Zadanie03.deps.json
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/bin/Debug/net10.0/Zadanie03.runtimeconfig.json
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/bin/Debug/net10.0/Zadanie03.dll
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/bin/Debug/net10.0/Zadanie03.pdb
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/Zadanie03.GeneratedMSBuildEditorConfig.editorconfig
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/Zadanie03.AssemblyInfoInputs.cache
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/Zadanie03.AssemblyInfo.cs
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/Zadanie03.csproj.CoreCompileInputs.cache
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/Zadanie03.sourcelink.json
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/Zadanie03.dll
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/refint/Zadanie03.dll
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/Zadanie03.pdb
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/Zadanie03.genruntimeconfig.cache
+/Users/oliwer/GitHub-Repos/UZ/R3S2/Platforma-.NET/Lab01/Zadanie03/obj/Debug/net10.0/ref/Zadanie03.dll
