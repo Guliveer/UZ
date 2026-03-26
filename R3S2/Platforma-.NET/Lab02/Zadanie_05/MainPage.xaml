@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zadanie_05.MainPage"
+             Title="Demonstracja ListView"
+             BackgroundColor="#F5F5F5">
+
+    <Grid Padding="16" RowSpacing="10"
+          RowDefinitions="Auto,*,Auto,Auto,Auto,*,Auto">
+
+        <!-- Naglowek listy glownej -->
+        <Label Grid.Row="0" Text="Lista glowna" FontSize="16" FontAttributes="Bold"
+               TextColor="#333" Margin="4,0" />
+
+        <!-- Lista glowna -->
+        <Border Grid.Row="1" StrokeShape="RoundRectangle 8" Stroke="#DDD"
+                BackgroundColor="White" Padding="0">
+            <ListView x:Name="SourceList" ItemSelected="OnItemSelected"
+                      SeparatorColor="#EEE" />
+        </Border>
+
+        <!-- Panel kontrolny -->
+        <Grid Grid.Row="2" ColumnSpacing="8" RowSpacing="8"
+              ColumnDefinitions="*,Auto"
+              RowDefinitions="Auto,Auto">
+
+            <!-- Dodawanie -->
+            <Entry Grid.Row="0" Grid.Column="0" x:Name="AddEntry"
+                   Placeholder="Nowy element..." FontSize="15"
+                   BackgroundColor="White" />
+            <Button Grid.Row="0" Grid.Column="1" Text="Dodaj"
+                    FontSize="14" BackgroundColor="#3B82F6" TextColor="White"
+                    CornerRadius="8" Padding="16,8" Clicked="OnAdd" />
+
+            <!-- Akcje + szukanie -->
+            <FlexLayout Grid.Row="1" Grid.ColumnSpan="2"
+                        Wrap="Wrap" JustifyContent="Start"
+                        AlignItems="Center" Direction="Row">
+                <Button Text="Usun" FontSize="13" BackgroundColor="#EF4444" TextColor="White"
+                        CornerRadius="8" Padding="12,6" Margin="0,0,6,6" Clicked="OnRemove" />
+                <Button Text="Wyczysc" FontSize="13" BackgroundColor="#6B7280" TextColor="White"
+                        CornerRadius="8" Padding="12,6" Margin="0,0,6,6" Clicked="OnClear" />
+                <Button Text="Sortuj" FontSize="13" BackgroundColor="#0D9488" TextColor="White"
+                        CornerRadius="8" Padding="12,6" Margin="0,0,6,6" Clicked="OnSort" />
+                <Button Text="W gore" FontSize="13" BackgroundColor="#64748B" TextColor="White"
+                        CornerRadius="8" Padding="12,6" Margin="0,0,6,6" Clicked="OnMoveUp" />
+                <Button Text="W dol" FontSize="13" BackgroundColor="#64748B" TextColor="White"
+                        CornerRadius="8" Padding="12,6" Margin="0,0,6,6" Clicked="OnMoveDown" />
+            </FlexLayout>
+        </Grid>
+
+        <!-- Szukanie -->
+        <Grid Grid.Row="3" ColumnSpacing="8" ColumnDefinitions="*,Auto">
+            <Entry Grid.Column="0" x:Name="SearchEntry"
+                   Placeholder="Szukaj..." FontSize="15"
+                   BackgroundColor="White" />
+            <Button Grid.Column="1" Text="Znajdz"
+                    FontSize="14" BackgroundColor="#2563EB" TextColor="White"
+                    CornerRadius="8" Padding="16,8" Clicked="OnSearch" />
+        </Grid>
+
+        <!-- Transfer -->
+        <HorizontalStackLayout Grid.Row="4" Spacing="8"
+                               HorizontalOptions="Center">
+            <Button Text="Przenies w dol  ↓" FontSize="14"
+                    BackgroundColor="#6366F1" TextColor="White"
+                    CornerRadius="8" Padding="20,8" Clicked="OnTransferRight" />
+            <Button Text="↑  Przenies w gore" FontSize="14"
+                    BackgroundColor="#6366F1" TextColor="White"
+                    CornerRadius="8" Padding="20,8" Clicked="OnTransferLeft" />
+        </HorizontalStackLayout>
+
+        <!-- Lista docelowa -->
+        <Border Grid.Row="5" StrokeShape="RoundRectangle 8" Stroke="#DDD"
+                BackgroundColor="White" Padding="0">
+            <Grid RowDefinitions="Auto,*">
+                <Label Grid.Row="0" Text="Lista docelowa" FontSize="16"
+                       FontAttributes="Bold" TextColor="#333"
+                       Margin="12,8" />
+                <ListView Grid.Row="1" x:Name="DestList"
+                          SeparatorColor="#EEE" />
+            </Grid>
+        </Border>
+
+        <!-- Pasek informacyjny -->
+        <Border Grid.Row="6" StrokeShape="RoundRectangle 6"
+                BackgroundColor="#E2E8F0" Stroke="Transparent" Padding="12,8">
+            <Label x:Name="InfoLabel" FontSize="13" TextColor="#475569" />
+        </Border>
+
+    </Grid>
+
+</ContentPage>

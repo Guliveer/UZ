@@ -1,0 +1,37 @@
+System analizy pola rażenia figur szachowych
+Celem zadania jest implementacja silnika (metody lub klasy) obliczającego pola ataku
+figur szachowych na kwadratowej planszy o rozmiarze N×N. Wejściem do programu jest
+rozmieszczenie figur, wyjściem informacja o polach atakowanych przez te figury. Na
+planszy mogą pojawić się przeszkody blokujące atak figury. Gdy figura napotka
+przeszkodę na swojej linii ataku, nie atakuje pól znajdujących się za nią. To ograniczenie
+nie dotyczy skoczka, który może przeskakiwać nad przeszkodami.
+W zależności od wariantu zadania należy wykorzystać JUnit w wersji 4 lub 5 oraz
+odpowiednią bibliotekę wspomagającą tworzenie asercji: AssertJ lub Hamcrest. Na
+wyższe oceny wymagane jest zaimplementowanie dodatkowych funkcjonalności:
+odbicia od krawędzi szachownicy oraz luster zmieniających kierunek ataku.
+Sposób oceniania:
+ocena 3.0:
+• implementacja metody calculateAttack,
+• obsługa dodatkowych pól typu przeszkoda,
+ocena 4.0:
+• implementacja odbić od band planszy (hokejowych),
+ocena 5.0:
+• implementacja luster (/, |, -, \) zmieniających kierunek ataku,
+• obsługa pętli nieskończonych (np. cztery lustra naprzeciw siebie).
+Warianty do implementacji do wyboru:
+Warianty zadania:
+Nr FiguraGłówna BibliotekaTestowa BibliotekaAsercji
+1 Hetman JUnit5 AssertJ
+2 Wieża JUnit4 Hamcrest
+3 Goniec JUnit5 Hamcrest
+4 Skoczek JUnit5 AssertJ
+5 Król JUnit4 AssertJ
+6 Hetman JUnit4 AssertJ
+7 Wieża JUnit5 AssertJ
+8 Goniec JUnit4 Hamcrest
+9 Skoczek JUnit5 Hamcrest
+10 Hetman JUnit5 Hamcrest
+11 Wieża JUnit5 AssertJ
+12 Król JUnit5 AssertJ
+
+My wybieramy tyko nr 3

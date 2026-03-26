@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zadanie_04.MainPage"
+             Title="Kalkulator"
+             BackgroundColor="WhiteSmoke">
+
+    <Grid RowSpacing="4" ColumnSpacing="4" Padding="5"
+          RowDefinitions="Auto,*,*,*,*,*,*"
+          ColumnDefinitions="*,*,*,*">
+
+        <!-- Display -->
+        <Frame Grid.Row="0" Grid.ColumnSpan="4" Padding="0" CornerRadius="10"
+               HasShadow="True" Margin="5,5,5,10">
+            <Label x:Name="Display" Text="0" FontSize="48" FontFamily="Courier New"
+                   HorizontalTextAlignment="End" VerticalTextAlignment="End"
+                   Padding="15" BackgroundColor="White" TextColor="Black"
+                   MinimumHeightRequest="90" LineBreakMode="NoWrap" />
+        </Frame>
+
+        <!-- Row 1 -->
+        <Button Text="%" Grid.Row="1" Grid.Column="0" FontSize="20" BackgroundColor="LightGray" TextColor="Black" CornerRadius="6" Clicked="OnPercent" />
+        <Button Text="CE" Grid.Row="1" Grid.Column="1" FontSize="20" BackgroundColor="LightGray" TextColor="Black" CornerRadius="6" Clicked="OnClearEntry" />
+        <Button Text="C" Grid.Row="1" Grid.Column="2" FontSize="20" BackgroundColor="LightGray" TextColor="Black" CornerRadius="6" Clicked="OnClear" />
+        <Button Text="&#x232B;" Grid.Row="1" Grid.Column="3" FontSize="20" BackgroundColor="LightGray" TextColor="Black" CornerRadius="6" Clicked="OnBackspace" />
+
+        <!-- Row 2 -->
+        <Button Text="1/x" Grid.Row="2" Grid.Column="0" FontSize="20" BackgroundColor="LightGray" TextColor="Black" CornerRadius="6" Clicked="OnInverse" />
+        <Button Text="x&#x00B2;" Grid.Row="2" Grid.Column="1" FontSize="20" BackgroundColor="LightGray" TextColor="Black" CornerRadius="6" Clicked="OnSquare" />
+        <Button Text="&#x221A;x" Grid.Row="2" Grid.Column="2" FontSize="20" BackgroundColor="LightGray" TextColor="Black" CornerRadius="6" Clicked="OnSqrt" />
+        <Button Text="&#x00F7;" Grid.Row="2" Grid.Column="3" FontSize="20" BackgroundColor="#dde4ff" TextColor="DarkBlue" CornerRadius="6" Clicked="OnOpDiv" />
+
+        <!-- Row 3 -->
+        <Button Text="7" Grid.Row="3" Grid.Column="0" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="8" Grid.Row="3" Grid.Column="1" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="9" Grid.Row="3" Grid.Column="2" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="&#x00D7;" Grid.Row="3" Grid.Column="3" FontSize="20" BackgroundColor="#dde4ff" TextColor="DarkBlue" CornerRadius="6" Clicked="OnOpMul" />
+
+        <!-- Row 4 -->
+        <Button Text="4" Grid.Row="4" Grid.Column="0" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="5" Grid.Row="4" Grid.Column="1" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="6" Grid.Row="4" Grid.Column="2" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="&#x2212;" Grid.Row="4" Grid.Column="3" FontSize="20" BackgroundColor="#dde4ff" TextColor="DarkBlue" CornerRadius="6" Clicked="OnOpSub" />
+
+        <!-- Row 5 -->
+        <Button Text="1" Grid.Row="5" Grid.Column="0" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="2" Grid.Row="5" Grid.Column="1" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="3" Grid.Row="5" Grid.Column="2" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="+" Grid.Row="5" Grid.Column="3" FontSize="20" BackgroundColor="#dde4ff" TextColor="DarkBlue" CornerRadius="6" Clicked="OnOpAdd" />
+
+        <!-- Row 6 -->
+        <Button Text="&#x00B1;" Grid.Row="6" Grid.Column="0" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnToggleSign" />
+        <Button Text="0" Grid.Row="6" Grid.Column="1" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDigit" />
+        <Button Text="," Grid.Row="6" Grid.Column="2" FontSize="20" BackgroundColor="White" TextColor="Black" CornerRadius="6" Clicked="OnDecimal" />
+        <Button Text="=" Grid.Row="6" Grid.Column="3" FontSize="22" FontAttributes="Bold" BackgroundColor="RoyalBlue" TextColor="White" CornerRadius="6" Clicked="OnEquals" />
+
+    </Grid>
+
+</ContentPage>

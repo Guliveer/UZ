@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zadanie_03.MainPage"
+             Title="Demonstracja DisplayAlert">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="10">
+
+                <Label x:Name="ResultLabel"
+                       Text="Kliknij przycisk, aby zobaczyc alert"
+                       FontSize="14" HorizontalTextAlignment="Center"
+                       TextColor="DarkBlue" Padding="10" BackgroundColor="WhiteSmoke" />
+
+                <Frame Padding="12" CornerRadius="10" BorderColor="LightGray" HasShadow="False">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Proste alerty" FontSize="15" FontAttributes="Bold" TextColor="DarkSlateGray" />
+                        <Button Text="Prosty alert (tylko tekst)" FontSize="13" BackgroundColor="WhiteSmoke"
+                                TextColor="Black" CornerRadius="6" Clicked="OnSimpleAlert" />
+                        <Button Text="Alert z dwoma przyciskami (Tak/Nie)" FontSize="13" BackgroundColor="WhiteSmoke"
+                                TextColor="Black" CornerRadius="6" Clicked="OnConfirmAlert" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="12" CornerRadius="10" BorderColor="LightGray" HasShadow="False">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Alerty potwierdzenia" FontSize="15" FontAttributes="Bold"
+                               TextColor="DarkSlateGray" />
+                        <Button Text="Czy zapisac zmiany?" FontSize="13" BackgroundColor="WhiteSmoke" TextColor="Black"
+                                CornerRadius="6" Clicked="OnSaveAlert" />
+                        <Button Text="Czy usunac element?" FontSize="13" BackgroundColor="WhiteSmoke" TextColor="Black"
+                                CornerRadius="6" Clicked="OnDeleteAlert" />
+                        <Button Text="Czy zamknac aplikacje?" FontSize="13" BackgroundColor="WhiteSmoke"
+                                TextColor="Black" CornerRadius="6" Clicked="OnCloseAlert" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="12" CornerRadius="10" BorderColor="LightGray" HasShadow="False">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="ActionSheet (wybor z listy)" FontSize="15" FontAttributes="Bold"
+                               TextColor="DarkSlateGray" />
+                        <Button Text="Wybierz kolor" FontSize="13" BackgroundColor="WhiteSmoke" TextColor="Black"
+                                CornerRadius="6" Clicked="OnColorSheet" />
+                        <Button Text="Wybierz akcje (z destrukcyjna)" FontSize="13" BackgroundColor="WhiteSmoke"
+                                TextColor="Black" CornerRadius="6" Clicked="OnActionSheet" />
+                        <Button Text="Wybierz format pliku" FontSize="13" BackgroundColor="WhiteSmoke"
+                                TextColor="Black" CornerRadius="6" Clicked="OnFormatSheet" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="12" CornerRadius="10" BorderColor="LightGray" HasShadow="False">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Prompt (wprowadzanie tekstu)" FontSize="15" FontAttributes="Bold"
+                               TextColor="DarkSlateGray" />
+                        <Button Text="Podaj swoje imie" FontSize="13" BackgroundColor="WhiteSmoke" TextColor="Black"
+                                CornerRadius="6" Clicked="OnNamePrompt" />
+                        <Button Text="Podaj liczbe (Numeric)" FontSize="13" BackgroundColor="WhiteSmoke"
+                                TextColor="Black" CornerRadius="6" Clicked="OnNumberPrompt" />
+                        <Button Text="Podaj haslo (max 20 znakow)" FontSize="13" BackgroundColor="WhiteSmoke"
+                                TextColor="Black" CornerRadius="6" Clicked="OnPasswordPrompt" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Label
+                    Text="MAUI oferuje: DisplayAlertAsync, DisplayActionSheetAsync&#10;i DisplayPromptAsync - odpowiedniki MessageBox z WinForms."
+                    FontSize="12" FontAttributes="Italic" TextColor="Gray" Margin="0,10" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Overlay do wprowadzania liczb -->
+        <Grid x:Name="NumberOverlay" IsVisible="False" BackgroundColor="#80000000">
+            <Frame VerticalOptions="Center" HorizontalOptions="Center"
+                   Padding="20" CornerRadius="12" BackgroundColor="White"
+                   WidthRequest="300">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Liczba" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="Podaj liczbe:" FontSize="14" />
+                    <Entry x:Name="NumberEntry" Keyboard="Numeric"
+                           Placeholder="0" FontSize="16" />
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+                        <Button Text="Anuluj" FontSize="13"
+                                BackgroundColor="LightGray" TextColor="Black"
+                                CornerRadius="6" Clicked="OnNumberOverlayCancel" />
+                        <Button Text="OK" FontSize="13"
+                                BackgroundColor="DodgerBlue" TextColor="White"
+                                CornerRadius="6" Clicked="OnNumberOverlayOk" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+
+        <!-- Overlay color picker -->
+        <Grid x:Name="ColorOverlay" IsVisible="False" BackgroundColor="#80000000">
+            <Frame VerticalOptions="Center" HorizontalOptions="Center"
+                   Padding="20" CornerRadius="12" BackgroundColor="White"
+                   WidthRequest="340">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Wybierz kolor" FontSize="18" FontAttributes="Bold" />
+                    <FlexLayout x:Name="ColorPalette" Wrap="Wrap"
+                                JustifyContent="Start" Direction="Row" />
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <BoxView x:Name="ColorPreview" WidthRequest="40" HeightRequest="40"
+                                 CornerRadius="6" Color="Transparent" />
+                        <Label x:Name="ColorHexLabel" Text="" FontSize="16"
+                               FontFamily="Courier New" VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+                        <Button Text="Anuluj" FontSize="13"
+                                BackgroundColor="LightGray" TextColor="Black"
+                                CornerRadius="6" Clicked="OnColorOverlayCancel" />
+                        <Button x:Name="ColorOkBtn" Text="Wybierz" FontSize="13"
+                                BackgroundColor="DodgerBlue" TextColor="White"
+                                CornerRadius="6" IsEnabled="False"
+                                Clicked="OnColorOverlayOk" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+
+        <!-- Overlay do wprowadzania hasla -->
+        <Grid x:Name="PasswordOverlay" IsVisible="False" BackgroundColor="#80000000">
+            <Frame VerticalOptions="Center" HorizontalOptions="Center"
+                   Padding="20" CornerRadius="12" BackgroundColor="White"
+                   WidthRequest="300">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Haslo" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="Wprowadz nowe haslo:" FontSize="14" />
+                    <Entry x:Name="PasswordEntry" IsPassword="True"
+                           MaxLength="20" Placeholder="Min. 8 znakow" FontSize="16" />
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+                        <Button Text="Anuluj" FontSize="13"
+                                BackgroundColor="LightGray" TextColor="Black"
+                                CornerRadius="6" Clicked="OnPasswordOverlayCancel" />
+                        <Button Text="Ustaw" FontSize="13"
+                                BackgroundColor="DodgerBlue" TextColor="White"
+                                CornerRadius="6" Clicked="OnPasswordOverlayOk" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zadanie_06.MainPage"
+             Title="Lista teleadresowa">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="15" Spacing="8">
+
+            <!-- Input fields -->
+            <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="5" RowSpacing="5">
+                <Entry x:Name="TxtImie" Placeholder="Imie" FontSize="13" Grid.Column="0" Grid.Row="0" />
+                <Entry x:Name="TxtNazwisko" Placeholder="Nazwisko" FontSize="13" Grid.Column="1" Grid.Row="0" />
+                <Entry x:Name="TxtTelefon" Placeholder="Telefon" Keyboard="Telephone" FontSize="13" Grid.Column="2" Grid.Row="0" />
+                <Entry x:Name="TxtEmail" Placeholder="Email" Keyboard="Email" FontSize="13" Grid.Column="0" Grid.Row="1" />
+                <Entry x:Name="TxtAdres" Placeholder="Adres" FontSize="13" Grid.Column="1" Grid.Row="1" />
+                <Entry x:Name="TxtDataUr" Placeholder="Data ur. (dd.MM.yyyy)" FontSize="13" Grid.Column="2" Grid.Row="1" />
+            </Grid>
+
+            <!-- Action buttons -->
+            <HorizontalStackLayout Spacing="5">
+                <Button Text="Dodaj" FontSize="12" BackgroundColor="DodgerBlue" TextColor="White" CornerRadius="6" Padding="10,5" Clicked="OnAdd" />
+                <Button Text="Edytuj" FontSize="12" BackgroundColor="Orange" TextColor="White" CornerRadius="6" Padding="10,5" Clicked="OnEdit" />
+                <Button Text="Usun" FontSize="12" BackgroundColor="IndianRed" TextColor="White" CornerRadius="6" Padding="10,5" Clicked="OnRemove" />
+            </HorizontalStackLayout>
+
+            <!-- Search -->
+            <SearchBar x:Name="SearchBarCtrl" Placeholder="Szukaj (imie, nazwisko, telefon, email...)"
+                       FontSize="13" TextChanged="OnSearchChanged" />
+
+            <!-- Sort buttons -->
+            <HorizontalStackLayout Spacing="5">
+                <Button Text="Sortuj: Nazwisko" FontSize="12" BackgroundColor="Teal" TextColor="White" CornerRadius="6" Padding="10,5" Clicked="OnSortName" />
+                <Button Text="Sortuj: Data ur." FontSize="12" BackgroundColor="Teal" TextColor="White" CornerRadius="6" Padding="10,5" Clicked="OnSortDate" />
+            </HorizontalStackLayout>
+
+            <!-- Contact list -->
+            <CollectionView x:Name="ContactsView" SelectionMode="Single"
+                            SelectionChanged="OnSelectionChanged" HeightRequest="400">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="0" Margin="0,2" CornerRadius="6" HasShadow="False" BorderColor="LightGray">
+                            <Grid Padding="10" RowDefinitions="Auto,Auto">
+                                <Label Text="{Binding FullDisplay}" FontSize="14"
+                                       FontAttributes="Bold" TextColor="DarkSlateGray" Grid.Row="0" />
+                                <Label Text="{Binding DetailDisplay}" FontSize="12"
+                                       TextColor="Gray" Grid.Row="1" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

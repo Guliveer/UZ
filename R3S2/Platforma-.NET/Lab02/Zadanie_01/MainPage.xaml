@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zadanie_01.MainPage"
+             Title="Zegar z alarmem">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="5">
+
+            <Label x:Name="TimeLabel"
+                   Text="00:00:00"
+                   FontSize="64"
+                   FontFamily="Courier New"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="DarkBlue" />
+
+            <Label x:Name="DateLabel"
+                   FontSize="20"
+                   HorizontalTextAlignment="Center"
+                   TextColor="DimGray" />
+
+            <BoxView HeightRequest="1" Color="LightGray" Margin="20,10" />
+
+            <Label Text="Ustaw alarm:" FontSize="16" Margin="0,10,0,5" />
+
+            <TimePicker x:Name="AlarmPicker" FontSize="18" />
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button x:Name="SetAlarmBtn"
+                        Text="Ustaw alarm"
+                        FontSize="14"
+                        BackgroundColor="DodgerBlue"
+                        TextColor="White"
+                        CornerRadius="8"
+                        Margin="0,5"
+                        Clicked="OnSetAlarm" />
+                <Button x:Name="CancelAlarmBtn"
+                        Text="Anuluj alarm"
+                        FontSize="14"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                        CornerRadius="8"
+                        IsEnabled="False"
+                        Margin="0,5"
+                        Clicked="OnCancelAlarm" />
+            </HorizontalStackLayout>
+
+            <Label x:Name="AlarmStatusLabel"
+                   Text="Alarm: nie ustawiony"
+                   FontSize="16"
+                   FontAttributes="Italic"
+                   HorizontalTextAlignment="Center"
+                   TextColor="Gray"
+                   Margin="0,15,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
