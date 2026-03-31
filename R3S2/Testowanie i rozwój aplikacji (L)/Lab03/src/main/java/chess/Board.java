@@ -1,10 +1,6 @@
 package chess;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Board {
     private final int size;
@@ -41,7 +37,7 @@ public class Board {
             }
         }
         // Figury nie atakują swoich własnych pól
-        attacked.removeAll(piecePositions);
+        piecePositions.forEach(attacked::remove);
         return attacked;
     }
 

@@ -19,10 +19,8 @@ class BishopAttackTest {
         return new Board(size, new Bishop());
     }
 
-    // ========== Grade 3.0: Basic attack + obstacles ==========
-
     @Nested
-    @DisplayName("Grade 3.0 - Basic diagonal attack")
+    @DisplayName("Basic diagonal attack")
     class BasicAttack {
 
         @Test
@@ -77,7 +75,7 @@ class BishopAttackTest {
     }
 
     @Nested
-    @DisplayName("Grade 3.0 - Obstacles")
+    @DisplayName("Obstacles blocking attack rays")
     class Obstacles {
 
         @Test
@@ -127,10 +125,8 @@ class BishopAttackTest {
         }
     }
 
-    // ========== Grade 4.0: Bouncing ==========
-
     @Nested
-    @DisplayName("Grade 4.0 - Board edge bouncing")
+    @DisplayName("Board edge bouncing")
     class Bouncing {
 
         @Test
@@ -183,10 +179,8 @@ class BishopAttackTest {
         }
     }
 
-    // ========== Grade 5.0: Mirrors ==========
-
     @Nested
-    @DisplayName("Grade 5.0 - Mirrors")
+    @DisplayName("Mirrors changing attack direction")
     class Mirrors {
 
         @Test
@@ -261,7 +255,7 @@ class BishopAttackTest {
     }
 
     @Nested
-    @DisplayName("Grade 5.0 - Infinite loop detection")
+    @DisplayName("Infinite loop detection")
     class InfiniteLoop {
 
         @Test
