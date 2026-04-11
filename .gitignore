@@ -203,3 +203,6 @@ fabric.properties
 
 # Custom ignore files
 **/.idea/material_theme_project_new.xml
+.omc/
+.claude/
+.remember/
