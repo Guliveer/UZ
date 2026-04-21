@@ -315,6 +315,7 @@ $RECYCLE.BIN/
 ### Gradle ###
 .gradle
 **/build/
+build/
 !src/**/build/
 
 # Ignore Gradle GUI config
@@ -338,3 +339,7 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,intellij,jetbrains,visualstudiocode,maven,gradle,java
+
+# Other
+.remember/
+.claude/
