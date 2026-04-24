@@ -271,3 +271,6 @@ pagefile.sys
 *.db
 Desktop.ini
 ntuser.dat*
+
+Plat-dot-NET*/
+*.7z
