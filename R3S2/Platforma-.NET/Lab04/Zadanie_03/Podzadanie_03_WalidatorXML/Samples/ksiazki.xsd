@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://lab04.uz/ksiazki"
+           targetNamespace="http://lab04.uz/ksiazki"
+           elementFormDefault="qualified">
+  <xs:element name="ksiazki">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ksiazka" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="tytul" type="xs:string"/>
+              <xs:element name="autor" type="xs:string"/>
+              <xs:element name="rok" type="xs:gYear"/>
+              <xs:element name="cena" type="xs:decimal"/>
+            </xs:sequence>
+            <xs:attribute name="isbn" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

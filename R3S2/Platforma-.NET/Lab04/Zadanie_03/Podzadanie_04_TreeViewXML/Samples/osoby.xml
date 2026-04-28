@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<osoby>
+  <osoba id="1">
+    <imie>Oliwer</imie>
+    <nazwisko>Pawelski</nazwisko>
+    <email>oliwer@example.com</email>
+    <adres>
+      <ulica>Licealna 9</ulica>
+      <miasto>Zielona Gora</miasto>
+      <kod>65-417</kod>
+    </adres>
+    <telefony>
+      <telefon typ="komorkowy">+48 600 000 000</telefon>
+      <telefon typ="sluzbowy">+48 68 328 0000</telefon>
+    </telefony>
+  </osoba>
+  <osoba id="2">
+    <imie>Anna</imie>
+    <nazwisko>Nowak</nazwisko>
+    <email>anna@example.com</email>
+    <adres>
+      <ulica>Wyspianskiego 3</ulica>
+      <miasto>Warszawa</miasto>
+      <kod>00-001</kod>
+    </adres>
+    <telefony>
+      <telefon typ="komorkowy">+48 700 000 000</telefon>
+    </telefony>
+  </osoba>
+</osoby>

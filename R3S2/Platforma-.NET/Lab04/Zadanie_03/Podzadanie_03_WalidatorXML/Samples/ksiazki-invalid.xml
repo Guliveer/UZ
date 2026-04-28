@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ksiazki xmlns="http://lab04.uz/ksiazki">
+  <ksiazka>
+    <tytul>Brak atrybutu isbn</tytul>
+    <autor>Nieznany</autor>
+    <rok>XIX wiek</rok>
+    <cena>nie podano</cena>
+  </ksiazka>
+</ksiazki>
