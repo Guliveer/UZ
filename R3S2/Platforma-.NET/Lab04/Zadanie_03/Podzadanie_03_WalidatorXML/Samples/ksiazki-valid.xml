@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ksiazki xmlns="http://lab04.uz/ksiazki">
+  <ksiazka isbn="978-83-01-12345-6">
+    <tytul>Pan Tadeusz</tytul>
+    <autor>Adam Mickiewicz</autor>
+    <rok>1834</rok>
+    <cena>29.90</cena>
+  </ksiazka>
+  <ksiazka isbn="978-83-01-54321-7">
+    <tytul>Lalka</tytul>
+    <autor>Boleslaw Prus</autor>
+    <rok>1890</rok>
+    <cena>39.99</cena>
+  </ksiazka>
+</ksiazki>

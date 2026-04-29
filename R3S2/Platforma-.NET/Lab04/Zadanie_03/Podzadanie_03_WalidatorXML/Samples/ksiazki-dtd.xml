@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ksiazki SYSTEM "ksiazki.dtd">
+<ksiazki>
+  <ksiazka isbn="978-83-01-12345-6">
+    <tytul>Pan Tadeusz</tytul>
+    <autor>Adam Mickiewicz</autor>
+    <rok>1834</rok>
+    <cena>29.90</cena>
+  </ksiazka>
+</ksiazki>

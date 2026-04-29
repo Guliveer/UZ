@@ -1,0 +1,7 @@
+<!ELEMENT ksiazki (ksiazka+)>
+<!ELEMENT ksiazka (tytul, autor, rok, cena)>
+<!ATTLIST ksiazka isbn CDATA #REQUIRED>
+<!ELEMENT tytul (#PCDATA)>
+<!ELEMENT autor (#PCDATA)>
+<!ELEMENT rok (#PCDATA)>
+<!ELEMENT cena (#PCDATA)>
