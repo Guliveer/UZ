@@ -2,6 +2,8 @@ package chess;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -29,39 +31,50 @@ public class Main {
             catch (NumberFormatException e) { System.out.println("Zły rozmiar, używam 8"); }
         }
         BoardEditor editor = new BoardEditor(initialSize, new DefaultAttackService());
-        Scanner in = new Scanner(System.in);
-        System.out.println("Plansza " + initialSize + "x" + initialSize + ". Komendy:"
+        run(System.in, System.out, editor);
+    }
+
+    static String helpText() {
+        return "Dostępne komendy:"
                 + "\n\tnew <N>                          — nowa plansza NxN"
                 + "\n\tput <row> <col> <symbol>         — dowolne pole: . B # / \\ - |  ('.' = wyczyść)"
-                + "\n\tcount"
-                + "\n\tshow"
-                + "\n\tsave <file>"
-                + "\n\tload <file>"
-                + "\n\texit\n");
-        while (in.hasNextLine()) {
-            String line = in.nextLine().trim();
+                + "\n\tcount                            — liczba atakowanych pól"
+                + "\n\tshow                             — wypisz planszę i atakowane pola"
+                + "\n\tsave <file>                      — zapisz planszę do pliku"
+                + "\n\tload <file>                      — wczytaj planszę z pliku"
+                + "\n\thelp                             — wyświetl tę pomoc"
+                + "\n\texit                             — zakończ program";
+    }
+
+    static void run(InputStream in, PrintStream out, BoardEditor editor) {
+        Scanner scanner = new Scanner(in);
+        out.println("Plansza " + editor.getSize() + "x" + editor.getSize()
+                + ". Wpisz 'help' aby zobaczyć dostępne komendy.");
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine().trim();
             if (line.isEmpty()) continue;
             if (line.equals("exit")) break;
             try {
                 String[] t = line.split("\\s+");
                 switch (t[0]) {
+                    case "help"  -> out.println(helpText());
                     case "new"   -> editor.resize(Integer.parseInt(t[1]));
                     case "put"   -> editor.placeCell(Integer.parseInt(t[1]), Integer.parseInt(t[2]), cellFromSymbol(t[3].charAt(0)));
-                    case "count" -> System.out.println("Atakowane pola: " + editor.attackCount());
+                    case "count" -> out.println("Atakowane pola: " + editor.attackCount());
                     case "show"  -> {
                         Set<Position> attacked = editor.attackedPositions();
-                        System.out.println(attacked.stream()
+                        out.println(attacked.stream()
                                 .sorted(Comparator.comparingInt(Position::row).thenComparingInt(Position::col))
                                 .map(Position::toString)
                                 .collect(Collectors.joining(", ", "[", "]")));
-                        System.out.println(renderBoard(editor, attacked));
+                        out.println(renderBoard(editor, attacked));
                     }
                     case "save"  -> editor.save(Path.of(t[1]));
                     case "load"  -> editor.load(Path.of(t[1]));
-                    default -> System.out.println("Nieznana komenda");
+                    default -> out.println("Nieznana komenda. Wpisz 'help' aby zobaczyć dostępne komendy.");
                 }
             } catch (Exception e) {
-                System.out.println("Błąd: " + e.getMessage());
+                out.println("Błąd: " + e.getMessage());
             }
         }
     }
