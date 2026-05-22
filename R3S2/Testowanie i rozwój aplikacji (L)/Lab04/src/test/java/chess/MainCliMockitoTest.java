@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,21 +22,31 @@ import java.util.Set;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 /**
- * Testy CLI Main — wyłącznie z użyciem Mockito.
+ * Testy CLI Main — z użyciem Mockito w stylu *behavior verification* oraz *stubowania*.
  *
- * Różnica względem {@link MainCliTest}:
- *  - tam: ręczny {@link StubAttackService} (stub oparty na stanie)
- *  - tu:  {@link org.mockito.Mock @Mock} + {@code when(...).thenReturn(...)} + {@code verify(...)}
+ * W przeciwieństwie do {@link MainCliTest}:
+ *  - tam: ręczny {@link StubAttackService} sterowany metodami {@code set...()} (klasyczny stub)
+ *  - tu:  pełnoprawny mock + stuby przez {@code when(...).thenReturn(...)}.
  *
- * Dzięki Mockito testujemy nie tylko "co CLI wypisało", ale też
- * **jak CLI zachowuje się względem serwisu** — ile razy go wołało,
- * w jakiej kolejności, czy w ogóle dotykało go podczas komend typu 'help'.
+ * Co testujemy w tym pliku:
+ *  - czy CLI w ogóle dotyka serwisu w danej komendzie ({@link org.mockito.Mockito#verifyNoInteractions}),
+ *  - którą metodę woła ({@link org.mockito.Mockito#verify} + {@link org.mockito.Mockito#never}),
+ *  - ile razy ({@link org.mockito.Mockito#times}),
+ *  - w jakiej kolejności ({@link InOrder}),
+ *  - **co konkretnie** przekazuje do serwisu — przy pomocy {@link ArgumentCaptor},
+ *  - jak CLI reaguje na **wymuszone** wartości zwracane przez serwis i strumienie IO
+ *    (sekcja {@code StubbedServiceReturns}, {@code StreamStubbing}).
+ *
+ * Domyślne zwroty mocka (bez stuba):
+ *  - {@code int count(...)} → 0,
+ *  - {@code Set<Position> calculateAttack(...)} → pusty zbiór.
  */
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Main CLI — testy wyłącznie z Mockito")
+@DisplayName("Main CLI — testy z Mockito (weryfikacja zachowań, bez stubów)")
 class MainCliMockitoTest {
 
     @Mock
@@ -50,124 +61,233 @@ class MainCliMockitoTest {
 
     /**
      * Uruchamia REPL z "wpisanymi" komendami i zwraca to, co zostało wypisane na stdout.
+     *
+     * <p>BAIS i BAOS są tu opakowane w {@link org.mockito.Mockito#spy(Object)} —
+     * "częściowy mock" Mockito. Dzięki temu:
+     * <ul>
+     *   <li>realne metody działają (Scanner czyta nasz skrypt, PrintStream zapisuje do bufora),</li>
+     *   <li>na strumieniach można stubować metody przez {@code when(...).thenReturn(...)},</li>
+     *   <li>można też weryfikować wywołania ({@code verify(stream)...}).</li>
+     * </ul>
+     *
+     * <p>Używamy {@code spy} zamiast czystego {@code mock(BAIS.class)}, bo czysty mock
+     * miałby {@code read(...)} zwracający domyślne {@code 0} → Scanner widziałby pusty stream
+     * i żadna komenda nie zostałaby wykonana.
      */
     private String runCli(String... commands) {
         String script = String.join("\n", commands) + "\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8));
-        ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
+        byte[] scriptBytes = script.getBytes(StandardCharsets.UTF_8);
+
+        ByteArrayInputStream in = spy(new ByteArrayInputStream(scriptBytes));
+        ByteArrayOutputStream outBuffer = spy(new ByteArrayOutputStream());
+        lenient().when(in.available()).thenReturn(scriptBytes.length);
+        lenient().when(outBuffer.size()).thenReturn(0);
+
         PrintStream out = new PrintStream(outBuffer, true, StandardCharsets.UTF_8);
-
         Main.run(in, out, editor);
-
         return outBuffer.toString(StandardCharsets.UTF_8);
     }
 
-    // ==================== Help ====================
+    // ==================== Brak interakcji z serwisem ====================
 
     @Nested
-    @DisplayName("Komenda help")
-    class Help {
+    @DisplayName("Komendy nie wymagające serwisu — verifyNoInteractions")
+    class NoServiceInteraction {
 
         @Test
-        @DisplayName("'help' wypisuje listę wszystkich komend")
-        void helpListsAllCommands() {
-            String output = runCli("help", "exit");
-
-            assertThat(output, containsString("new"));
-            assertThat(output, containsString("put"));
-            assertThat(output, containsString("count"));
-            assertThat(output, containsString("show"));
-            assertThat(output, containsString("save"));
-            assertThat(output, containsString("load"));
-            assertThat(output, containsString("exit"));
-        }
-
-        @Test
-        @DisplayName("'help' nie dotyka serwisu ataku")
+        @DisplayName("'help' nie dotyka serwisu")
         void helpDoesNotTouchService() {
             runCli("help", "exit");
-
             verifyNoInteractions(mockService);
         }
 
         @Test
-        @DisplayName("Baner startowy odsyła do komendy 'help' i nie woła serwisu")
-        void bannerMentionsHelp() {
-            String output = runCli("exit");
-
-            assertThat(output, containsString("help"));
+        @DisplayName("Sam baner i 'exit' nie wołają serwisu")
+        void bannerOnlyDoesNotTouchService() {
+            runCli("exit");
             verifyNoInteractions(mockService);
         }
 
         @Test
-        @DisplayName("helpText() zwraca spójny tekst z tym, co wypisuje CLI")
-        void helpTextMatchesCliOutput() {
-            String direct = Main.helpText();
-            String fromCli = runCli("help", "exit");
-            assertThat(fromCli, containsString(direct));
-        }
-    }
-
-    // ==================== Nieznana komenda ====================
-
-    @Nested
-    @DisplayName("Nieznane/błędne komendy")
-    class UnknownCommand {
-
-        @Test
-        @DisplayName("Nieznana komenda — komunikat + brak wywołań serwisu")
-        void unknownCommandHint() {
-            String output = runCli("foobar", "exit");
-
-            assertThat(output, containsString("Nieznana komenda"));
-            assertThat(output, containsString("help"));
+        @DisplayName("Nieznana komenda nie woła serwisu")
+        void unknownCommandNoInteraction() {
+            runCli("foobar", "exit");
             verifyNoInteractions(mockService);
         }
 
         @Test
-        @DisplayName("Puste linie są ignorowane — nie psują REPL-a i nie wołają serwisu")
-        void emptyLinesAreIgnored() {
-            String output = runCli("", "   ", "help", "exit");
-
-            assertThat(output, containsString("Dostępne komendy"));
+        @DisplayName("Puste linie nie wołają serwisu")
+        void emptyLinesNoInteraction() {
+            runCli("", "   ", "help", "exit");
             verifyNoInteractions(mockService);
         }
 
         @Test
-        @DisplayName("Błąd w jednej komendzie nie przerywa sesji")
-        void errorDoesNotKillRepl() {
-            String output = runCli(
-                    "put 99 99 B",   // poza planszą
-                    "help",
-                    "exit");
+        @DisplayName("Błąd w 'put' (poza planszą) nie powoduje wywołań serwisu")
+        void invalidPutNoInteraction() {
+            runCli("put 99 99 B", "put -1 0 B", "exit");
+            verifyNoInteractions(mockService);
+        }
 
-            assertThat(output, containsString("Błąd"));
-            assertThat(output, containsString("Dostępne komendy"));
+        @Test
+        @DisplayName("Sama edycja (put / new) — zero interakcji z serwisem")
+        void editingOnlyNoInteraction() {
+            runCli("put 0 0 B", "put 1 1 #", "new 5", "put 2 2 /", "exit");
+            verifyNoInteractions(mockService);
+        }
+
+        @Test
+        @DisplayName("Wszystkie symbole 'put' (lustra, '.') — żaden nie woła serwisu")
+        void allPutSymbolsNoInteraction() {
+            runCli("put 0 0 /", "put 0 1 \\", "put 0 2 -", "put 0 3 |",
+                    "put 1 0 .", "put 1 1 B", "put 1 2 #", "exit");
             verifyNoInteractions(mockService);
         }
     }
 
-    // ==================== Sesja z użyciem mocka ====================
+    // ==================== Selektywne delegowanie ====================
 
     @Nested
-    @DisplayName("Sesja użytkownika — delegacja do zamockowanego AttackService")
-    class UserSession {
+    @DisplayName("Delegacja do serwisu — verify / never / times")
+    class ServiceDelegation {
 
         @Test
-        @DisplayName("'count' wypisuje wartość zwróconą przez mock")
-        void countPrintsMockValue() {
-            when(mockService.count(any(Board.class))).thenReturn(42);
+        @DisplayName("'count' woła count() raz, calculateAttack() — nigdy")
+        void countDelegatesOnlyToCount() {
+            runCli("count", "exit");
+
+            verify(mockService).count(any(Board.class));
+            verify(mockService, never()).calculateAttack(any(Board.class));
+            verifyNoMoreInteractions(mockService);
+        }
+
+        @Test
+        @DisplayName("'show' woła calculateAttack() raz, count() — nigdy")
+        void showDelegatesOnlyToCalculateAttack() {
+            runCli("show", "exit");
+
+            verify(mockService).calculateAttack(any(Board.class));
+            verify(mockService, never()).count(any(Board.class));
+            verifyNoMoreInteractions(mockService);
+        }
+
+        @Test
+        @DisplayName("Każde 'count' = osobne wywołanie serwisu")
+        void repeatedCountInvokesServiceEachTime() {
+            when(mockService.count(any(Board.class))).thenReturn(10, 20, 30);
+
+            String output = runCli("count", "count", "count", "exit");
+
+            verify(mockService, times(3)).count(any(Board.class));
+            verify(mockService, never()).calculateAttack(any(Board.class));
+            assertThat(output, containsString("Atakowane pola: 10"));
+            assertThat(output, containsString("Atakowane pola: 20"));
+            assertThat(output, containsString("Atakowane pola: 30"));
+        }
+
+        @Test
+        @DisplayName("Mieszane komendy — count() i calculateAttack() po właściwej liczbie razy")
+        void mixedCommandCounts() {
+            runCli("count", "show", "count", "show", "show", "exit");
+
+            verify(mockService, times(2)).count(any(Board.class));
+            verify(mockService, times(3)).calculateAttack(any(Board.class));
+            verifyNoMoreInteractions(mockService);
+        }
+    }
+
+    // ==================== InOrder ====================
+
+    @Nested
+    @DisplayName("Kolejność wywołań serwisu — InOrder")
+    class CallOrder {
+
+        @Test
+        @DisplayName("Kolejność wywołań odpowiada kolejności komend w sesji")
+        void orderMatchesCommandSequence() {
+            when(mockService.count(any(Board.class))).thenReturn(4, 9);
+            when(mockService.calculateAttack(any(Board.class)))
+                    .thenReturn(Set.of(new Position(1, 1)));
+
+            String output = runCli("count", "show", "count", "exit");
+
+            InOrder inOrder = inOrder(mockService);
+            inOrder.verify(mockService).count(any(Board.class));
+            inOrder.verify(mockService).calculateAttack(any(Board.class));
+            inOrder.verify(mockService).count(any(Board.class));
+            inOrder.verifyNoMoreInteractions();
+
+            // Stuby konsumowane w tej samej kolejności co wywołania.
+            assertThat(output, containsString("Atakowane pola: 4"));
+            assertThat(output, containsString("(1, 1)"));
+            assertThat(output, containsString("Atakowane pola: 9"));
+        }
+
+        @Test
+        @DisplayName("Komendy nie-serwisowe ('help', 'put') nie pojawiają się w sekwencji wywołań")
+        void nonServiceCommandsAbsentInOrder() {
+            runCli("show", "help", "put 0 0 B", "count", "exit");
+
+            InOrder inOrder = inOrder(mockService);
+            inOrder.verify(mockService).calculateAttack(any(Board.class));
+            inOrder.verify(mockService).count(any(Board.class));
+            inOrder.verifyNoMoreInteractions();
+        }
+    }
+
+    // ==================== Domyślne zwroty mocka — bez stubów ====================
+
+    @Nested
+    @DisplayName("Domyślne zwroty mocka widoczne w outputcie")
+    class DefaultMockReturns {
+
+        @Test
+        @DisplayName("'count' wypisuje 0 (domyślny int z mocka)")
+        void countPrintsDefaultZero() {
+            String output = runCli("count", "exit");
+            assertThat(output, containsString("Atakowane pola: 0"));
+        }
+
+        @Test
+        @DisplayName("'show' wypisuje pustą listę pozycji (domyślny pusty Set)")
+        void showPrintsEmptyPositionList() {
+            String output = runCli("show", "exit");
+            assertThat(output, containsString("[]"));
+        }
+
+        @Test
+        @DisplayName("'show' wypisuje też planszę z postawioną figurą i legendę")
+        void showStillRendersBoard() {
+            String output = runCli("put 0 0 B", "show", "exit");
+            assertThat(output, containsString("B"));
+            assertThat(output, containsString("Legenda"));
+        }
+    }
+
+    // ==================== Stubowanie zwrotów serwisu — when().thenReturn() ====================
+
+    @Nested
+    @DisplayName("Stubowane zwroty serwisu — when().thenReturn()")
+    class StubbedServiceReturns {
+
+        @Test
+        @DisplayName("when(count).thenReturn(7) — CLI wypisuje 7 zamiast domyślnego 0")
+        void countReturnsStubbedValue() {
+            when(mockService.count(any(Board.class))).thenReturn(7);
 
             String output = runCli("count", "exit");
 
-            assertThat(output, containsString("Atakowane pola: 42"));
+            assertThat(output, containsString("Atakowane pola: 7"));
             verify(mockService).count(any(Board.class));
         }
 
         @Test
-        @DisplayName("Każde wywołanie 'count' w sesji = osobne wywołanie serwisu")
-        void repeatedCountInvokesServiceEachTime() {
-            when(mockService.count(any(Board.class))).thenReturn(1, 2, 3);
+        @DisplayName("Kolejne wywołania count — różne stubowane wartości (then-chain)")
+        void countReturnsDifferentValuesAcrossCalls() {
+            when(mockService.count(any(Board.class)))
+                    .thenReturn(1)
+                    .thenReturn(2)
+                    .thenReturn(3);
 
             String output = runCli("count", "count", "count", "exit");
 
@@ -178,104 +298,150 @@ class MainCliMockitoTest {
         }
 
         @Test
-        @DisplayName("'show' wypisuje pozycje zwrócone przez mock")
-        void showPrintsMockPositions() {
+        @DisplayName("when(calculateAttack).thenReturn(...) — 'show' wypisuje stubowane pozycje")
+        void showRendersStubbedAttackedPositions() {
             when(mockService.calculateAttack(any(Board.class)))
-                    .thenReturn(Set.of(new Position(1, 2), new Position(3, 4)));
+                    .thenReturn(Set.of(new Position(2, 3), new Position(5, 5)));
 
             String output = runCli("show", "exit");
 
-            assertThat(output, containsString("(1, 2)"));
-            assertThat(output, containsString("(3, 4)"));
+            assertThat(output, containsString("(2, 3)"));
+            assertThat(output, containsString("(5, 5)"));
             verify(mockService).calculateAttack(any(Board.class));
         }
 
         @Test
-        @DisplayName("'show' woła calculateAttack() ale nie count()")
-        void showDoesNotCallCount() {
-            when(mockService.calculateAttack(any(Board.class))).thenReturn(Set.of());
+        @DisplayName("Stub działa niezależnie od stanu planszy (any(Board.class))")
+        void stubMatchesAnyBoard() {
+            when(mockService.count(any(Board.class))).thenReturn(99);
 
-            runCli("show", "exit");
+            String output = runCli("put 0 0 B", "count", "new 4", "count", "exit");
 
-            verify(mockService).calculateAttack(any(Board.class));
-            verify(mockService, never()).count(any(Board.class));
-        }
-
-        @Test
-        @DisplayName("'count' woła count() ale nie calculateAttack()")
-        void countDoesNotCallCalculateAttack() {
-            when(mockService.count(any(Board.class))).thenReturn(0);
-
-            runCli("count", "exit");
-
-            verify(mockService).count(any(Board.class));
-            verify(mockService, never()).calculateAttack(any(Board.class));
-        }
-
-        @Test
-        @DisplayName("'put' nie dotyka serwisu — to tylko edycja stanu")
-        void putDoesNotCallService() {
-            runCli("put 0 0 B", "put 1 1 #", "exit");
-
-            verifyNoInteractions(mockService);
-        }
-
-        @Test
-        @DisplayName("'put' rzeczywiście zmienia planszę — 'show' ją renderuje")
-        void putChangesBoard() {
-            when(mockService.calculateAttack(any(Board.class))).thenReturn(Set.of());
-
-            String output = runCli("put 0 0 B", "show", "exit");
-
-            assertThat(output, containsString("B"));
-        }
-
-        @Test
-        @DisplayName("Kolejność wywołań serwisu odpowiada kolejności komend (InOrder)")
-        void serviceCallOrderMatchesCommandOrder() {
-            when(mockService.count(any(Board.class))).thenReturn(7);
-            when(mockService.calculateAttack(any(Board.class))).thenReturn(Set.of());
-
-            runCli("count", "show", "count", "exit");
-
-            InOrder inOrder = inOrder(mockService);
-            inOrder.verify(mockService).count(any(Board.class));
-            inOrder.verify(mockService).calculateAttack(any(Board.class));
-            inOrder.verify(mockService).count(any(Board.class));
-            inOrder.verifyNoMoreInteractions();
-        }
-
-        @Test
-        @DisplayName("CLI deleguje 'count' do serwisu — wypisuje nawet dziwne wartości mocka")
-        void countDelegatesNotComputes() {
-            when(mockService.count(any(Board.class))).thenReturn(-7);
-
-            String output = runCli("count", "exit");
-
-            assertThat(output, containsString("Atakowane pola: -7"));
+            // Obie odpowiedzi pochodzą z tego samego stuba — niezależnie od planszy.
+            assertThat(output, containsString("Atakowane pola: 99"));
+            verify(mockService, times(2)).count(any(Board.class));
         }
     }
 
-    // ==================== Zapis i odczyt przez CLI ====================
+    // ==================== ArgumentCaptor — co CLI naprawdę przekazuje ====================
 
     @Nested
-    @DisplayName("Zapis i odczyt planszy przez komendy save/load")
+    @DisplayName("ArgumentCaptor — stan planszy przekazany do serwisu")
+    class CapturedArguments {
+
+        @Test
+        @DisplayName("'count' przekazuje aktualną planszę edytora (z postawioną figurą)")
+        void countPassesBoardWithPiece() {
+            when(mockService.count(any(Board.class))).thenReturn(13);
+
+            String output = runCli("put 0 0 B", "count", "exit");
+
+            ArgumentCaptor<Board> captor = ArgumentCaptor.forClass(Board.class);
+            verify(mockService).count(captor.capture());
+
+            Board passed = captor.getValue();
+            assertThat(passed.getSize(), is(8));
+            assertThat(passed.getCell(0, 0), is(CellType.PIECE));
+            assertThat(output, containsString("Atakowane pola: 13"));
+        }
+
+        @Test
+        @DisplayName("'show' otrzymuje planszę z postawioną przeszkodą")
+        void showPassesBoardWithObstacle() {
+            when(mockService.calculateAttack(any(Board.class)))
+                    .thenReturn(Set.of(new Position(0, 0)));
+
+            String output = runCli("put 3 4 #", "show", "exit");
+
+            ArgumentCaptor<Board> captor = ArgumentCaptor.forClass(Board.class);
+            verify(mockService).calculateAttack(captor.capture());
+
+            assertThat(captor.getValue().getCell(3, 4), is(CellType.OBSTACLE));
+            assertThat(output, containsString("(0, 0)"));
+        }
+
+        @Test
+        @DisplayName("'new <N>' resetuje planszę widzianą przez serwis przy następnym 'count'")
+        void newResetsBoardSeenByService() {
+            runCli("put 0 0 B", "new 4", "count", "exit");
+
+            ArgumentCaptor<Board> captor = ArgumentCaptor.forClass(Board.class);
+            verify(mockService).count(captor.capture());
+
+            Board seen = captor.getValue();
+            assertThat(seen.getSize(), is(4));
+            assertThat(seen.getCell(0, 0), is(CellType.EMPTY));
+        }
+
+        @Test
+        @DisplayName("'count' zawsze przekazuje aktualną instancję planszy edytora")
+        void countAlwaysPassesEditorsBoard() {
+            runCli("count", "count", "exit");
+
+            ArgumentCaptor<Board> captor = ArgumentCaptor.forClass(Board.class);
+            verify(mockService, times(2)).count(captor.capture());
+
+            assertThat(captor.getAllValues(), everyItem(sameInstance(editor.getBoard())));
+        }
+    }
+
+    // ==================== Stuby na strumieniach IO ====================
+
+    @Nested
+    @DisplayName("Stuby na BAIS/BAOS — when().thenReturn()")
+    class StreamStubbing {
+
+        @Test
+        @DisplayName("when(in.available()).thenReturn(...) — stub widoczny przed startem REPL")
+        void inputStreamAvailableIsStubbed() {
+            byte[] bytes = "exit\n".getBytes(StandardCharsets.UTF_8);
+            ByteArrayInputStream in = spy(new ByteArrayInputStream(bytes));
+
+            when(in.available()).thenReturn(42);
+            assertThat(in.available(), is(42));
+
+            // Czytanie nadal działa realnie — spy nie blokuje read(byte[],int,int).
+            ByteArrayOutputStream buf = new ByteArrayOutputStream();
+            Main.run(in, new PrintStream(buf, true, StandardCharsets.UTF_8), editor);
+            verify(in, atLeastOnce()).read(any(byte[].class), anyInt(), anyInt());
+        }
+
+        @Test
+        @DisplayName("when(out.size()).thenReturn(0) — stub nadpisuje realny rozmiar bufora")
+        void outputStreamSizeIsStubbed() {
+            ByteArrayOutputStream out = spy(new ByteArrayOutputStream());
+
+            when(out.size()).thenReturn(0);
+
+            ByteArrayInputStream in = new ByteArrayInputStream(
+                    "help\nexit\n".getBytes(StandardCharsets.UTF_8));
+            Main.run(in, new PrintStream(out, true, StandardCharsets.UTF_8), editor);
+
+            // Stub nadal aktywny — size() zwraca 0 mimo że bufor zawiera bajty.
+            assertThat(out.size(), is(0));
+            // Realna zawartość bufora nadal dostępna przez toString().
+            assertThat(out.toString(StandardCharsets.UTF_8), containsString("Dostępne komendy"));
+            verifyNoInteractions(mockService);
+        }
+    }
+
+    // ==================== Komendy IO ====================
+
+    @Nested
+    @DisplayName("save/load przez CLI — IO bez serwisu")
     class SaveLoadViaCli {
 
         @TempDir
         Path tempDir;
 
         @Test
-        @DisplayName("Sesja: put → save → load odtwarza stan — bez udziału serwisu")
-        void saveLoadRoundtrip() throws IOException {
+        @DisplayName("put → save → load odtwarza stan, bez wywołań serwisu")
+        void saveLoadRoundtripNoService() throws IOException {
             Path file = tempDir.resolve("session.txt");
 
             runCli("put 0 0 B", "put 2 3 #", "save " + file, "exit");
-
-            // save/load nie powinno wywoływać serwisu ataku
             verifyNoInteractions(mockService);
 
-            // Świeża plansza, wczytuje z pliku
             Main.BoardEditor loaded = new Main.BoardEditor(8, mockService);
             ByteArrayInputStream in = new ByteArrayInputStream(
                     ("load " + file + "\nexit\n").getBytes(StandardCharsets.UTF_8));
@@ -284,82 +450,15 @@ class MainCliMockitoTest {
 
             assertThat(loaded.getBoard().getCell(0, 0), is(CellType.PIECE));
             assertThat(loaded.getBoard().getCell(2, 3), is(CellType.OBSTACLE));
+            verifyNoInteractions(mockService);
         }
 
         @Test
-        @DisplayName("'load' z nieistniejącego pliku — komunikat o błędzie, sesja trwa")
-        void loadMissingFile() {
+        @DisplayName("'load' z brakującego pliku — sesja trwa, bez wywołań serwisu")
+        void loadMissingFileSessionContinues() {
             String output = runCli("load /no/such/file.txt", "help", "exit");
 
             assertThat(output, containsString("Błąd"));
-            assertThat(output, containsString("Dostępne komendy"));
-            verifyNoInteractions(mockService);
-        }
-    }
-
-    // ==================== Dodatkowe scenariusze sesyjne ====================
-
-    @Nested
-    @DisplayName("Sesja edycji — komendy sekwencyjne")
-    class EditingSession {
-
-        @Test
-        @DisplayName("put → new <N> czyści planszę i zmienia jej rozmiar")
-        void resizeClearsBoard() {
-            runCli("put 0 0 B", "put 7 7 #", "new 4", "exit");
-
-            assertThat(editor.getSize(), is(4));
-            assertThat(editor.getBoard().getCell(0, 0), is(CellType.EMPTY));
-            verifyNoInteractions(mockService);
-        }
-
-        @Test
-        @DisplayName("Kolejność odpowiedzi w output odpowiada kolejności komend")
-        void outputFollowsCommandOrder() {
-            when(mockService.count(any(Board.class))).thenReturn(7);
-
-            String output = runCli("count", "help", "exit");
-
-            int countIdx = output.indexOf("Atakowane pola: 7");
-            int helpIdx = output.indexOf("Dostępne komendy");
-            assertThat(countIdx, is(greaterThanOrEqualTo(0)));
-            assertThat(helpIdx, is(greaterThan(countIdx)));
-        }
-
-        @Test
-        @DisplayName("Wszystkie typy luster da się postawić przez CLI")
-        void allMirrorTypesViaCli() {
-            runCli("put 0 0 /", "put 0 1 \\", "put 0 2 -", "put 0 3 |", "exit");
-
-            assertThat(editor.getBoard().getCell(0, 0), is(CellType.MIRROR_SLASH));
-            assertThat(editor.getBoard().getCell(0, 1), is(CellType.MIRROR_BACKSLASH));
-            assertThat(editor.getBoard().getCell(0, 2), is(CellType.MIRROR_HORIZONTAL));
-            assertThat(editor.getBoard().getCell(0, 3), is(CellType.MIRROR_VERTICAL));
-            verifyNoInteractions(mockService);
-        }
-
-        @Test
-        @DisplayName("'.' w komendzie put czyści pole")
-        void dotClearsCell() {
-            runCli("put 3 3 B", "put 3 3 .", "exit");
-
-            assertThat(editor.getBoard().getCell(3, 3), is(CellType.EMPTY));
-            verifyNoInteractions(mockService);
-        }
-
-        @Test
-        @DisplayName("Sesja bez komend ataku — zero interakcji z serwisem")
-        void sessionWithoutAttackCommands() {
-            runCli("put 0 0 B", "put 1 1 #", "new 5", "put 2 2 /", "exit");
-
-            verifyNoInteractions(mockService);
-        }
-
-        @Test
-        @DisplayName("Błąd z 'put' nie powoduje wywołań serwisu")
-        void errorInPutDoesNotCallService() {
-            runCli("put 100 100 B", "put -1 0 B", "exit");
-
             verifyNoInteractions(mockService);
         }
     }
