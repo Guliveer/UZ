@@ -2,8 +2,8 @@
 # ============================================================
 # Shell port of prepare.bat for macOS / Linux.
 # Copies a selected LabXX folder, renames it per the course
-# naming convention, strips bin/obj/.claude, rewrites the
-# solution filename and in-file references, then compresses
+# naming convention, strips bin/obj/.claude/.remember, rewrites
+# the solution filename and in-file references, then compresses
 # the result into a .7z archive with maximum compression.
 #
 # Uses any available 7-Zip CLI: 7zz, 7z, 7za. Falls back to
@@ -89,9 +89,9 @@ fi
 cp -R "$selectedLab" "$newName"
 
 # ---- prune build artifacts ---------------------------------
-echo "Removing bin/, obj/ and .claude/ folders..."
+echo "Removing bin/, obj/, .claude/ and .remember/ folders..."
 
-find "$newName" -type d \( -name bin -o -name obj -o -name .claude \) \
+find "$newName" -type d \( -name bin -o -name obj -o -name .claude -o -name .remember \) \
     -prune -exec rm -rf {} +
 
 # ---- rename solution file ----------------------------------
