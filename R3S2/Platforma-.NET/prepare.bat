@@ -5,7 +5,8 @@ REM ============================================================
 REM This script automates applying the required naming convention
 REM and structure enforced by the course instructor.
 REM It copies a selected LabXX folder, renames it according to
-REM the required schema, removes build artifacts (bin/obj/.claude/.remember),
+REM the required schema, removes build artifacts and IDE metadata
+REM (bin/obj/.claude/.remember/.idea/.vs/.vscode),
 REM replaces occurrences inside files, renames the solution file
 REM (.sln or .slnx), and compresses the result into a .7z archive
 REM (max compression).
@@ -61,9 +62,9 @@ if errorlevel 1 (
     exit /b
 )
 
-echo Removing bin/, obj/, .claude/ and .remember/ folders...
+echo Removing bin/, obj/, .claude/, .remember/, .idea/, .vs/ and .vscode/ folders...
 
-for /d /r "%newName%" %%D in (bin obj .claude .remember) do (
+for /d /r "%newName%" %%D in (bin obj .claude .remember .idea .vs .vscode) do (
     if exist "%%D" rd /s /q "%%D"
 )
 

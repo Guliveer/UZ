@@ -2,9 +2,10 @@
 # ============================================================
 # Shell port of prepare.bat for macOS / Linux.
 # Copies a selected LabXX folder, renames it per the course
-# naming convention, strips bin/obj/.claude/.remember, rewrites
-# the solution filename and in-file references, then compresses
-# the result into a .7z archive with maximum compression.
+# naming convention, strips bin/obj/.claude/.remember/.idea/.vs/
+# .vscode, rewrites the solution filename and in-file references,
+# then compresses the result into a .7z archive with maximum
+# compression.
 #
 # Uses any available 7-Zip CLI: 7zz, 7z, 7za. Falls back to
 # the keka7zz binary bundled with Keka.app on macOS.
@@ -89,10 +90,17 @@ fi
 cp -R "$selectedLab" "$newName"
 
 # ---- prune build artifacts ---------------------------------
-echo "Removing bin/, obj/, .claude/ and .remember/ folders..."
+echo "Removing bin/, obj/, .claude/, .remember/, .idea/, .vs/ and .vscode/ folders..."
 
-find "$newName" -type d \( -name bin -o -name obj -o -name .claude -o -name .remember \) \
-    -prune -exec rm -rf {} +
+find "$newName" -type d \( \
+        -name bin -o -name obj -o -name .claude -o -name .remember \
+        -o -name .idea -o -name .vs -o -name .vscode \
+    \) -prune -exec rm -rf {} +
+
+# ---- prune macOS metadata files ----------------------------
+echo "Removing .DS_Store files..."
+
+find "$newName" -type f -name .DS_Store -delete
 
 # ---- rename solution file ----------------------------------
 echo "Renaming solution file..."
