@@ -13,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -436,7 +435,7 @@ class MainCliMockitoTest {
 
         @Test
         @DisplayName("put → save → load odtwarza stan, bez wywołań serwisu")
-        void saveLoadRoundtripNoService() throws IOException {
+        void saveLoadRoundtripNoService() {
             Path file = tempDir.resolve("session.txt");
 
             runCli("put 0 0 B", "put 2 3 #", "save " + file, "exit");
