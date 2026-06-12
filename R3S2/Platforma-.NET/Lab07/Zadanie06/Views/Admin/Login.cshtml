@@ -1,0 +1,28 @@
+@model Zadanie06.Models.AdminLoginModel
+@{
+    ViewData["Title"] = "Logowanie administratora";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <h2>Panel administratora</h2>
+        <hr />
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+            <p class="text-muted small">Domyślne hasło: admin123</p>
+            <button type="submit" class="btn btn-primary w-100">Zaloguj się</button>
+        </form>
+        <div class="mt-3">
+            <a asp-controller="Home" asp-action="Index">Wróć do aktualności</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

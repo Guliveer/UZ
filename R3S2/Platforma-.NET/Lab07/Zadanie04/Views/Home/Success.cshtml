@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Sukces";
+}
+
+<div class="text-center py-5">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Sukces!</h4>
+            <p>@TempData["SuccessMessage"]</p>
+        </div>
+    }
+    <a asp-action="Index" class="btn btn-primary">Powrót do formularza</a>
+</div>

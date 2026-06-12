@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Strona główna";
+}
+
+<div class="text-center py-5">
+    <h1 class="display-4">Witaj na mojej stronie!</h1>
+    <p class="lead">Przykładowa strona WWW zbudowana w ASP.NET Core MVC</p>
+    <hr class="my-4" />
+    <p>Skorzystaj z menu nawigacyjnego, aby przejść do poszczególnych sekcji.</p>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">O nas</h5>
+                    <p class="card-text">Dowiedz się więcej o naszej firmie i zespole.</p>
+                    <a asp-action="About" class="btn btn-primary">Przejdź</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Usługi</h5>
+                    <p class="card-text">Poznaj nasze usługi i ofertę.</p>
+                    <a asp-action="Services" class="btn btn-primary">Przejdź</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Kontakt</h5>
+                    <p class="card-text">Skontaktuj się z nami.</p>
+                    <a asp-action="Contact" class="btn btn-primary">Przejdź</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

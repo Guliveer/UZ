@@ -1,0 +1,36 @@
+@model IReadOnlyList<Zadanie06.Models.NewsItem>
+@{
+    ViewData["Title"] = "Zarządzanie aktualnościami";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Zarządzanie aktualnościami</h2>
+    <div>
+        <a asp-action="Add" class="btn btn-success btn-sm">Dodaj wiadomość</a>
+        <a asp-action="Logout" class="btn btn-outline-danger btn-sm ms-2">Wyloguj</a>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped">
+    <thead><tr><th>Tytuł</th><th>Data</th><th>Akcje</th></tr></thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.PublishedAt.ToString("dd.MM.yyyy HH:mm")</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Usunąć wiadomość?')">Usuń</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

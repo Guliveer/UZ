@@ -1,0 +1,25 @@
+@model Zadanie06.Models.NewsItem
+@{
+    ViewData["Title"] = "Dodaj wiadomość";
+}
+
+<h2>Dodaj nową wiadomość</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Add" method="post">
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label">Tytuł</label>
+                <input asp-for="Title" class="form-control" required maxlength="200" />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Content" class="form-label">Treść</label>
+                <textarea asp-for="Content" class="form-control" rows="5" required></textarea>
+                <span asp-validation-for="Content" class="text-danger small"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Dodaj</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Anuluj</a>
+        </form>
+    </div>
+</div>

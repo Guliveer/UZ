@@ -1,0 +1,58 @@
+@model Zadanie05.Models.CalculatorModel
+@{
+    ViewData["Title"] = "Kalkulator";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Kalkulator ASP.NET MVC</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Index" method="post">
+                    <div class="mb-3">
+                        <label asp-for="A" class="form-label"></label>
+                        <input asp-for="A" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="A" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Operation" class="form-label"></label>
+                        <select asp-for="Operation" class="form-select">
+                            <option value="+">+ Dodawanie</option>
+                            <option value="-">− Odejmowanie</option>
+                            <option value="*">× Mnożenie</option>
+                            <option value="/">÷ Dzielenie</option>
+                            <option value="%">% Reszta z dzielenia</option>
+                            <option value="^">^ Potęgowanie</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="B" class="form-label"></label>
+                        <input asp-for="B" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="B" class="text-danger small"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">=</button>
+                </form>
+
+                @if (Model.Error != null)
+                {
+                    <div class="alert alert-danger mt-3">@Model.Error</div>
+                }
+                else if (Model.Result.HasValue)
+                {
+                    <div class="alert alert-success mt-3 text-center">
+                        <strong>Wynik: @Model.Result.Value</strong>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

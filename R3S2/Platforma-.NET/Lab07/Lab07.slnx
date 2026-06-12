@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Zadanie01/" />
+  <Folder Name="/Zadanie01/Client/">
+    <Project Path="Zadanie01/Client/Zadanie01.Client.csproj" />
+  </Folder>
+  <Folder Name="/Zadanie01/Service/">
+    <Project Path="Zadanie01/Service/Zadanie01.Service.csproj" />
+  </Folder>
+  <Project Path="Zadanie02/Zadanie02.csproj" />
+  <Project Path="Zadanie03/Zadanie03.csproj" />
+  <Project Path="Zadanie04/Zadanie04.csproj" />
+  <Project Path="Zadanie05/Zadanie05.csproj" />
+  <Project Path="Zadanie06/Zadanie06.csproj" />
+  <Project Path="Zadanie07/Zadanie07.csproj" />
+  <Project Path="Zadanie08/Zadanie08.csproj" />
+</Solution>

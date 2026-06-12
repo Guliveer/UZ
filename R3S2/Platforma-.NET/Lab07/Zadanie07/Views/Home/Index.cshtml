@@ -1,0 +1,53 @@
+@model (Zadanie07.Models.UploadModel Model, System.Collections.ObjectModel.ReadOnlyCollection<Zadanie07.Models.UploadedFile> Files)
+@{
+    ViewData["Title"] = "Wgrywanie plików";
+}
+
+<h1>Wgrywanie plików na serwer</h1>
+<hr />
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Errors"] != null)
+{
+    <div class="alert alert-warning">@TempData["Errors"]</div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Upload" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">Wybierz pliki (max 10 MB każdy)</label>
+                        <input name="Files" type="file" class="form-control" multiple />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Wgraj pliki</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.Files.Any())
+{
+    <h4 class="mt-4">Wgrane pliki (@Model.Files.Count)</h4>
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr><th>Nazwa pliku</th><th>Rozmiar</th><th>Typ</th><th>Data wgrania</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var f in Model.Files)
+            {
+                <tr>
+                    <td>@f.FileName</td>
+                    <td>@f.SizeFormatted</td>
+                    <td><code>@f.ContentType</code></td>
+                    <td>@f.UploadedAt.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

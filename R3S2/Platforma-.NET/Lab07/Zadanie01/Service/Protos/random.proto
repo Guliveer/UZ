@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Zadanie01.Service";
+
+package random;
+
+service RandomNumberService {
+  rpc GenerateNumbers (NumberRequest) returns (stream NumberResponse);
+}
+
+message NumberRequest {
+  int32 count = 1;
+  int32 min = 2;
+  int32 max = 3;
+}
+
+message NumberResponse {
+  int32 value = 1;
+}
