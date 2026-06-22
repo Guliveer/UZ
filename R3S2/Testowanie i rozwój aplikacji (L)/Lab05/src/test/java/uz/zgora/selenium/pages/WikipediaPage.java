@@ -20,7 +20,7 @@ public class WikipediaPage extends BasePage {
 
     private static final By FIRST_HEADING = By.id("firstHeading");
     private static final By BODY_CONTENT_LINK =
-            By.cssSelector("#bodyContent p a[href^='/wiki/']:not([class*='new']):not([class*='mw-redirect'])");
+            By.cssSelector(".mw-parser-output p a[href*='/wiki/']:not([href*='Specjalna']):not([href*='Wikipedia']):not([href*='Pomoc']):not([href*='Kategoria']):not([class*='new'])");
 
     public WikipediaPage(WebDriver driver) {
         super(driver);
