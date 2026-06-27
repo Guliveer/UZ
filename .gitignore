@@ -206,5 +206,38 @@ fabric.properties
 **/.omc/
 **/.claude/
 **/.remember/
-**/*.local.*
+
+# Local overrides — never commit
 **/*.local
+**/*.local.*
+!**/*.example
+!**/*.example.*
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# .NET build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Python compiled
+__pycache__/
+*.pyc
+*.pyo
+
+# Java compiled
+*.class
+
+# CMake / Ninja generated artifacts
+*.cache
+*.ninja_log
+*.ninja_deps
+*.check_cache
+
+# Logs
+*.log
