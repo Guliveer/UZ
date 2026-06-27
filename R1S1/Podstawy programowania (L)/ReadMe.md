@@ -1,9 +1,5 @@
-![C](https://img.shields.io/badge/C-FF318C?style=for-the-badge&logo=clion&logoColor=white)
+# Podstawy programowania (L)
 
-## Prowadzący
+> Grade: **5.0** &nbsp;·&nbsp; [dr inż. Grzegorz Łabiak](https://scholar.google.com/citations?user=OdZiPAMAAAAJ)
 
-[dr inż. Grzegorz Łabiak](https://scholar.google.com/citations?user=OdZiPAMAAAAJ)
-
-## Ocena końcowa
-
-5.0
+Introductory C programming course. Covered basic language constructs (variables, conditions, loops), functions, arrays, 2D arrays, pointers, and recursion. Exercises included implementing algorithms such as Euler's GCD, the Ackermann function, and various sorting routines. Also included in-class quizzes and bonus exercises.

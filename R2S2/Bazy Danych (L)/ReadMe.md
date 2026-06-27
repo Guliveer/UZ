@@ -1,9 +1,5 @@
-![MySQL Badge](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=fff&style=for-the-badge)
+# Bazy Danych (L)
 
-## Prowadzący / Lecturer
+> Grade: **5.0** &nbsp;·&nbsp; mgr inż. Norbert Łukaniszyn
 
-mgr inż. Norbert Łukaniszyn
-
-## Ocena końcowa / Final grade
-
-5.0
+SQL and relational database laboratory in **MySQL**. Topics included data definition (CREATE, ALTER), querying (SELECT with joins, subqueries, aggregates), views, stored procedures, triggers, transactions, and basic backup/restore operations. Labs progressed from simple queries to multi-table schemas and procedural SQL.

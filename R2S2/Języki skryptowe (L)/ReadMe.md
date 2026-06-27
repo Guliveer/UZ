@@ -1,9 +1,5 @@
-![Python](https://img.shields.io/badge/Python-FCF84A?style=for-the-badge&logo=python&logoColor=black)
+# Języki skryptowe (L)
 
-## Prowadzący / Lecturer
+> Grade: **4.5** &nbsp;·&nbsp; dr Beata Zięba
 
-dr Beata Zięba
-
-## Ocena końcowa / Final grade
-
-4.5
+**Python** scripting course. Covered built-in data structures (lists, dicts, sets), string processing, file I/O, functions and decorators, OOP (classes, inheritance), and module creation. Final labs used **Django** to build a note-keeper web application with user registration, login, and role-based access control.

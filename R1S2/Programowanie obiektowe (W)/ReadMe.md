@@ -1,9 +1,5 @@
-![C++](https://img.shields.io/badge/C%2B%2B-21D789?style=for-the-badge&logo=clion&logoColor=white)
+# Programowanie obiektowe (W)
 
-## Prowadzący
+> Grade: **5.0** &nbsp;·&nbsp; [dr hab. inż. Paweł Majdzik](https://scholar.google.com/citations?user=AS504XgAAAAJ)
 
-[dr hab. inż. Paweł Majdzik](https://scholar.google.com/citations?user=AS504XgAAAAJ)
-
-## Ocena końcowa
-
-5.0
+Lecture-accompanying exercises in **C++** covering advanced OOP topics: template classes, design patterns, deep vs. shallow copy semantics, and abstract interfaces.

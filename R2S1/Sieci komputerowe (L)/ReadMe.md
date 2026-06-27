@@ -1,9 +1,5 @@
-![Networking](https://img.shields.io/badge/Networking-1BA0D7?style=for-the-badge&logo=Cisco&logoColor=white)
+# Sieci komputerowe (L)
 
-## Prowadzący / Lecturer
+> Grade: **5.0** &nbsp;·&nbsp; [dr hab. inż. Bartłomiej Sulikowski](https://scholar.google.com/citations?user=A81wbWsAAAAJ)
 
-[dr hab. inż. Bartłomiej Sulikowski](https://scholar.google.com/citations?user=A81wbWsAAAAJ)
-
-## Ocena końcowa / Final grade
-
-5.0
+Computer networks laboratory. Covered IP addressing fundamentals: address classes (A–E), binary and hexadecimal octet notation, network and broadcast address derivation, subnet masks, and CIDR subnetting calculations.

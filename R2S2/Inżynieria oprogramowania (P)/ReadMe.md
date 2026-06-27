@@ -1,15 +1,13 @@
-### 🔗 [Guliveer/song-request](https://github.com/Guliveer/song-request)
+# Inżynieria oprogramowania (P)
 
-## Prowadzący / Lecturer
+> Grade: **5.0** &nbsp;·&nbsp; dr inż. Tomasz Gratkowski
 
-dr inż. Tomasz Gratkowski
+## Project: song-request
 
-## Ocena końcowa / Final grade
+- **[song-request](https://github.com/Guliveer/song-request)** — A song request web application built collaboratively during the semester.
 
-5.0
+  ![GitHub last commit](https://img.shields.io/github/last-commit/Guliveer/song-request)
+  ![GitHub repo size](https://img.shields.io/github/repo-size/Guliveer/song-request)
+  ![GitHub contributors](https://img.shields.io/github/contributors/Guliveer/song-request)
 
-## Opis / Description
-
-Celem zajęć było stworzenie jakiejś aplikacji/programu w ciągu semestru. Założeniem była praca zespołowa z wykorzystaniem zwinnych metod programowania (Scrum). Podczas zajęć realizowane były spotkania "daily", a sprint trwał około 3/4 tygodnie. Na koniec semestru każdy zespół prezentował swoje osiągnięcia.
-
-The goal of the classes was to create an application/program during the semester. The assumption was to work as a team using agile programming methods (Scrum). During the classes, "daily" meetings were held, and a sprint lasted about 3/4 weeks. At the end of the semester, each team presented its achievements.
+The goal was to build a working application over one semester using agile methods (Scrum). Classes followed a sprint structure (~3–4 weeks each) with daily stand-up meetings. Each team presented their results at the end of the semester.

@@ -1,9 +1,5 @@
-![Java](https://img.shields.io/badge/Java-087CFA?style=for-the-badge&logo=intellij-idea&logoColor=white)
+# Programowanie współbieżne i rozproszone (L)
 
-## Prowadzący / Lecturer
+> Grade: **4.5** &nbsp;·&nbsp; dr inż. Andrzej Popławski
 
-dr inż. Andrzej Popławski
-
-## Ocena końcowa / Final grade
-
-4.5
+Concurrency and distributed systems laboratory in **Java**. Topics included thread lifecycle and priorities, synchronization primitives (synchronized, Lock, Semaphore), classic problems (producer-consumer, readers-writers), parallel matrix multiplication, and stream-based data processing.
