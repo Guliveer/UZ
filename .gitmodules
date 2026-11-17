@@ -22,3 +22,6 @@
 [submodule "R3S2/Projekt grupowy (P)/BlockchainUZ-frontend"]
 	path = R3S2/Projekt grupowy (P)/BlockchainUZ-frontend
 	url = https://github.com/Guliveer/BlockchainUZ-frontend
+[submodule "R2S2/Inżynieria oprogramowania (P)/song-request"]
+	path = R2S2/Inżynieria oprogramowania (P)/song-request
+	url = https://github.com/Guliveer/song-request
