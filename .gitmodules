@@ -1,0 +1,24 @@
+[submodule "R2S2/Języki skryptowe (L)/Lab10-11/UZ-django-notekeeper"]
+	path = R2S2/Języki skryptowe (L)/Lab10-11/UZ-django-notekeeper
+	url = https://github.com/Guliveer/UZ-django-notekeeper
+[submodule "R3S1/Podstawy programowania na platformę Android (L)/Ecological-Assistant"]
+	path = R3S1/Podstawy programowania na platformę Android (L)/Ecological-Assistant
+	url = https://github.com/Guliveer/Ecological-Assistant
+[submodule "R3S1/Systemy wbudowane (P)/RFID-access-manager"]
+	path = R3S1/Systemy wbudowane (P)/RFID-access-manager
+	url = https://github.com/Guliveer/RFID-access-manager
+[submodule "R3S1/Zaawansowane technologie usług sieciowych (P)/MagazynierUZ-backend"]
+	path = R3S1/Zaawansowane technologie usług sieciowych (P)/MagazynierUZ-backend
+	url = https://github.com/Guliveer/MagazynierUZ-backend
+[submodule "R3S1/Zaawansowane technologie usług sieciowych (P)/MagazynierUZ-frontend"]
+	path = R3S1/Zaawansowane technologie usług sieciowych (P)/MagazynierUZ-frontend
+	url = https://github.com/Guliveer/MagazynierUZ-frontend
+[submodule "R3S2/Platforma .NET (P)/SzachUZ"]
+	path = R3S2/Platforma .NET (P)/SzachUZ
+	url = https://github.com/Guliveer/SzachUZ
+[submodule "R3S2/Projekt grupowy (P)/BlockchainUZ-backend"]
+	path = R3S2/Projekt grupowy (P)/BlockchainUZ-backend
+	url = https://github.com/Guliveer/BlockchainUZ-backend
+[submodule "R3S2/Projekt grupowy (P)/BlockchainUZ-frontend"]
+	path = R3S2/Projekt grupowy (P)/BlockchainUZ-frontend
+	url = https://github.com/Guliveer/BlockchainUZ-frontend
